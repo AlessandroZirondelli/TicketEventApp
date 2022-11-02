@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TicketEventApp</string>
+    <string name="profile_icon">Profile icon</string>
+    <string name="login_icon">Login icon</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TicketEventApp</string>
+    <string name="profile_icon">Icona profilo</string>
+    <string name="login_icon">Icona login</string>
+</resources>
