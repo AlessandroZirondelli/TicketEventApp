@@ -5,4 +5,7 @@
     <string name="login_icon">Icona login</string>
     <string name="username">Usernam</string>
     <string name="acc_username">Campo per inserire il tuo username</string>
+    <string name="welcome">Benvenuto</string>
+    <string name="sign_up_to_continue">Registrati per continuare</string>
+    <string name="password">Password</string>
 </resources>

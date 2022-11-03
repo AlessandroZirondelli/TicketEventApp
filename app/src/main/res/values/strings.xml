@@ -4,5 +4,11 @@
     <string name="login_icon">Login icon</string>
     <string name="username">Username</string>
     <string name="acc_username">Field to insert your username</string>
+    <string name="welcome">Welcome</string>
+    <string name="sign_up_to_continue">Sign up to continue</string>
+    <string name="password">Password</string>
+    <string name="acc_password">Field to insert your password</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="icon_to_add_new_account">Icon to add new account</string>
 
 </resources>
