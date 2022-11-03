@@ -3,9 +3,12 @@
     <string name="app_name">TicketEventApp</string>
     <string name="profile_icon">Icona profilo</string>
     <string name="login_icon">Icona login</string>
-    <string name="username">Usernam</string>
+    <string name="username">Username</string>
     <string name="acc_username">Campo per inserire il tuo username</string>
     <string name="welcome">Benvenuto</string>
     <string name="sign_up_to_continue">Registrati per continuare</string>
     <string name="password">Password</string>
+    <string name="acc_password">Campo per inserire la tua password</string>
+    <string name="create_new_account">Crea un nuovo account</string>
+    <string name="icon_to_add_new_account">Icona per aggiungere un nuovo account</string>
 </resources>
