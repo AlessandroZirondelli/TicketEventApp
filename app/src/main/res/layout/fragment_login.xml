@@ -51,6 +51,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2_fields"
         app:layout_constraintStart_toStartOf="@+id/guideline1_fields"
         app:layout_constraintTop_toTopOf="@+id/guideline6_fields"
+        app:layout_constraintVertical_bias="0.84000003"
         app:startIconContentDescription="@string/acc_username"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
@@ -71,6 +72,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2_fields"
         app:layout_constraintStart_toStartOf="@+id/guideline1_fields"
         app:layout_constraintTop_toTopOf="@+id/guideline4_fields"
+        app:layout_constraintVertical_bias="0.07999998"
         app:startIconContentDescription="@string/acc_password"
         app:startIconDrawable="@drawable/key">
 
@@ -102,7 +104,8 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2_fields"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/guideline1_fields"
-        app:layout_constraintTop_toBottomOf="@+id/welcome_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/welcome_text_view"
+        tools:layout_editor_absoluteY="236dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2_profile_icon"
@@ -126,21 +129,19 @@
         app:layout_constraintGuide_percent="0.80" />
 
 
-
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.6" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6_fields"
