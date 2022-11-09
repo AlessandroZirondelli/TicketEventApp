@@ -9,6 +9,12 @@
     <string name="sign_up_to_continue">Registrati per continuare</string>
     <string name="password">Password</string>
     <string name="acc_password">Campo per inserire la tua password</string>
-    <string name="create_new_account">Crea un nuovo account</string>
+    <string name="create_new_account">Crea account</string>
     <string name="icon_to_add_new_account">Icona per aggiungere un nuovo account</string>
+    <string name="registration_info">Inserisci tutti i dati per continuare</string>
+    <string name="sign_up_button">Registrati</string>
+    <string name="name">Nome</string>
+    <string name="acc_name">Campo per inserire il tuo nome</string>
+    <string name="surnname">Cognome</string>
+    <string name="acc_surname">Campo per inserire il tuo cognome</string>
 </resources>

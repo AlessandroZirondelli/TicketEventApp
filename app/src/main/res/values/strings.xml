@@ -8,7 +8,13 @@
     <string name="sign_up_to_continue">Sign up to continue</string>
     <string name="password">Password</string>
     <string name="acc_password">Field to insert your password</string>
-    <string name="create_new_account">Create new account</string>
+    <string name="create_new_account">Create account</string>
     <string name="icon_to_add_new_account">Icon to add new account</string>
+    <string name="registration_info">Insert all data to continue</string>
+    <string name="sign_up_button">Sign up</string>
+    <string name="name">Name</string>
+    <string name="acc_name">Field to insert your name</string>
+    <string name="surnname">Surname</string>
+    <string name="acc_surname">Field to insert your surname</string>
 
 </resources>
