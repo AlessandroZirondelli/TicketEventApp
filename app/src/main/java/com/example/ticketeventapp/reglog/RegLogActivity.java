@@ -15,7 +15,7 @@ public class RegLogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reg_log);
 
         if(savedInstanceState == null){
-            Utilities.insertFragment(this,new RegistrationFragment(), RegistrationFragment.class.getSimpleName());
+            Utilities.insertFragment(this,new AddEventFragment(), AddEventFragment.class.getSimpleName());
         }
 
 

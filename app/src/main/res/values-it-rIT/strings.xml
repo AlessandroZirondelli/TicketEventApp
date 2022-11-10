@@ -17,4 +17,12 @@
     <string name="acc_name">Campo per inserire il tuo nome</string>
     <string name="surnname">Cognome</string>
     <string name="acc_surname">Campo per inserire il tuo cognome</string>
+    <string name="new_event">Nuovo evento</string>
+    <string name="event_name">Nome evento</string>
+    <string name="acc_event_name">Campo per inserire nome evento</string>
+    <string name="acc_event_place">Campo per inserire luogo evento</string>
+    <string name="event_place">Luogo evento</string>
+    <string name="event_description">Descrizione evento</string>
+    <string name="event_date">Data</string>
+    <string name="acc_event_date">Campo per inserire data evento</string>
 </resources>

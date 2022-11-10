@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/welcome_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_event"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_top_event_icon"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/profile_icon_image_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/profile_icon"
+
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_icon"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_icon"
+        app:srcCompat="@drawable/add_photo_alternate" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_name_login_text_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/event_name"
+
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_name"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_name"
+        app:startIconContentDescription="@string/acc_event_name"
+        app:startIconDrawable="@drawable/celebration">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_name_login_text_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_description_text_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/event_description"
+        app:startIconDrawable="@drawable/edit_note"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_description"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_description"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_description_text_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_place_text_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/event_place"
+        app:endIconMode="custom"
+
+
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_place"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_place"
+        app:startIconContentDescription="@string/acc_event_place"
+        app:startIconDrawable="@drawable/location_on"
+        app:endIconDrawable="@drawable/ic_baseline_gps_fixed_24"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_place_text_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_date_text_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/event_date"
+
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_date"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_date"
+        app:startIconContentDescription="@string/acc_event_date"
+        app:startIconDrawable="@drawable/calendar_month">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_date_text_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_time_text_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/event_time"
+
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_time"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_time"
+        app:startIconContentDescription="@string/acc_event_time"
+        app:startIconDrawable="@drawable/schedule">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_time_text_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/event_price_text_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/event_price"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_price"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_price"
+        app:startIconContentDescription="@string/acc_event_price"
+        app:startIconDrawable="@drawable/payments">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/event_price_text_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/filledButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_event"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_bottom_event_price" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left_all_fields"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right_all_fields"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top_event_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_event_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.26" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top_event_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.28" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_event_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.36" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top_event_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.38" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_event_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.52" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top_event_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.54" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_event_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.62" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top_event_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.64" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_event_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.72" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top_event_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.74" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_event_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.82" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top_event_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.84" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_event_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.92" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
