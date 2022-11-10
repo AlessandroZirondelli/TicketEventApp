@@ -7,26 +7,26 @@
 
 
     <TextView
-        android:id="@+id/welcome_text_view2"
+        android:id="@+id/create_account_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_new_account"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_create_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/signup_to_continue_text_view"
+        android:id="@+id/insert_all_data_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registration_info"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline17"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_insert_all_data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_bottom_create_account" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_login_text_input_layout"
@@ -35,10 +35,10 @@
         android:hint="@string/name"
 
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline21"
-        app:layout_constraintEnd_toStartOf="@+id/guideline20"
-        app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toTopOf="@+id/guideline23"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_name_surname"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_name_username"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_name_username"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_name_surname"
         app:startIconContentDescription="@string/acc_name"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
@@ -56,10 +56,10 @@
         android:hint="@string/surnname"
 
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline21"
-        app:layout_constraintEnd_toStartOf="@+id/guideline19"
-        app:layout_constraintStart_toStartOf="@+id/guideline24"
-        app:layout_constraintTop_toTopOf="@+id/guideline23"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_name_surname"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_surname_password"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_surname_password"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_name_surname"
         app:startIconContentDescription="@string/acc_surname"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
@@ -77,10 +77,10 @@
         android:hint="@string/username"
 
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline25"
-        app:layout_constraintEnd_toStartOf="@+id/guideline20"
-        app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toTopOf="@+id/guideline26"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_username_password"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_name_username"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_name_username"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_username_password"
         app:startIconContentDescription="@string/acc_username"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
@@ -97,17 +97,19 @@
         android:layout_height="0dp"
         android:hint="@string/password"
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline25"
-        app:layout_constraintEnd_toStartOf="@+id/guideline19"
-        app:layout_constraintStart_toStartOf="@+id/guideline24"
-        app:layout_constraintTop_toTopOf="@+id/guideline26"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_username_password"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_surname_password"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_surname_password"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_username_password"
         app:startIconContentDescription="@string/acc_password"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_login_text_input_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:textColorHint="#616161" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,97 +119,97 @@
         android:layout_height="wrap_content"
         android:text="@string/sign_up_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline28"
-        app:layout_constraintStart_toStartOf="@+id/guideline27"
-        app:layout_constraintTop_toTopOf="@+id/guideline22"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_create_account"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_create_account"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_sign_up"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
+        android:id="@+id/guideline_bottom_create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline17"
+        android:id="@+id/guideline_insert_all_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.20924574" />
+        app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline18"
+        android:id="@+id/guideline_left_name_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.12" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline19"
+        android:id="@+id/guideline_right_surname_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.88" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline20"
+        android:id="@+id/guideline_right_name_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.48" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline21"
+        android:id="@+id/guideline_bottom_name_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.48" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline22"
+        android:id="@+id/guideline_top_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline23"
+        android:id="@+id/guideline_top_name_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline24"
+        android:id="@+id/guideline_left_surname_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5212038" />
+        app:layout_constraintGuide_percent="0.52" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline25"
+        android:id="@+id/guideline_bottom_username_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline26"
+        android:id="@+id/guideline_top_username_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.53" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline27"
+        android:id="@+id/guideline_left_create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline28"
+        android:id="@+id/guideline_right_create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

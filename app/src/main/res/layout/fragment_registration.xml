@@ -7,27 +7,27 @@
 
 
     <TextView
-        android:id="@+id/welcome_text_view2"
+        android:id="@+id/create_account_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_new_account"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_create_account"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_create_account"
         app:layout_constraintVertical_bias="0.633" />
 
     <TextView
-        android:id="@+id/signup_to_continue_text_view"
+        android:id="@+id/insert_all_data_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registration_info"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_insert_all"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_bottom_create_account" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_login_text_input_layout"
@@ -35,10 +35,10 @@
         android:layout_height="0dp"
         android:hint="@string/name"
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline10"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline9"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_name"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_name"
         app:startIconContentDescription="@string/acc_name"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
@@ -55,10 +55,10 @@
         android:layout_height="0dp"
         android:hint="@string/surnname"
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline12"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline11"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_surname"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_surname"
         app:startIconContentDescription="@string/acc_surname"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
@@ -76,10 +76,10 @@
         android:hint="@string/username"
 
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline14"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline13"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_username"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_username"
         app:startIconContentDescription="@string/acc_username"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
@@ -95,17 +95,19 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="@string/password"
-        app:layout_constraintBottom_toTopOf="@+id/guideline16"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline15"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_password"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_password"
         app:startIconContentDescription="@string/acc_password"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_login_text_input_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:textColorHint="#616161" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,48 +117,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up_button"
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline16" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_all"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_bottom_password" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/guideline_bottom_create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+        android:id="@+id/guideline_top_create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
+        android:id="@+id/guideline_bottom_insert_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
+        android:id="@+id/guideline_left_all_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
+        android:id="@+id/guideline_right_all_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
+        android:id="@+id/guideline_bottom_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -165,56 +167,56 @@
 
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline9"
+        android:id="@+id/guideline_top_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline10"
+        android:id="@+id/guideline_bottom_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline11"
+        android:id="@+id/guideline_top_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline12"
+        android:id="@+id/guideline_bottom_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline13"
+        android:id="@+id/guideline_top_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.55" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline14"
+        android:id="@+id/guideline_bottom_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.65" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline15"
+        android:id="@+id/guideline_top_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.70861834" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline16"
+        android:id="@+id/guideline_bottom_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
