@@ -11,10 +11,10 @@
         android:layout_height="0dp"
         android:contentDescription="@string/profile_icon"
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_date_time"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_event_icon"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_all_fields"
         app:srcCompat="@drawable/add_photo_alternate" />
 
 
@@ -25,10 +25,10 @@
         android:hint="@string/event_place"
         app:endIconDrawable="@drawable/ic_baseline_gps_fixed_24"
         app:endIconMode="custom"
-        app:layout_constraintBottom_toTopOf="@+id/guideline13"
-        app:layout_constraintEnd_toStartOf="@+id/guideline10"
-        app:layout_constraintStart_toStartOf="@+id/guideline12"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_price_place"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_event_place_time"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_all_fields"
         app:startIconContentDescription="@string/acc_event_place"
         app:startIconDrawable="@drawable/location_on">
 
@@ -46,10 +46,10 @@
         android:hint="@string/event_name"
 
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline15"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toTopOf="@+id/guideline14"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_evemt_name"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_event_icon"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_name"
         app:startIconContentDescription="@string/acc_event_name"
         app:startIconDrawable="@drawable/celebration">
 
@@ -66,10 +66,10 @@
         android:layout_height="0dp"
         android:hint="@string/event_date"
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintEnd_toStartOf="@+id/guideline11"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toTopOf="@+id/guideline17"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_date_time"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_date_time"
         app:startIconContentDescription="@string/acc_event_date"
         app:startIconDrawable="@drawable/calendar_month">
 
@@ -87,10 +87,10 @@
         android:hint="@string/event_time"
 
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintEnd_toStartOf="@+id/guideline10"
-        app:layout_constraintStart_toStartOf="@+id/guideline12"
-        app:layout_constraintTop_toTopOf="@+id/guideline17"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_date_time"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_event_place_time"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_date_time"
         app:startIconContentDescription="@string/acc_event_time"
         app:startIconDrawable="@drawable/schedule">
 
@@ -106,11 +106,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="@string/event_description"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_all_fields"
 
-        app:layout_constraintEnd_toStartOf="@+id/guideline10"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_description"
         app:startIconDrawable="@drawable/edit_note">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -126,10 +126,10 @@
         android:layout_height="0dp"
         android:hint="@string/event_price"
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline13"
-        app:layout_constraintEnd_toStartOf="@+id/guideline11"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_price_place"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_fields"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_all_fields"
         app:startIconContentDescription="@string/acc_event_price"
         app:startIconDrawable="@drawable/payments">
 
@@ -146,113 +146,113 @@
         android:layout_height="wrap_content"
         android:text="@string/new_event"
         android:textSize="28sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_event_icon"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_event_description" />
 
     <Button
         android:id="@+id/filledButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/add_event"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/guideline15" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_all_fields"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_event_icon"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toBottomOf="@+id/guideline_bottom_evemt_name" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+        android:id="@+id/guideline_right_event_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
+        android:id="@+id/guideline_top_all_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05109489" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
+        android:id="@+id/guideline_bottom_all_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
+        android:id="@+id/guideline_left_all_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.02" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
+        android:id="@+id/guideline_bottom_event_date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.47" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
+        android:id="@+id/guideline_top_event_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.51" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline9"
+        android:id="@+id/guideline_left_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.37" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline10"
+        android:id="@+id/guideline_right_all_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.98" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline11"
+        android:id="@+id/guideline_right_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.665" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline12"
+        android:id="@+id/guideline_left_event_place_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.685" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline13"
+        android:id="@+id/guideline_bottom_event_price_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.24" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline17"
+        android:id="@+id/guideline_top_event_date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.28" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline14"
+        android:id="@+id/guideline_top_event_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.62" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline15"
+        android:id="@+id/guideline_bottom_evemt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
