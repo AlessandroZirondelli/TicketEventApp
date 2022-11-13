@@ -17,11 +17,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/profile_icon_image_view"
+        android:id="@+id/event_icon_image_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:contentDescription="@string/profile_icon"
-
+        android:contentDescription="@string/event_icon"
         app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_icon"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"

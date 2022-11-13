@@ -21,7 +21,7 @@
             android:layout_height="108dp"
             tools:srcCompat="@tools:sample/backgrounds/scenic"
             android:scaleType="centerCrop"
-            android:contentDescription="Place image" />
+            android:contentDescription="@string/event_icon" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,19 +58,3 @@
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
-
-
-<!--
-CardView
-    Cambiamo l'altezza perchè dioendere dal contenuto.
-    La larghezza invece occupava tutto lo schermo.
-
-    Impostiamo un margine, colore di background.
-    Material on surface stroke è un colore di material.
-
-
-ImageView
-    Mettiamo match parent come larghezza e come altezza una predefinita.
-    Per far si che occupi tutta la superficie in orizzontale dobbiamo scalarla. Scaletype CenterCroop è scalata e centrale
-    Dobbiamo inserire anche la content descriprion
--->

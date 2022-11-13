@@ -29,5 +29,6 @@
     <string name="event_time">Event time</string>
     <string name="acc_event_time">Field to insert the event time</string>
     <string name="add_event">Add event</string>
+    <string name="event_icon">Icon or photo about event</string>
 
 </resources>
