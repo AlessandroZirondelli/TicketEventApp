@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/single_card"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="@color/white"
+    app:strokeColor="@color/material_on_surface_stroke"
+    app:strokeWidth="1dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:id="@+id/event_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="108dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:scaleType="centerCrop"
+            android:contentDescription="Place image" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/event_name_textview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/event_name"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+            <TextView
+                android:id="@+id/event_date_textview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/event_date"
+                android:textAppearance="@style/TextAppearance.Material3.LabelMedium" />
+
+            <TextView
+                android:id="@+id/event_time_textview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/event_time"
+                android:textAppearance="@style/TextAppearance.Material3.LabelMedium" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
+
+<!--
+CardView
+    Cambiamo l'altezza perchè dioendere dal contenuto.
+    La larghezza invece occupava tutto lo schermo.
+
+    Impostiamo un margine, colore di background.
+    Material on surface stroke è un colore di material.
+
+
+ImageView
+    Mettiamo match parent come larghezza e come altezza una predefinita.
+    Per far si che occupi tutta la superficie in orizzontale dobbiamo scalarla. Scaletype CenterCroop è scalata e centrale
+    Dobbiamo inserire anche la content descriprion
+-->
