@@ -13,7 +13,6 @@
         android:text="@string/all_partecipants"
         android:textSize="42sp"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +29,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_anchor="@+id/recycler_view"
             app:layout_anchorGravity="center"
-            tools:listitem="@layout/event_card_layout" />
+            tools:listitem="@layout/partectipant_card_layout" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

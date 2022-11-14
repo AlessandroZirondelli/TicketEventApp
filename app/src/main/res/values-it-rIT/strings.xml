@@ -30,4 +30,14 @@
     <string name="event_time">Orario evento</string>
     <string name="acc_event_time">Campo per inserire orario evento</string>
     <string name="add_event">Aggiungi evento</string>
+    <string name="event_icon">Foto o icona evento</string>
+    <string name="scan_qrcode">Scannerizza qrcode</string>
+    <string name="view_partecipants">Visualizza partecipanti</string>
+    <string name="action_select">Scegli azione</string>
+    <string name="all_events">Tutti gli eventi</string>
+    <string name="all_partecipants">Tutti i partecipanti</string>
+    <string name="partecipant_icon">Icona o foto del partecipante</string>
+    <string name="ticket">Ticket personale</string>
+    <string name="acc_save_to_gallery">Icon o foto per salvare nella galleria</string>
+    <string name="save_to_gallery">Salva nella galleria</string>
 </resources>

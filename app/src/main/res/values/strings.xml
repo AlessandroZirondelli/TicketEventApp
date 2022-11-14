@@ -36,5 +36,8 @@
     <string name="all_events">All events</string>
     <string name="all_partecipants">All partecipants</string>
     <string name="partecipant_icon">Icon or photo about partecipant</string>
+    <string name="ticket">Personal ticket</string>
+    <string name="acc_save_to_gallery">Icon to save to gallery</string>
+    <string name="save_to_gallery">Save to gallery</string>
 
 </resources>
