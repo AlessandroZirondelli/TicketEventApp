@@ -10,7 +10,7 @@
         android:id="@+id/recycle_view_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/all_events"
+        android:text="@string/all_partecipants"
         android:textSize="42sp"
         app:layout_constraintEnd_toEndOf="parent"
 
@@ -18,21 +18,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/recycle_view_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/recycle_view_title"
         >
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_anchor="@+id/recycler_view"
-                app:layout_anchorGravity="center"
-                tools:listitem="@layout/event_card_layout" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_anchor="@+id/recycler_view"
+            app:layout_anchorGravity="center"
+            tools:listitem="@layout/event_card_layout" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

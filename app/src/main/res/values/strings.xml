@@ -33,5 +33,8 @@
     <string name="scan_qrcode">Scan qrcode</string>
     <string name="view_partecipants">View partecipants</string>
     <string name="action_select">Choose action</string>
+    <string name="all_events">All events</string>
+    <string name="all_partecipants">All partecipants</string>
+    <string name="partecipant_icon">Icon or photo about partecipant</string>
 
 </resources>
