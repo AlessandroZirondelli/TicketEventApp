@@ -18,7 +18,7 @@
 
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chip_group"
+        android:id="@+id/chip_group_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,25 +29,29 @@
             android:id="@+id/all_events_chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/all_events_chip" />
+            android:text="@string/all_events_chip"
+            style="@style/Widget.Material3.Chip.Filter"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/current_events_chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/current_events_chip" />
+            android:text="@string/current_events_chip"
+            style="@style/Widget.Material3.Chip.Filter"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/past_events_chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/past_events_chip" />
+            android:text="@string/past_events_chip"
+            style="@style/Widget.Material3.Chip.Filter"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/near_events_chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/near_events_chip" />
+            android:text="@string/near_events_chip"
+            style="@style/Widget.Material3.Chip.Filter"/>
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -55,7 +59,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/chip_group"
+            app:layout_constraintTop_toBottomOf="@+id/chip_group_filter"
         >
 
             <androidx.recyclerview.widget.RecyclerView
