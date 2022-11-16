@@ -40,4 +40,8 @@
     <string name="ticket">Ticket personale</string>
     <string name="acc_save_to_gallery">Icon o foto per salvare nella galleria</string>
     <string name="save_to_gallery">Salva nella galleria</string>
+    <string name="all_events_chip">Tutti</string>
+    <string name="current_events_chip">Correnti</string>
+    <string name="past_events_chip">Passati</string>
+    <string name="near_events_chip">Vicini</string>
 </resources>

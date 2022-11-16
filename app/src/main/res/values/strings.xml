@@ -39,5 +39,9 @@
     <string name="ticket">Personal ticket</string>
     <string name="acc_save_to_gallery">Icon to save to gallery</string>
     <string name="save_to_gallery">Save to gallery</string>
+    <string name="all_events_chip">All</string>
+    <string name="current_events_chip">Current</string>
+    <string name="past_events_chip">Past</string>
+    <string name="near_events_chip">Near</string>
 
 </resources>
