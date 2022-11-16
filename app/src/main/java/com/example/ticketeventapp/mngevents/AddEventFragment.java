@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.reglog;
+package com.example.ticketeventapp.mngevents;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

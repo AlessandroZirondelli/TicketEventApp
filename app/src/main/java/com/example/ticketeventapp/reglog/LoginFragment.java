@@ -2,6 +2,7 @@ package com.example.ticketeventapp.reglog;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,8 @@ public class LoginFragment extends Fragment {
         registerIcon = view.findViewById(R.id.add_account_icon_image_view);
         loginIcon = view.findViewById(R.id.login_icon_image_view);
 
+        //username.setFocusable(false); Serve per  rendere il textinpt non focusable e quindi non modificabile
+
 
         registerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,4 +53,5 @@ public class LoginFragment extends Fragment {
         });
 
     }
+
 }

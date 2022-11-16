@@ -15,6 +15,19 @@ public class User {
     private String surname;
     private String username;
     private String password;
+    private Boolean type;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Boolean getType() {
+        return type;
+    }
+
+    public void setType(Boolean type) {
+        this.type = type;
+    }
 
     public int getId() {
         return id;
