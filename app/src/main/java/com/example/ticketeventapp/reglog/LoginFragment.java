@@ -12,11 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.mng_users.UsersViewModel;
 import com.example.ticketeventapp.utilities.Utilities;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginFragment extends Fragment {
+
+    private UsersViewModel usersViewModel;
 
     private TextInputEditText username;
     private TextInputEditText password;
@@ -24,6 +29,10 @@ public class LoginFragment extends Fragment {
     private ImageView registerIcon;
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
@@ -44,11 +53,15 @@ public class LoginFragment extends Fragment {
 
         //username.setFocusable(false); Serve per  rendere il textinpt non focusable e quindi non modificabile
 
+        usersViewModel = new ViewModelProvider(getActivity()).get(UsersViewModel.class);
+
 
         registerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utilities.insertFragment((AppCompatActivity) activity,new RegistrationFragment(), RegistrationFragment.class.getSimpleName());
+
+
             }
         });
 

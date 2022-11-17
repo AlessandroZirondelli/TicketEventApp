@@ -151,7 +151,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_top_event_description" />
 
     <Button
-        android:id="@+id/filledButton"
+        android:id="@+id/sign_up_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/add_event"

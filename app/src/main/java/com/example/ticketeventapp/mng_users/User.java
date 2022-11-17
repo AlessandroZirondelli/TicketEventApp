@@ -15,7 +15,15 @@ public class User {
     private String surname;
     private String username;
     private String password;
-    private Boolean type;
+    private Boolean type; // 0 means Administrator , 1 means Customer
+
+    public User(String name, String surname, String username, String password, Boolean type) {
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        this.password = password;
+        this.type = type;
+    }
 
     public void setId(int id) {
         this.id = id;

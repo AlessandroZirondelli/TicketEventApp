@@ -1,20 +1,23 @@
 package com.example.ticketeventapp.database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
+import androidx.room.Transaction;
 
-/*
-*   Qui andremo a specificare tutte le query al database
-*  */
+import com.example.ticketeventapp.mng_users.User;
+
+import java.util.List;
 
 @Dao
 public interface TicketEventAppDAO {
-    /*Se inseriamo nella tabella una riga con gli stessi valori, specifichiamo cosa succede e come gestire tramite onConflict */
-    /*@Insert(onConflict = OnConflictStrategy.IGNORE)
-    void addCardItem(CardItem cardItem);
 
-    //Forziamo il fatto che questa query venga eseguita in maniera atomica tramite transaction
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void addUser(User user);
+
     @Transaction
-    @Query("SELECT * FROM item ORDER BY item_id DESC")
-    LiveData<List<CardItem>> getCardItems();*/
-
+    @Query("SELECT * FROM user")
+    LiveData<List<User>> getUsersList();
 }

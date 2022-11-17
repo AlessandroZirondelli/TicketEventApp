@@ -44,4 +44,5 @@
     <string name="current_events_chip">Correnti</string>
     <string name="past_events_chip">Passati</string>
     <string name="near_events_chip">Vicini</string>
+    <string name="successful_registration">Registrazione avvenuta correttamente</string>
 </resources>
