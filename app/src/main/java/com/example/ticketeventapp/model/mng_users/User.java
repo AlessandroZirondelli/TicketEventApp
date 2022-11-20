@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.mng_users;
+package com.example.ticketeventapp.model.mng_users;
 
 import androidx.room.Entity;
 import androidx.room.Index;

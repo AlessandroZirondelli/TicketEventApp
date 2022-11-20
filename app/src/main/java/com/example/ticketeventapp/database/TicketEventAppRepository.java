@@ -4,7 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.ticketeventapp.mng_users.User;
+import com.example.ticketeventapp.model.mng_users.User;
 
 import java.util.List;
 

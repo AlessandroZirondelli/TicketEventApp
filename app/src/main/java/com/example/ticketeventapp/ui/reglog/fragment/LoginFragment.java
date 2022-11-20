@@ -1,8 +1,7 @@
-package com.example.ticketeventapp.reglog;
+package com.example.ticketeventapp.ui.reglog.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.mng_users.UsersViewModel;
+import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModel;
 import com.example.ticketeventapp.utilities.Utilities;
 import com.google.android.material.textfield.TextInputEditText;
 

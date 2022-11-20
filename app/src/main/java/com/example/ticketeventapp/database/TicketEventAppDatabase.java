@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 
-import com.example.ticketeventapp.mng_users.User;
+import com.example.ticketeventapp.model.mng_users.User;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

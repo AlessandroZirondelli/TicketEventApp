@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
-import com.example.ticketeventapp.mng_users.User;
+import com.example.ticketeventapp.model.mng_users.User;
 
 import java.util.List;
 

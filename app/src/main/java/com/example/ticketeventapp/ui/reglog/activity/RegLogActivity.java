@@ -1,12 +1,13 @@
-package com.example.ticketeventapp.reglog;
+package com.example.ticketeventapp.ui.reglog.activity;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.os.Bundle;
-
 import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.mng_users.UsersViewModel;
+import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModel;
+import com.example.ticketeventapp.ui.reglog.fragment.LoginFragment;
 import com.example.ticketeventapp.utilities.Utilities;
 
 public class RegLogActivity extends AppCompatActivity {

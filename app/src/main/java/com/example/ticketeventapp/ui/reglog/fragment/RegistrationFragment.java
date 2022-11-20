@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.reglog;
+package com.example.ticketeventapp.ui.reglog.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +14,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.mng_users.User;
-import com.example.ticketeventapp.mng_users.UsersViewModel;
+import com.example.ticketeventapp.model.mng_users.User;
+import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -52,7 +52,7 @@ public class RegistrationFragment extends Fragment {
        usersViewModel.getUsers().observe(getActivity(), new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
-                Log.e("RegistrationFragment","Livedata cambia");
+                Log.e("RegistrationFragment","Livedata cambia:"+usersViewModel.getUsers().getValue().size());
             }
         });
 
