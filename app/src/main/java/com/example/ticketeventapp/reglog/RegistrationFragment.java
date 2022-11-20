@@ -10,18 +10,14 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.mng_users.User;
-import com.example.ticketeventapp.mng_users.UsersModel;
 import com.example.ticketeventapp.mng_users.UsersViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -34,7 +30,6 @@ public class RegistrationFragment extends Fragment {
     private Button signup;
 
     private UsersViewModel usersViewModel;
-    private UsersModel usersModel;
 
     @Nullable
     @Override
@@ -50,14 +45,14 @@ public class RegistrationFragment extends Fragment {
         username = view.findViewById(R.id.username_login_text_input_edit_text);
         password = view.findViewById(R.id.password_login_text_input_edit_text);
         signup = view.findViewById(R.id.sign_up_button);
-
         usersViewModel = new ViewModelProvider(getActivity()).get(UsersViewModel.class);
-        usersModel = new UsersModel();
+        //usersModel = new UsersModel();
 
-        usersViewModel.getUsers().observe(getActivity(), new Observer<List<User>>() {
+        /* Se commento l'observe, NON funziona ! */
+       usersViewModel.getUsers().observe(getActivity(), new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
-                usersModel.setUserList(users);
+                Log.e("RegistrationFragment","Livedata cambia");
             }
         });
 
@@ -69,11 +64,11 @@ public class RegistrationFragment extends Fragment {
                 String username_string = String.valueOf(username.getText());
                 String password_string = String.valueOf(password.getText());
 
+
+                Log.e("RegistrationFragment",String.valueOf(usersViewModel.getUsers().getValue().size()));
+
+
                 if(name_string != null && surname_string != null && username_string != null && password_string != null){
-
-                    Log.e("RegistrationFragment",String.valueOf(usersModel.getUsersList().size()));
-
-
 
                     usersViewModel.addUser(new User(name_string,surname_string,username_string,password_string,true));
                     //getActivity().getSupportFragmentManager().popBackStack();
