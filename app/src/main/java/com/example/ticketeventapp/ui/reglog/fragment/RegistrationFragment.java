@@ -1,7 +1,6 @@
 package com.example.ticketeventapp.ui.reglog.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +9,12 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.model.mng_users.User;
-import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModel;
+import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.List;
 
 public class RegistrationFragment extends Fragment {
 
@@ -29,7 +24,7 @@ public class RegistrationFragment extends Fragment {
     private TextInputEditText password;
     private Button signup;
 
-    private UsersViewModel usersViewModel;
+    private UsersViewModelRegLog usersViewModelRegLog;
 
     @Nullable
     @Override
@@ -45,16 +40,9 @@ public class RegistrationFragment extends Fragment {
         username = view.findViewById(R.id.username_login_text_input_edit_text);
         password = view.findViewById(R.id.password_login_text_input_edit_text);
         signup = view.findViewById(R.id.sign_up_button);
-        usersViewModel = new ViewModelProvider(getActivity()).get(UsersViewModel.class);
-        //usersModel = new UsersModel();
+        //usersViewModelRegLog = new ViewModelProvider(getActivity()).get(UsersViewModelRegLog.class);
 
-        /* Se commento l'observe, NON funziona ! */
-       usersViewModel.getUsers().observe(getActivity(), new Observer<List<User>>() {
-            @Override
-            public void onChanged(List<User> users) {
-                Log.e("RegistrationFragment","Livedata cambia:"+usersViewModel.getUsers().getValue().size());
-            }
-        });
+
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,13 +52,9 @@ public class RegistrationFragment extends Fragment {
                 String username_string = String.valueOf(username.getText());
                 String password_string = String.valueOf(password.getText());
 
-
-                Log.e("RegistrationFragment",String.valueOf(usersViewModel.getUsers().getValue().size()));
-
-
                 if(name_string != null && surname_string != null && username_string != null && password_string != null){
 
-                    usersViewModel.addUser(new User(name_string,surname_string,username_string,password_string,true));
+                    //usersViewModel.addUser(new User(name_string,surname_string,username_string,password_string,true));
                     //getActivity().getSupportFragmentManager().popBackStack();
                     Snackbar snackbar  =  Snackbar.make(getActivity().findViewById(R.id.fragment_container_view),
                             R.string.successful_registration,

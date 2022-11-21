@@ -12,20 +12,26 @@ public class TicketEventAppRepository {
 
     private TicketEventAppDAO ticketEventAppDAO;
 
-
-    private LiveData<List<User>> usersList;
+    private List<User> usersList;
+    private LiveData<List<User>> usersLiveData;
 
     public TicketEventAppRepository(Application application){
         TicketEventAppDatabase db = TicketEventAppDatabase.getDatabase(application);
         ticketEventAppDAO = db.ticketEventAppDAO();
         usersList = ticketEventAppDAO.getUsersList();
+        //usersLiveData = ticketEventAppDAO.getUsersLiveData();
     }
 
-    public LiveData<List<User>> getUsersList(){
+    /*public LiveData<List<User>> getUsersLiveData(){
+        return usersLiveData;
+    }*/
+
+    public List<User> getUsersList(){
         return usersList;
     }
 
     public void addUser(User user){
+        usersList.add(user);// DA CANCELLARE SE SI USA SOLO LIVEDATA
         TicketEventAppDatabase.executor.execute(new Runnable() {
 
             @Override

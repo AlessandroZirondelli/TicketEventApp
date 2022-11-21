@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.utilities.Utilities;
+import com.example.ticketeventapp.ui.utilities.Utilities;
 
 public class MngEventsActivity extends AppCompatActivity {
 

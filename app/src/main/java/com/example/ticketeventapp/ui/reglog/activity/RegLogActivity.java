@@ -6,13 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModel;
+import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
 import com.example.ticketeventapp.ui.reglog.fragment.LoginFragment;
-import com.example.ticketeventapp.utilities.Utilities;
+import com.example.ticketeventapp.ui.utilities.Utilities;
 
 public class RegLogActivity extends AppCompatActivity {
 
-    private UsersViewModel usersViewModel;
+    private UsersViewModelRegLog usersViewModelRegLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,15 @@ public class RegLogActivity extends AppCompatActivity {
             Utilities.insertFragment(this,new LoginFragment(), LoginFragment.class.getSimpleName());
         }
 
-        usersViewModel = new ViewModelProvider(this).get(UsersViewModel.class);
+        usersViewModelRegLog = new ViewModelProvider(this).get(UsersViewModelRegLog.class);
+
+        /*usersViewModel.getUsers().observe(this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(List<User> users) {
+                //Log.e("RegistrationFragment","Livedata cambia:"+usersViewModel.getUsers().getValue().size());
+            }
+        });*/
+
 
     }
 }

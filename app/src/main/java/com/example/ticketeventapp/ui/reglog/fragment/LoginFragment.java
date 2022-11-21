@@ -14,13 +14,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModel;
-import com.example.ticketeventapp.utilities.Utilities;
+import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
+import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginFragment extends Fragment {
 
-    private UsersViewModel usersViewModel;
+    private UsersViewModelRegLog usersViewModelRegLog;
 
     private TextInputEditText username;
     private TextInputEditText password;
@@ -52,7 +52,7 @@ public class LoginFragment extends Fragment {
 
         //username.setFocusable(false); Serve per  rendere il textinpt non focusable e quindi non modificabile
 
-        usersViewModel = new ViewModelProvider(getActivity()).get(UsersViewModel.class);
+        //usersViewModelRegLog = new ViewModelProvider(getActivity()).get(UsersViewModelRegLog.class);
 
 
         registerIcon.setOnClickListener(new View.OnClickListener() {

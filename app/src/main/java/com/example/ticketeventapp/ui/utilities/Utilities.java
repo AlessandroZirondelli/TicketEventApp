@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.utilities;
+package com.example.ticketeventapp.ui.utilities;
 
 
 import androidx.appcompat.app.AppCompatActivity;
