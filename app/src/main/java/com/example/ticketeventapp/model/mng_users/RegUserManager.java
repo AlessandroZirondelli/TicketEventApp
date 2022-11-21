@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.model.mng_users;
 
 import android.os.Build;
+import android.util.Log;
 
 import java.util.List;
 
@@ -15,10 +16,12 @@ public class RegUserManager {
 
     public boolean isUsernameAvailable(String username){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return !usersList.stream().anyMatch((user)->user.getUsername() == username);
+            Log.e("RegistrationFragment","Sono qui1");
+            return !usersList.stream().anyMatch((user)->user.getUsername().equals(username));
         } else {
+            Log.e("RegistrationFragment","Sono qui2");
             for(User user : usersList){
-                if(user.getUsername() == username){
+                if(user.getUsername().equals(username)){
                     return false;
                 }
             }

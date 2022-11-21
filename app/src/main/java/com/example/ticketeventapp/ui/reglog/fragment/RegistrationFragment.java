@@ -69,6 +69,12 @@ public class RegistrationFragment extends Fragment {
 
                 int resFilled = regUserManager.areFilledFields(name_string,surname_string,username_string,password_string);
 
+                if(regUserManager.isUsernameAvailable("mrossiii")){
+                    Log.e("RegistrationFragment","Username disponibile");
+                } else {
+                    Log.e("RegistrationFragment","Username non disponibile");
+                }
+
                 if(resFilled != 0){ // if fields are empty
                     enableEmptyFieldError(resFilled);
                 }
@@ -85,8 +91,6 @@ public class RegistrationFragment extends Fragment {
                         enableExistedUsernameError();
 
                     }
-
-
 
 
 
