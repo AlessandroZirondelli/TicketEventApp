@@ -14,10 +14,6 @@ import java.util.List;
 @Dao
 public interface TicketEventAppDAO {
 
-    @Transaction
-    @Query("SELECT * FROM user")
-    List<User> getUsersList();
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addUser(User user);
 

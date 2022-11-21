@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import com.example.ticketeventapp.database.TicketEventAppRepository;
 import com.example.ticketeventapp.model.mng_users.User;
@@ -12,23 +13,17 @@ import java.util.List;
 
 public class UsersViewModelRegLog extends AndroidViewModel {
 
-    private List<User> usersList;
     private TicketEventAppRepository repository;
-    //private LiveData<List<User>> usersLiveData;
+    private LiveData<List<User>> usersLiveData;
 
     public UsersViewModelRegLog(@NonNull Application application){
         super(application);
         repository = new TicketEventAppRepository(application);
-
-        //usersList = repository.getUsersList();
+        usersLiveData = repository.getUsersLiveData();
     }
 
-    /*public LiveData<List<User>> getUsersLiveData(){
+    public LiveData<List<User>> getUsersLiveData(){
         return usersLiveData;
-    }*/
-
-    public List<User> getUsersList(){
-       return usersList;
     }
 
     public void addUser(User user){

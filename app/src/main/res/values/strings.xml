@@ -44,5 +44,7 @@
     <string name="past_events_chip">Past</string>
     <string name="near_events_chip">Near</string>
     <string name="successful_registration">Successful registration</string>
+    <string name="used_username">Username already used</string>
+    <string name="empty_field">Empty field</string>
 
 </resources>

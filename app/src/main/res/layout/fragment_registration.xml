@@ -75,7 +75,7 @@
         android:layout_height="0dp"
         android:hint="@string/username"
 
-
+        app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_username"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
