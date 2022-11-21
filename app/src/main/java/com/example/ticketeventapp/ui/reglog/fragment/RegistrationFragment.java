@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.ui.reglog.fragment;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -96,6 +98,11 @@ public class RegistrationFragment extends Fragment {
                                 Snackbar.ANIMATION_MODE_SLIDE);
                         snackbar.show();
                         clearRegistrationFields();
+
+                        timerChangeFragment(getFragmentManager());
+
+
+
                     } else{
                         enableExistedUsernameError();
 
@@ -186,5 +193,16 @@ public class RegistrationFragment extends Fragment {
 
     private void disableFocusListener(TextInputEditText view){
         view.setOnFocusChangeListener(null);
+    }
+
+    private void timerChangeFragment(FragmentManager fragmentManager){
+        new CountDownTimer(3, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                getFragmentManager().popBackStack();
+            }
+        }.start();
     }
 }
