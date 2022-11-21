@@ -29,12 +29,7 @@ public class RegLogActivity extends AppCompatActivity {
 
         usersViewModelRegLog = new ViewModelProvider(this).get(UsersViewModelRegLog.class);
 
-        usersViewModelRegLog.getUsersLiveData().observe(this, new Observer<List<User>>() {
-            @Override
-            public void onChanged(List<User> users) {
-                //Log.e("RegistrationFragment","Livedata cambia:"+usersViewModel.getUsers().getValue().size());
-            }
-        });
+
 
 
     }

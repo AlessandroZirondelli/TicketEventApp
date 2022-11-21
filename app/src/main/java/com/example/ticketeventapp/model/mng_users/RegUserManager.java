@@ -33,6 +33,10 @@ public class RegUserManager {
         return usersList;
     }
 
+    public void setUsersList(List<User> list){
+        usersList = list;
+    }
+
     public int  areFilledFields(String name, String surname, String username, String password){
         if(name.isEmpty()){
             return 1;

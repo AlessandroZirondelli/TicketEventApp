@@ -10,6 +10,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
@@ -20,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -57,6 +59,13 @@ public class RegistrationFragment extends Fragment {
 
         //Log.e("RegistrationFragment","num elementi:"+String.valueOf(regUserManager.getUsersList().size()));
 
+        usersViewModelRegLog.getUsersLiveData().observe(getActivity(), new Observer<List<User>>() {
+            @Override
+            public void onChanged(List<User> users) {
+                regUserManager.setUsersList(users);
+                Log.e("RegistrationFragment","Livedata cambia. Size lista locale"+regUserManager.getUsersList().size());
+            }
+        });
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
