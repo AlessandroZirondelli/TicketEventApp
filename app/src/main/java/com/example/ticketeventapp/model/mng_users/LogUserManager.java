@@ -1,18 +1,23 @@
 package com.example.ticketeventapp.model.mng_users;
 
+import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
+import com.example.ticketeventapp.model.utils.AppPreferences;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public class LogUserManager {
 
     private List<User> usersList;
+    public AppPreferences appPreferences;
 
-    public LogUserManager(List<User> list){
+    public LogUserManager(List<User> list, Context context){
         usersList = list;
+        appPreferences = new AppPreferences(context);
     }
-
 
     public List<User> getUsersList(){
         return usersList;
@@ -57,6 +62,20 @@ public class LogUserManager {
             return 1; //wrong username
         }
 
+    }
+
+    public void startLoginSession(String username,String password){
+        User user = new User(username,password);
+        appPreferences.setLoggedUser(user);
+
+    }
+
+    public User getLoggedUser(){
+        return appPreferences.getLoggedUser();
+    }
+
+    public LocalDate getExpirationDateLogin(){
+        return appPreferences.getExpirationDate();
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.model.mng_users;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -23,6 +24,11 @@ public class User {
         this.username = username;
         this.password = password;
         this.type = type;
+    }
+    @Ignore
+    public User(String username,String password){
+        this.username = username;
+        this.password = password;
     }
 
     public void setId(int id) {

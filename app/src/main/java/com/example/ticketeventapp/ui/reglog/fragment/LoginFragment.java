@@ -66,7 +66,7 @@ public class LoginFragment extends Fragment {
 
 
         usersViewModelRegLog = new ViewModelProvider(getActivity()).get(UsersViewModelRegLog.class);
-        logUserManager = new LogUserManager(usersViewModelRegLog.getUsersLiveData().getValue());
+        logUserManager = new LogUserManager(usersViewModelRegLog.getUsersLiveData().getValue(),getActivity());
 
         usersViewModelRegLog.getUsersLiveData().observe(getActivity(), new Observer<List<User>>() {
             @Override
@@ -88,7 +88,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                String username_string = String.valueOf(username.getText());
+                /*String username_string = String.valueOf(username.getText());
                 String password_string = String.valueOf(password.getText());
 
                 int resFilled = logUserManager.areFilledFields(username_string,password_string);
@@ -102,8 +102,13 @@ public class LoginFragment extends Fragment {
                     } else{ //correct credentials
                         //redirect to activity with home
                         Log.e("LoginFragment","Login corretto");
+                        logUserManager.startLoginSession(username_string,password_string);
                     }
-                }
+                }*/
+
+                Log.e("LoginFragment","username:"+logUserManager.getLoggedUser().getUsername()+" password:"+logUserManager.getLoggedUser().getPassword());
+
+
             }
         });
 
