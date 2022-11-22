@@ -53,21 +53,19 @@ public class RegistrationFragment extends Fragment {
         password = view.findViewById(R.id.password_login_text_input_edit_text);
         signup = view.findViewById(R.id.sign_up_button);
 
-
-
-
         usersViewModelRegLog = new ViewModelProvider(getActivity()).get(UsersViewModelRegLog.class);
         regUserManager = new RegUserManager(usersViewModelRegLog.getUsersLiveData().getValue());
 
-        //Log.e("RegistrationFragment","num elementi:"+String.valueOf(regUserManager.getUsersList().size()));
 
+
+        //It's mandatory to call this observe method
         usersViewModelRegLog.getUsersLiveData().observe(getActivity(), new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
                 regUserManager.setUsersList(users);
-                Log.e("RegistrationFragment","Livedata cambia. Size lista locale"+regUserManager.getUsersList().size());
             }
         });
+
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,12 +77,6 @@ public class RegistrationFragment extends Fragment {
                 String password_string = String.valueOf(password.getText());
 
                 int resFilled = regUserManager.areFilledFields(name_string,surname_string,username_string,password_string);
-
-                if(regUserManager.isUsernameAvailable("mrossiii")){
-                    Log.e("RegistrationFragment","Username disponibile");
-                } else {
-                    Log.e("RegistrationFragment","Username non disponibile");
-                }
 
                 if(resFilled != 0){ // if fields are empty
                     enableEmptyFieldError(resFilled);
@@ -98,32 +90,13 @@ public class RegistrationFragment extends Fragment {
                                 Snackbar.ANIMATION_MODE_SLIDE);
                         snackbar.show();
                         clearRegistrationFields();
-
                         timerChangeFragment(getFragmentManager());
-
-
 
                     } else{
                         enableExistedUsernameError();
 
                     }
-
-
-
                 }
-
-
-                /*if(name_string != null && surname_string != null && username_string != null && password_string != null){
-
-                    usersViewModelRegLog.addUser(new User(name_string,surname_string,username_string,password_string,true));
-                    //getActivity().getSupportFragmentManager().popBackStack();
-                    Snackbar snackbar  =  Snackbar.make(getActivity().findViewById(R.id.fragment_container_view),
-                            R.string.successful_registration,
-                            Snackbar.ANIMATION_MODE_SLIDE);
-                    snackbar.show();
-                    clearRegistrationFields();
-
-                }*/
 
             }
         });
@@ -147,9 +120,10 @@ public class RegistrationFragment extends Fragment {
         setFocusOutListener(username);
     }
 
+    /*
     private void disableExistedUsernameError(){
         username.setError(null);
-    }
+    }*/
 
     private void enableEmptyFieldError(int field){
         Map<Integer,TextInputEditText> map = createMapIntegerErrorTextFields();

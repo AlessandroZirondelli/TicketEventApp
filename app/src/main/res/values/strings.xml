@@ -46,5 +46,7 @@
     <string name="successful_registration">Successful registration</string>
     <string name="used_username">Username already used</string>
     <string name="empty_field">Empty field</string>
+    <string name="username_not_exists">Username doesn\'t exist</string>
+    <string name="wrong_password">Wrong password</string>
 
 </resources>
