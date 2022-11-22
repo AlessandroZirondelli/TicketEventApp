@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.ui.reglog.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.mng_users.LogUserManager;
 import com.example.ticketeventapp.model.mng_users.RegUserManager;
 import com.example.ticketeventapp.model.mng_users.User;
+import com.example.ticketeventapp.ui.mngevents.MngEventsActivity;
 import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.google.android.material.textfield.TextInputEditText;
@@ -84,11 +86,19 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        if(logUserManager.canDoAutoLogin()){
+            Log.e("LoginFragment","Auto login possibile");
+            Intent intent = new Intent(getActivity(), MngEventsActivity.class); //esplicitiamo la classe che andiamo a richiamare
+            this.startActivity(intent);
+        }else{
+            Log.e("LoginFragment","Auto login NON possibile");
+        }
+
         loginIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                /*String username_string = String.valueOf(username.getText());
+                String username_string = String.valueOf(username.getText());
                 String password_string = String.valueOf(password.getText());
 
                 int resFilled = logUserManager.areFilledFields(username_string,password_string);
@@ -104,10 +114,10 @@ public class LoginFragment extends Fragment {
                         Log.e("LoginFragment","Login corretto");
                         logUserManager.startLoginSession(username_string,password_string);
                     }
-                }*/
+                }
 
-                Log.e("LoginFragment","username:"+logUserManager.getLoggedUser().getUsername()+" password:"+logUserManager.getLoggedUser().getPassword());
-
+                /*Log.e("LoginFragment","username:"+logUserManager.getLoggedUser().getUsername()+" password:"+logUserManager.getLoggedUser().getPassword());
+                Log.e("LoginFragment","Expiration date is:"+logUserManager.getExpirationDateLogin());*/
 
             }
         });

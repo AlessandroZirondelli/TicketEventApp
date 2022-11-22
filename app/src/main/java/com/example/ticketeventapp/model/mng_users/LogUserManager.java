@@ -70,12 +70,16 @@ public class LogUserManager {
 
     }
 
-    public User getLoggedUser(){
+    public Boolean canDoAutoLogin(){
+        return appPreferences.canDoAutoLogin();
+    }
+
+    /*public User getLoggedUser(){
         return appPreferences.getLoggedUser();
     }
 
     public LocalDate getExpirationDateLogin(){
         return appPreferences.getExpirationDate();
-    }
+    }*/
 
 }

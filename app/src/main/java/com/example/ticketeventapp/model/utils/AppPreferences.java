@@ -28,6 +28,7 @@ public class AppPreferences {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             LocalDate expirationDate = LocalDate.now().plusDays(21); //yyyy-mm-dd
             sharedPreferencesEditor.putString("logged_expiration",expirationDate.toString());
+            sharedPreferencesEditor.commit();
             Log.e("LoginFragment","Expiration date aggiunta");
         } else {
             //TODO
@@ -42,7 +43,14 @@ public class AppPreferences {
 
     public LocalDate getExpirationDate(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            return LocalDate.parse(sharedPreferences.getString("logged_expiration",null));
+            Log.e("LoginFragment","Leggo expiration date"+sharedPreferences.getString("logged_expiration",null));
+            String date = sharedPreferences.getString("logged_expiration",null);
+            if(date==null){
+                return null;
+            } else {
+                return LocalDate.parse(sharedPreferences.getString("logged_expiration",null));
+            }
+
         } else{
             //TODO
             Log.e("LoginFragment","Data reperita nulla");
@@ -55,9 +63,15 @@ public class AppPreferences {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDate todayDate = LocalDate.now();
-            if(!user.getUsername().isEmpty() && !user.getPassword().isEmpty() && !todayDate.isAfter(LocalDate.now()) ){
+            if(user.getUsername()==null || user.getUsername()== null || getExpirationDate()==null ){
+                return false;
+            }
+            if(!user.getUsername().isEmpty() && !user.getPassword().isEmpty() && !todayDate.isAfter(getExpirationDate()) ){
                 return true;
             }
+            //Expiration date or username/password not saved in shared preferences
+            sharedPreferencesEditor.clear();
+            sharedPreferencesEditor.commit();
             return false;
         }
         else{

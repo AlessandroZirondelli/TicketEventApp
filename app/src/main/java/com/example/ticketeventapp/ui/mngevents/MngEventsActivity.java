@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.mngevents;
+package com.example.ticketeventapp.ui.mngevents;
 
 import android.os.Bundle;
 
