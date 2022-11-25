@@ -18,9 +18,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.mng_users.LogUserManager;
-import com.example.ticketeventapp.model.mng_users.RegUserManager;
 import com.example.ticketeventapp.model.mng_users.User;
-import com.example.ticketeventapp.ui.mngevents.MngEventsActivity;
+import com.example.ticketeventapp.ui.mngevents.activity.MngEventsActivity;
 import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.google.android.material.textfield.TextInputEditText;

@@ -54,7 +54,7 @@
         app:startIconDrawable="@drawable/celebration">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/event_name_login_text_input_edit_text"
+            android:id="@+id/event_name_text_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -151,7 +151,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_top_event_description" />
 
     <Button
-        android:id="@+id/sign_up_button"
+        android:id="@+id/add_event_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/add_event"

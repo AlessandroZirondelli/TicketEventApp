@@ -28,7 +28,7 @@
                 android:value="" />
         </activity>
 
-        <activity android:name=".ui.mngevents.MngEventsActivity" />
+        <activity android:name=".ui.mngevents.activity.MngEventsActivity" />
     </application>
 
 </manifest>

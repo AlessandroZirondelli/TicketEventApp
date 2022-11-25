@@ -51,7 +51,7 @@ public class RegistrationFragment extends Fragment {
         surname = view.findViewById(R.id.surname_login_text_input_edit_text);
         username = view.findViewById(R.id.username_login_text_input_edit_text);
         password = view.findViewById(R.id.password_login_text_input_edit_text);
-        signup = view.findViewById(R.id.sign_up_button);
+        signup = view.findViewById(R.id.add_event_button);
 
         usersViewModelRegLog = new ViewModelProvider(getActivity()).get(UsersViewModelRegLog.class);
         regUserManager = new RegUserManager(usersViewModelRegLog.getUsersLiveData().getValue());
