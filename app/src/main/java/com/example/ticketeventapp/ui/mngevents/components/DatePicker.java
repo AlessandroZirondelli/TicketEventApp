@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentManager;
 
+import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -21,16 +22,17 @@ public class DatePicker {
     MaterialDatePicker.Builder  materialDateBuilder;
     FragmentManager fragmentManager;
     String selectedDate;
+    AddEventViewModel addEventViewModel;
 
-    public DatePicker(FragmentManager fragmentManager){
+    public DatePicker(FragmentManager fragmentManager, AddEventViewModel addEventViewModel){
         materialDateBuilder = MaterialDatePicker.Builder.datePicker();
         materialDateBuilder.setTitleText("SELECT A DATE");
-
         disablePastDatesSelection();
         materialDatePicker = materialDateBuilder.build();
         this.fragmentManager = fragmentManager;
         setPositiveClickListener();
-
+        this.addEventViewModel = addEventViewModel;
+        selectedDate = null;
     }
 
 
@@ -46,12 +48,8 @@ public class DatePicker {
                 calendar.setTimeInMillis(selection);
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String formattedDate  = format.format(calendar.getTime());
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    selectedDate = formattedDate;
-                }else{
-                    //TODO
-                }
-                Log.e("AddFragment",formattedDate);
+                selectedDate = formattedDate;
+                setDateOnViewModel();
             }
         });
     }
@@ -63,6 +61,10 @@ public class DatePicker {
         CalendarConstraints calendarConstraints = calendarConstraintsBuilder.build();
         materialDateBuilder.setCalendarConstraints(calendarConstraints);
 
+    }
+
+    private void setDateOnViewModel(){
+        this.addEventViewModel.setSelectedDate(this.getSelectedDate());
     }
 
     public String getSelectedDate(){

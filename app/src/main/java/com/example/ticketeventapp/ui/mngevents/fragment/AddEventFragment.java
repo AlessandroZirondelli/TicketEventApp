@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.ui.mngevents.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.ui.mngevents.components.DatePicker;
+import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
+import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class AddEventFragment extends Fragment {
+
+    private AddEventViewModel addEventViewModel;
 
     private TextView fragment_title;
     private ImageView event_photo;
@@ -53,8 +59,9 @@ public class AddEventFragment extends Fragment {
         event_price = view.findViewById(R.id.event_price_text_input_edit_text);
         button = view.findViewById(R.id.add_event_button);
 
-        datePicker = new DatePicker(getActivity().getSupportFragmentManager());
+        addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
 
+        datePicker = new DatePicker(getActivity().getSupportFragmentManager(),addEventViewModel);
 
         event_date.setFocusable(false);
 
@@ -62,6 +69,13 @@ public class AddEventFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 datePicker.show();
+            }
+        });
+
+        event_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("AddEventFragment",addEventViewModel.getSelectedDate().getValue());
             }
         });
 
