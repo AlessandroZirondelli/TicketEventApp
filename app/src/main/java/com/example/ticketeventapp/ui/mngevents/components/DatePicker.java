@@ -25,12 +25,11 @@ public class DatePicker {
     public DatePicker(FragmentManager fragmentManager){
         materialDateBuilder = MaterialDatePicker.Builder.datePicker();
         materialDateBuilder.setTitleText("SELECT A DATE");
-        
+
         disablePastDatesSelection();
         materialDatePicker = materialDateBuilder.build();
         this.fragmentManager = fragmentManager;
         setPositiveClickListener();
-
 
     }
 
