@@ -32,7 +32,11 @@ public class DatePicker {
         this.fragmentManager = fragmentManager;
         setPositiveClickListener();
         this.addEventViewModel = addEventViewModel;
-        selectedDate = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            selectedDate = LocalDate.now().toString();
+        }else{
+            //TODO
+        }
     }
 
 

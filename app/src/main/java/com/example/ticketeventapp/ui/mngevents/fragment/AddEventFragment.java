@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
@@ -64,6 +65,15 @@ public class AddEventFragment extends Fragment {
         datePicker = new DatePicker(getActivity().getSupportFragmentManager(),addEventViewModel);
 
         event_date.setFocusable(false);
+
+
+
+        addEventViewModel.getSelectedDate().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String date) {
+                event_date.setText(date);
+            }
+        });
 
         event_date.setOnClickListener(new View.OnClickListener() {
             @Override
