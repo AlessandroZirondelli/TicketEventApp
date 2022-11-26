@@ -11,13 +11,18 @@ public class AddEventViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Bitmap> imageBitmap;
     private final MutableLiveData<String> selectedDate;
-    private final MutableLiveData<String> selectedTime;
+
+    private final MutableLiveData<Integer> selectedHour;
+    private final MutableLiveData<Integer> selectedMinutes;
 
     public AddEventViewModel(@NonNull Application application) {
         super(application);
         imageBitmap = new MutableLiveData<>();
         selectedDate = new MutableLiveData<>();
-        selectedTime = new MutableLiveData<>();
+        selectedHour = new MutableLiveData<>();
+        selectedMinutes = new MutableLiveData<>();
+
+
     }
 
     public void setImageBitmap(Bitmap bitmap){
@@ -28,9 +33,15 @@ public class AddEventViewModel extends AndroidViewModel {
         this.selectedDate.setValue(selectedDate);
     }
 
-    public void setSelectedTime(String selectedTime){
-        this.selectedTime.setValue(selectedTime);
+    public void setSelectedHour(Integer selectedHour){
+        this.selectedHour.setValue(selectedHour);
     }
+
+    public void setSelectedMinutes(Integer selectedMinutes) {this.selectedMinutes.setValue(selectedMinutes);}
+
+    public MutableLiveData<Integer> getSelectedMinutes(){return this.selectedMinutes;}
+
+    public MutableLiveData<Integer> getSelectedHour(){return this.selectedHour;}
 
     public MutableLiveData<Bitmap> getImageBitmap(){
         return this.imageBitmap;
@@ -40,8 +51,6 @@ public class AddEventViewModel extends AndroidViewModel {
         return this.selectedDate;
     }
 
-    public MutableLiveData<String> getSelectedTime(){
-        return this.selectedTime;
-    }
+
 
 }

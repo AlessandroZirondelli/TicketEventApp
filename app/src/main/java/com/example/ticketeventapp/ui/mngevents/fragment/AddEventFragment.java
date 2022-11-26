@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.ui.mngevents.components.DatePicker;
+import com.example.ticketeventapp.ui.mngevents.components.TimePicker;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
 import com.google.android.material.textfield.TextInputEditText;
@@ -36,6 +37,7 @@ public class AddEventFragment extends Fragment {
     private Button button;
 
     private DatePicker datePicker;
+    private TimePicker timePicker;
 
 
 
@@ -63,8 +65,10 @@ public class AddEventFragment extends Fragment {
         addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
 
         datePicker = new DatePicker(getActivity().getSupportFragmentManager(),addEventViewModel);
+        timePicker = new TimePicker(getActivity().getSupportFragmentManager(),addEventViewModel);
 
         event_date.setFocusable(false);
+        event_time.setFocusable(false);
 
 
 
@@ -75,6 +79,8 @@ public class AddEventFragment extends Fragment {
             }
         });
 
+        
+
         event_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,10 +88,17 @@ public class AddEventFragment extends Fragment {
             }
         });
 
+        event_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timePicker.show();
+            }
+        });
+
         event_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("AddEventFragment",addEventViewModel.getSelectedDate().getValue());
+                Log.e("AddEventFragment",String.valueOf(addEventViewModel.getSelectedHour().getValue())+":"+String.valueOf(addEventViewModel.getSelectedMinutes().getValue()));
             }
         });
 
