@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentManager;
 
+import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
@@ -25,8 +26,7 @@ public class DatePicker {
     AddEventViewModel addEventViewModel;
 
     public DatePicker(FragmentManager fragmentManager, AddEventViewModel addEventViewModel){
-        materialDateBuilder = MaterialDatePicker.Builder.datePicker();
-        materialDateBuilder.setTitleText("SELECT A DATE");
+        materialDateBuilder = MaterialDatePicker.Builder.datePicker().setTitleText(R.string.select_event_date);
         disablePastDatesSelection();
         materialDatePicker = materialDateBuilder.build();
         this.fragmentManager = fragmentManager;

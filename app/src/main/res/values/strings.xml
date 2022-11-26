@@ -48,5 +48,6 @@
     <string name="empty_field">Empty field</string>
     <string name="username_not_exists">Username doesn\'t exist</string>
     <string name="wrong_password">Wrong password</string>
+    <string name="select_event_date">Select event date</string>
 
 </resources>
