@@ -2,6 +2,7 @@ package com.example.ticketeventapp.ui.mngevents.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -91,10 +92,10 @@ public class AddEventFragment extends Fragment {
             }
         });
 
-        addEventViewModel.getImageBitmap().observe(getActivity(), new Observer<Bitmap>() {
+        addEventViewModel.getImageURI().observe(getActivity(), new Observer<Uri>() {
             @Override
-            public void onChanged(Bitmap bitmap) {
-                event_photo.setImageBitmap(bitmap);
+            public void onChanged(Uri uri) {
+                event_photo.setImageURI(uri);
             }
         });
         
@@ -126,17 +127,12 @@ public class AddEventFragment extends Fragment {
 
     private void imageChooser(){
         int CHOOSE_PICTURE = 200;
-        /*Intent choosePicture = new Intent();
-        choosePicture.setType("image/*");
-        choosePicture.setAction(Intent.ACTION_GET_CONTENT);*/
-
-
-
-        Intent choosePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent choosePicture = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
 
         if (choosePicture.resolveActivity(getActivity().getPackageManager()) != null) {
-            //getActivity().startActivityForResult(Intent.createChooser(choosePicture, "Select Picture"), CHOOSE_PICTURE);
             getActivity().startActivityForResult(choosePicture, CHOOSE_PICTURE);
+        } else {
+            Log.e("AddEventFragment","No resolver of specific choose picture intent");
         }
 
     }

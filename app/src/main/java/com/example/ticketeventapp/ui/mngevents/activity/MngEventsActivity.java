@@ -1,7 +1,7 @@
 package com.example.ticketeventapp.ui.mngevents.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -39,12 +39,8 @@ public class MngEventsActivity extends AppCompatActivity {
         int CHOOSE_PICTURE = 200;
 
         if(requestCode == CHOOSE_PICTURE && resultCode==RESULT_OK){
-            Bundle bundle = data.getExtras();
-            if(bundle != null){
-                //l'immagine è salvata con chiave "data"
-                Bitmap imageBitmap = (Bitmap) bundle.get("data");
-                addEventViewModel.setImageBitmap(imageBitmap);
-            }
+            Uri imageUri = data.getData();
+            addEventViewModel.setImageURI(imageUri);
         }
     }
 }
