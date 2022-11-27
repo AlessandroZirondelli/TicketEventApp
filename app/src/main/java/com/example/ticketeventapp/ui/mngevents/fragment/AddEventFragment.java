@@ -22,6 +22,8 @@ import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.time.LocalTime;
+
 public class AddEventFragment extends Fragment {
 
     private AddEventViewModel addEventViewModel;
@@ -79,6 +81,12 @@ public class AddEventFragment extends Fragment {
             }
         });
 
+        addEventViewModel.getSelectedTime().observe(getActivity(), new Observer<LocalTime>() {
+            @Override
+            public void onChanged(LocalTime localTime) {
+                event_time.setText(localTime.toString());
+            }
+        });
         
 
         event_date.setOnClickListener(new View.OnClickListener() {
@@ -95,12 +103,12 @@ public class AddEventFragment extends Fragment {
             }
         });
 
-        event_photo.setOnClickListener(new View.OnClickListener() {
+        /*event_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("AddEventFragment",String.valueOf(addEventViewModel.getSelectedHour().getValue())+":"+String.valueOf(addEventViewModel.getSelectedMinutes().getValue()));
+                //Log.e("AddEventFragment",String.valueOf(addEventViewModel.getSelectedHour().getValue())+":"+String.valueOf(addEventViewModel.getSelectedMinutes().getValue()));
             }
-        });
+        });*/
 
     }
 

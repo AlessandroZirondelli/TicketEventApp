@@ -11,6 +11,7 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -51,29 +52,22 @@ public class TimePicker {
             public void onClick(View view) {
                 hour = materialTimePicker.getHour();
                 minutes = materialTimePicker.getMinute();
-                setHourOnViewModel(hour);
-                setMinutesOnViewModel(minutes);
+                setTimeOnViewModel(hour,minutes);
             }
         });
 
     }
 
 
-    private int getMinutes(){
-        return this.minutes;
+    private void setTimeOnViewModel(int hour, int minutes){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            LocalTime time = LocalTime.of(hour,minutes);
+            addEventViewModel.setSelectedTime(time);
+        } else{
+            //TODO
+        }
     }
 
-    private int getHour(){
-        return this.hour;
-    }
-
-    private void setHourOnViewModel(Integer hour){
-        this.addEventViewModel.setSelectedHour(hour);
-    }
-
-    private void setMinutesOnViewModel(Integer minutes){
-        this.addEventViewModel.setSelectedMinutes(minutes);
-    }
 
     public void show(){
         materialTimePicker.show(fragmentManager,"MATERIAL_TIME_PICKER");
