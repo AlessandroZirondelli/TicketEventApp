@@ -20,6 +20,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.mng_events.LocationAgent;
+import com.example.ticketeventapp.model.mng_events.NetworkCallback;
 import com.example.ticketeventapp.ui.mngevents.components.DatePicker;
 import com.example.ticketeventapp.ui.mngevents.components.TimePicker;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
@@ -46,6 +48,10 @@ public class AddEventFragment extends Fragment {
     private TimePicker timePicker;
 
 
+
+    private Boolean requestingLocationUpdates = false;
+    private Boolean isNetworkConnected = false;
+    private final static String OSM_REQUEST_TAG = "OSM_REQUEST";
 
 
 
@@ -120,6 +126,15 @@ public class AddEventFragment extends Fragment {
                 imageChooser();
             }
         });
+
+
+
+
+
+
+        NetworkCallback networkCallback = new NetworkCallback(getActivity(),isNetworkConnected,requestingLocationUpdates, this);
+
+
 
     }
 
