@@ -19,11 +19,11 @@ import java.util.TimeZone;
 
 public class DatePicker {
 
-    MaterialDatePicker<Long> materialDatePicker;
-    MaterialDatePicker.Builder  materialDateBuilder;
-    FragmentManager fragmentManager;
-    String selectedDate;
-    AddEventViewModel addEventViewModel;
+    private MaterialDatePicker<Long> materialDatePicker;
+    private MaterialDatePicker.Builder  materialDateBuilder;
+    private FragmentManager fragmentManager;
+    private String selectedDate;
+    private AddEventViewModel addEventViewModel;
 
     public DatePicker(FragmentManager fragmentManager, AddEventViewModel addEventViewModel){
         materialDateBuilder = MaterialDatePicker.Builder.datePicker().setTitleText(R.string.select_event_date);
