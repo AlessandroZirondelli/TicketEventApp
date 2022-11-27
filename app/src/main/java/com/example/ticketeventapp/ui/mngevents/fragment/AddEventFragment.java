@@ -1,6 +1,9 @@
 package com.example.ticketeventapp.ui.mngevents.fragment;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,6 +90,13 @@ public class AddEventFragment extends Fragment {
                 event_time.setText(localTime.toString());
             }
         });
+
+        addEventViewModel.getImageBitmap().observe(getActivity(), new Observer<Bitmap>() {
+            @Override
+            public void onChanged(Bitmap bitmap) {
+                event_photo.setImageBitmap(bitmap);
+            }
+        });
         
 
         event_date.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +113,31 @@ public class AddEventFragment extends Fragment {
             }
         });
 
-        /*event_photo.setOnClickListener(new View.OnClickListener() {
+        event_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Log.e("AddEventFragment",String.valueOf(addEventViewModel.getSelectedHour().getValue())+":"+String.valueOf(addEventViewModel.getSelectedMinutes().getValue()));
+                imageChooser();
             }
-        });*/
+        });
+
+    }
+
+
+
+    private void imageChooser(){
+        int CHOOSE_PICTURE = 200;
+        /*Intent choosePicture = new Intent();
+        choosePicture.setType("image/*");
+        choosePicture.setAction(Intent.ACTION_GET_CONTENT);*/
+
+
+
+        Intent choosePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (choosePicture.resolveActivity(getActivity().getPackageManager()) != null) {
+            //getActivity().startActivityForResult(Intent.createChooser(choosePicture, "Select Picture"), CHOOSE_PICTURE);
+            getActivity().startActivityForResult(choosePicture, CHOOSE_PICTURE);
+        }
 
     }
 
