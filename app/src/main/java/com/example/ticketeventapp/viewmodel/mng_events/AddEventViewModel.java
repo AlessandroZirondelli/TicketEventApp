@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.viewmodel.mng_events;
 
 import android.app.Application;
+import android.location.Location;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ public class AddEventViewModel extends AndroidViewModel {
     private final MutableLiveData<LocalTime> selectedTime;
     private final MutableLiveData<Boolean> isPermissionGPSAllowed;
     private final MutableLiveData<Boolean> isTurnedOnGPS;
+    private final MutableLiveData<Location> position;
 
 
 
@@ -27,6 +29,7 @@ public class AddEventViewModel extends AndroidViewModel {
         selectedTime = new MutableLiveData<>();
         isPermissionGPSAllowed = new MutableLiveData<>();
         isTurnedOnGPS = new MutableLiveData<>();
+        position = new MutableLiveData<>();
     }
 
 
@@ -48,6 +51,10 @@ public class AddEventViewModel extends AndroidViewModel {
         this.isTurnedOnGPS.setValue(isTurnedOnGPS);
     }
 
+    public  void setPosition(Location position){
+        this.position.setValue(position);
+    }
+
     public MutableLiveData<Boolean> getIsTurnedOnGPS(){
         return this.isTurnedOnGPS;
     }
@@ -63,6 +70,10 @@ public class AddEventViewModel extends AndroidViewModel {
     }
 
     public MutableLiveData<Boolean> getIsPermissionGPSAllowed() { return isPermissionGPSAllowed;}
+
+    public MutableLiveData<Location> getPosition(){
+        return this.position;
+    }
 
 
 

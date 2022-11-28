@@ -16,9 +16,12 @@ import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.room.Ignore;
 
 import com.example.ticketeventapp.model.utils.PermissionManager;
+import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -51,10 +54,15 @@ public class LocationGpsAgent {
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
 
+                AddEventViewModel addEventViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(AddEventViewModel.class);
                 //Update UI with the location data
                 Location location = locationResult.getLastLocation();
+                //update view model
+                addEventViewModel.setPosition(location);
 
-                //Here I need to update ViewModel with location
+                //here i can send volley request to translate
+
+                stopLocationUpdates();
 
             }
         };
@@ -68,13 +76,16 @@ public class LocationGpsAgent {
     }
 
     @SuppressLint("MissingPermission") // It's used to ignore error to do check permissions. I've already checked with isPermissionGPSAllowed
-    private void startLocationUpdates(Activity activity) {
-
+    public void startLocationUpdates() {
         if (permissionManager.isPermissionGPSAllowed()) {
-            checkStatusGPS();
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+            if(this.isTurnedOnGPS() && this.permissionManager.isPermissionGPSAllowed()){
+                fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+            }
         }
+    }
 
+    public void stopLocationUpdates(){
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback);
     }
 
     public boolean isTurnedOnGPS(){
@@ -82,11 +93,6 @@ public class LocationGpsAgent {
         return (locationManager != null && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
     }
 
-    private void checkStatusGPS(){ //Check if GPS is turned on or not
-
-
-
-    }
 
 
 

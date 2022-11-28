@@ -2,6 +2,7 @@ package com.example.ticketeventapp.ui.mngevents.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -135,6 +136,13 @@ public class AddEventFragment extends Fragment {
                 }
             }
         });
+
+        addEventViewModel.getPosition().observe(getActivity(), new Observer<Location>() {
+            @Override
+            public void onChanged(Location location) {
+                event_place.setText(location.getLatitude()+ "  "+location.getLongitude());
+            }
+        });
         
 
         event_date.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +177,7 @@ public class AddEventFragment extends Fragment {
                     } else {
                         addEventViewModel.setIsTurnedOnGPS(true);
                         Log.e("AddEventFragment","GPS is active");
+                        locationGpsAgent.startLocationUpdates();
                     }
 
                 } else {//GPS permission denied, so ask for it
@@ -181,6 +190,12 @@ public class AddEventFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        locationGpsAgent.stopLocationUpdates();
+    }
 
     @Override
     public void onResume() {
