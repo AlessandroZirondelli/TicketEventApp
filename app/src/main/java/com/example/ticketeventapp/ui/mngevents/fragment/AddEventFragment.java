@@ -144,7 +144,7 @@ public class AddEventFragment extends Fragment {
                 Location loc = new Location("");
                 loc.setLatitude(44.485800);
                 loc.setLongitude(11.640463);
-                Log.e("AddEventFragment","Distance between my home and here (km)"+loc.distanceTo(location)/1000);
+                Log.e("AddEventFragment","Distance between my home and here (km)"+ locationGpsAgent.getDistanceKmBetweenLocations(location,loc));
             }
         });
         

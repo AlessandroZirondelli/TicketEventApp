@@ -94,6 +94,11 @@ public class LocationGpsAgent {
     }
 
 
+    public double getDistanceKmBetweenLocations(Location firstLocation, Location secondLocation){
+        return (firstLocation.distanceTo(secondLocation))/1000;
+    }
+
+
 
 
 
