@@ -16,7 +16,7 @@ public class PermissionDialog {
 
     public void shoInfoDeniedPermissionGPS(){
         Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
-                "Some GPS features are disabled. You should allow GPS permissions.",
+                R.string.gps_features_disabled,
                 Snackbar.ANIMATION_MODE_SLIDE);
                 snackbar.show();
     }

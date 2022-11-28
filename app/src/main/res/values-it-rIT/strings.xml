@@ -45,4 +45,12 @@
     <string name="past_events_chip">Passati</string>
     <string name="near_events_chip">Vicini</string>
     <string name="successful_registration">Registrazione avvenuta correttamente</string>
+
+    <string name="used_username">Username già usato</string>
+    <string name="empty_field">Campo vuoto</string>
+    <string name="username_not_exists">Username non esistente</string>
+    <string name="wrong_password">Password errata</string>
+    <string name="select_event_date">Seleziona data evento</string>
+    <string name="gps_features_disabled">Alcune funzionalità del GPS sono disattivate. Abilita il GPS.</string>
+
 </resources>
