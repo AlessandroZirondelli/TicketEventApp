@@ -141,6 +141,10 @@ public class AddEventFragment extends Fragment {
             @Override
             public void onChanged(Location location) {
                 event_place.setText(location.getLatitude()+ "  "+location.getLongitude());
+                Location loc = new Location("");
+                loc.setLatitude(44.485800);
+                loc.setLongitude(11.640463);
+                Log.e("AddEventFragment","Distance between my home and here (km)"+loc.distanceTo(location)/1000);
             }
         });
         
