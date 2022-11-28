@@ -2,6 +2,7 @@ package com.example.ticketeventapp.ui.mngevents.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -52,6 +53,8 @@ public class AddEventFragment extends Fragment {
     private Boolean requestingLocationUpdates = false;
     private Boolean isNetworkConnected = false;
     private final static String OSM_REQUEST_TAG = "OSM_REQUEST";
+
+    private NetworkCallback networkCallback;
 
 
 
@@ -104,6 +107,21 @@ public class AddEventFragment extends Fragment {
                 event_photo.setImageURI(uri);
             }
         });
+
+        /*addEventViewModel.getLocation().observe(getActivity(), new Observer<Location>() {
+            @Override
+            public void onChanged(Location location) {
+                event_place.setText(location.getLatitude()+" "+ location.getLongitude());
+            }
+        });*/
+
+        addEventViewModel.getLocationDisplayName().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                event_place.setText(s);
+                Log.e("AddEventFragment","val tradotto:"+s);
+            }
+        });
         
 
         event_date.setOnClickListener(new View.OnClickListener() {
@@ -129,13 +147,53 @@ public class AddEventFragment extends Fragment {
 
 
 
+        networkCallback = new NetworkCallback(getActivity(),isNetworkConnected,requestingLocationUpdates, this, addEventViewModel);
+
+        event_place.setFocusable(false);
+        event_place.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestingLocationUpdates = true;
+                networkCallback.registerNetworkCallback(getActivity());
+                networkCallback.getLocationAgent().startLocationUpdates(getActivity());
+            }
+        });
 
 
-
-        NetworkCallback networkCallback = new NetworkCallback(getActivity(),isNetworkConnected,requestingLocationUpdates, this);
-
+    }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (getActivity() != null && requestingLocationUpdates){
+            networkCallback.registerNetworkCallback(getActivity());
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (requestingLocationUpdates && getActivity() != null){
+            networkCallback.getLocationAgent().startLocationUpdates(getActivity());
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        networkCallback.getLocationAgent().startLocationUpdates(getActivity());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(networkCallback.getVolleyAgent().getRequestQueue() != null){
+            networkCallback.getVolleyAgent().getRequestQueue() .cancelAll(OSM_REQUEST_TAG);
+        }
+
+        if (requestingLocationUpdates)
+            networkCallback.unregisterNetworkCallback();
     }
 
 

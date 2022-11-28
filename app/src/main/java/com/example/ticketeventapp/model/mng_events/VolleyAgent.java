@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,12 +25,14 @@ public class VolleyAgent {
 
     private NetworkCallback networkCallback;
     private RequestQueue requestQueue;
+    private AddEventViewModel addEventViewModel;
 
 
 
-    public VolleyAgent (Activity activity,NetworkCallback networkCallback){
+    public VolleyAgent (Activity activity, NetworkCallback networkCallback, AddEventViewModel addEventViewModel){
        this.networkCallback = networkCallback;
        this.requestQueue = Volley.newRequestQueue(activity);
+       this.addEventViewModel = addEventViewModel;
     }
 
     public  void sendVolleyRequest(String latitude, String longitude) {
@@ -42,8 +45,10 @@ public class VolleyAgent {
                     public void onResponse(JSONObject response) {
                         try {
 
-                            String name = response.get("name").toString();
-                            String display_name = response.get("display_name").toString();
+                            //placeTIET.setText(response.get("name").toString());
+                            //descriptionTIET.setText(response.get("display_name").toString());
+
+                            addEventViewModel.setLocationDisplayName(response.get("display_name").toString());
 
                             networkCallback.unregisterNetworkCallback();
                         } catch (JSONException e) {
@@ -60,6 +65,10 @@ public class VolleyAgent {
 
         jsonObjectRequest.setTag(OSM_REQUEST_TAG);
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public RequestQueue getRequestQueue(){
+        return this.requestQueue;
     }
 
 
