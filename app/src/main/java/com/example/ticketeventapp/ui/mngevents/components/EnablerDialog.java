@@ -5,12 +5,19 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
+import android.view.View;
+
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 public class EnablerDialog {
 
     private Activity activity;
+
 
     public EnablerDialog(Activity activity){
         this.activity = activity;
@@ -29,6 +36,13 @@ public class EnablerDialog {
                         dialogInterface.cancel();
                     }
                 }).setCancelable(false).create().show();
+    }
+
+    public void showInfoTurnedOnGPS(){
+        Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
+                R.string.gps_features_cannot_run,
+                Snackbar.ANIMATION_MODE_SLIDE);
+        snackbar.show();
     }
 
 }

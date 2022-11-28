@@ -125,6 +125,16 @@ public class AddEventFragment extends Fragment {
                 Log.e("AddEventFragment","Permessi cambiati in: "+ isPermissionGPSAllowed);
             }
         });
+
+        addEventViewModel.getIsTurnedOnGPS().observe(getActivity(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isTurnedOnGPS) {
+                if(!isTurnedOnGPS){
+                    Log.e("AddEventFragment","GPS si è disabilitato");
+                    enablerDialog.showInfoTurnedOnGPS();
+                }
+            }
+        });
         
 
         event_date.setOnClickListener(new View.OnClickListener() {
@@ -157,11 +167,12 @@ public class AddEventFragment extends Fragment {
                         Log.e("AddEventFragment","GPS is not active");
                         enablerDialog.askTurnOnGPS();
                     } else {
+                        addEventViewModel.setIsTurnedOnGPS(true);
                         Log.e("AddEventFragment","GPS is active");
                     }
 
                 } else {//GPS permission denied, so ask for it
-                    permissionManager.launchPermissionRequestGPS(); ;
+                    permissionManager.launchPermissionRequestGPS();
                 }
             }
         });
@@ -171,6 +182,15 @@ public class AddEventFragment extends Fragment {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(locationGpsAgent.isTurnedOnGPS()){
+            addEventViewModel.setIsTurnedOnGPS(true);
+            Log.e("AddEventFragment","GPS Riattivato");
+        }
+        Log.e("AddEventFragment","OnResume");
+    }
 
     private void imageChooser(){
         int CHOOSE_PICTURE = 200;

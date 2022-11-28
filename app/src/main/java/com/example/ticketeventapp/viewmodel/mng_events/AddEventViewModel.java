@@ -16,6 +16,8 @@ public class AddEventViewModel extends AndroidViewModel {
     private final MutableLiveData<String> selectedDate;
     private final MutableLiveData<LocalTime> selectedTime;
     private final MutableLiveData<Boolean> isPermissionGPSAllowed;
+    private final MutableLiveData<Boolean> isTurnedOnGPS;
+
 
 
     public AddEventViewModel(@NonNull Application application) {
@@ -24,6 +26,7 @@ public class AddEventViewModel extends AndroidViewModel {
         selectedDate = new MutableLiveData<>();
         selectedTime = new MutableLiveData<>();
         isPermissionGPSAllowed = new MutableLiveData<>();
+        isTurnedOnGPS = new MutableLiveData<>();
     }
 
 
@@ -40,6 +43,14 @@ public class AddEventViewModel extends AndroidViewModel {
     }
 
     public void setIsPermissionGPSAllowed(Boolean isPermissionGPSAllowed){this.isPermissionGPSAllowed.setValue(isPermissionGPSAllowed);}
+
+    public void setIsTurnedOnGPS(Boolean isTurnedOnGPS){
+        this.isTurnedOnGPS.setValue(isTurnedOnGPS);
+    }
+
+    public MutableLiveData<Boolean> getIsTurnedOnGPS(){
+        return this.isTurnedOnGPS;
+    }
 
     public MutableLiveData<LocalTime> getSelectedTime(){return this.selectedTime;}
 
