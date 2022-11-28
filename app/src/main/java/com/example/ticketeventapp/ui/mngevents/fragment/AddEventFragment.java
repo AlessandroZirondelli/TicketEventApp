@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.ui.mngevents.components.DatePicker;
 import com.example.ticketeventapp.ui.mngevents.components.TimePicker;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
@@ -44,6 +45,8 @@ public class AddEventFragment extends Fragment {
 
     private DatePicker datePicker;
     private TimePicker timePicker;
+
+    private PermissionManager permissionManager;
 
 
 
@@ -75,6 +78,10 @@ public class AddEventFragment extends Fragment {
 
         event_date.setFocusable(false);
         event_time.setFocusable(false);
+        event_price.setFocusable(false);
+
+        event_place.setFocusable(false);
+        permissionManager = new PermissionManager(getActivity(),this);
 
 
 
@@ -120,6 +127,22 @@ public class AddEventFragment extends Fragment {
                 imageChooser();
             }
         });
+
+
+        event_place.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("AddEventFragment","Allowed:"+permissionManager.isPermissionGPSAllowed());
+            }
+        });
+
+        event_price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                permissionManager.launchPermissionRequestGPS();
+            }
+        });
+
 
     }
 
