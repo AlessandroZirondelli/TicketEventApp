@@ -10,6 +10,10 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+
+import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 
 public class PermissionManager {
 
@@ -18,21 +22,25 @@ public class PermissionManager {
     private Activity activity;
     private String PERMISSION_REQUESTED = Manifest.permission.ACCESS_FINE_LOCATION;
 
+    private Boolean alreadyAskedPermissionGPS;
+
     public PermissionManager(Activity activity, Fragment fragment){
         this.activity = activity;
         this.fragment = fragment;
+        this.alreadyAskedPermissionGPS = false;
 
         this.requestPermissionLauncher = fragment.registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
             @Override
             public void onActivityResult(Boolean result) { //result ci indica se l'utente ha dato o meno il permesso
-                if(result){ //se ha acconsentito possiamo iniziare a prendere la posizione
-                    //startLocationUpdate(activity);
-                    Log.d("ADD_FRAGMENT","PERMISSION GRANTED");
+                if(result){ //permission granted
+                    // Update boolean variable in ViewModel
+
                 }
-                else{ //se ha rifiutato
-                    //showDialog(activity);
-                    Log.d("ADD_FRAGMENT","PERMISSION DENIED");
+                else{ //permission denied
+                     alreadyAskedPermissionGPS = true;
                 }
+                AddEventViewModel addEventViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(AddEventViewModel.class);
+                addEventViewModel.setIsPermissionGPSAllowed(result);
             }
         });
     }
@@ -42,7 +50,9 @@ public class PermissionManager {
     }
 
     public void launchPermissionRequestGPS(){
-        requestPermissionLauncher.launch(PERMISSION_REQUESTED);
+        if(!this.alreadyAskedPermissionGPS){ //Ask only if the user has not deny yet
+            requestPermissionLauncher.launch(PERMISSION_REQUESTED);
+        }
     }
 
 
