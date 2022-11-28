@@ -161,7 +161,7 @@ public class AddEventFragment extends Fragment {
                     }
 
                 } else {//GPS permission denied, so ask for it
-                    permissionManager.launchPermissionRequestGPS();
+                    permissionManager.launchPermissionRequestGPS(); ;
                 }
             }
         });
