@@ -50,5 +50,6 @@
     <string name="wrong_password">Wrong password</string>
     <string name="select_event_date">Select event date</string>
     <string name="gps_features_disabled">Some GPS features are disabled. You should allow GPS permissions.</string>
+    <string name="ask_turn_on_gps">The GPS is off, do you want to enable it?</string>
 
 </resources>

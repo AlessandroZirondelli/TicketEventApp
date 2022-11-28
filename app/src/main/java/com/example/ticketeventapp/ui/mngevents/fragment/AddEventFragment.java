@@ -20,8 +20,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.ui.mngevents.components.DatePicker;
+import com.example.ticketeventapp.ui.mngevents.components.EnablerDialog;
 import com.example.ticketeventapp.ui.mngevents.components.PermissionDialog;
 import com.example.ticketeventapp.ui.mngevents.components.TimePicker;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
@@ -49,6 +51,8 @@ public class AddEventFragment extends Fragment {
 
     private PermissionManager permissionManager;
     private PermissionDialog permissionDialog;
+    private EnablerDialog enablerDialog;
+    private LocationGpsAgent locationGpsAgent;
 
 
 
@@ -85,6 +89,8 @@ public class AddEventFragment extends Fragment {
         event_place.setFocusable(false);
         permissionManager = new PermissionManager(getActivity(),this);
         permissionDialog = new PermissionDialog(getActivity());
+        locationGpsAgent = new LocationGpsAgent(getActivity(),permissionManager);
+        enablerDialog = new EnablerDialog(getActivity());
 
 
 
@@ -146,16 +152,20 @@ public class AddEventFragment extends Fragment {
         event_place.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("AddEventFragment","Allowed:"+permissionManager.isPermissionGPSAllowed());
+                if(permissionManager.isPermissionGPSAllowed()){ //GPS permission allowed
+                    if(!locationGpsAgent.isTurnedOnGPS()){
+                        Log.e("AddEventFragment","GPS is not active");
+                        enablerDialog.askTurnOnGPS();
+                    } else {
+                        Log.e("AddEventFragment","GPS is active");
+                    }
+
+                } else {//GPS permission denied, so ask for it
+                    permissionManager.launchPermissionRequestGPS();
+                }
             }
         });
 
-        event_price.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                permissionManager.launchPermissionRequestGPS();
-            }
-        });
 
 
     }
