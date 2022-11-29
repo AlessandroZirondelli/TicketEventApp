@@ -1,7 +1,6 @@
 package com.example.ticketeventapp.ui.mngevents.fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,13 +21,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
+import com.example.ticketeventapp.model.mng_events.NetworkAgent;
 import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.ui.mngevents.components.DatePicker;
 import com.example.ticketeventapp.ui.mngevents.components.EnablerDialog;
 import com.example.ticketeventapp.ui.mngevents.components.PermissionDialog;
 import com.example.ticketeventapp.ui.mngevents.components.TimePicker;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
-import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.time.LocalTime;
@@ -54,6 +53,7 @@ public class AddEventFragment extends Fragment {
     private PermissionDialog permissionDialog;
     private EnablerDialog enablerDialog;
     private LocationGpsAgent locationGpsAgent;
+    private NetworkAgent networkAgent;
 
 
 
@@ -92,6 +92,7 @@ public class AddEventFragment extends Fragment {
         permissionDialog = new PermissionDialog(getActivity());
         locationGpsAgent = new LocationGpsAgent(getActivity(),permissionManager);
         enablerDialog = new EnablerDialog(getActivity());
+        networkAgent = new NetworkAgent(getActivity());
 
 
 
@@ -141,10 +142,10 @@ public class AddEventFragment extends Fragment {
             @Override
             public void onChanged(Location location) {
                 event_place.setText(location.getLatitude()+ "  "+location.getLongitude());
-                Location loc = new Location("");
-                loc.setLatitude(44.485800);
-                loc.setLongitude(11.640463);
-                Log.e("AddEventFragment","Distance between my home and here (km)"+ locationGpsAgent.getDistanceKmBetweenLocations(location,loc));
+
+                networkAgent.createRequestQueue();
+                networkAgent.registerNetworkCallback();
+                networkAgent.sendVolleyRequest(String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()));
             }
         });
         
@@ -182,10 +183,24 @@ public class AddEventFragment extends Fragment {
                         addEventViewModel.setIsTurnedOnGPS(true);
                         Log.e("AddEventFragment","GPS is active");
                         locationGpsAgent.startLocationUpdates();
+
+
                     }
 
                 } else {//GPS permission denied, so ask for it
                     permissionManager.launchPermissionRequestGPS();
+                }
+            }
+        });
+
+        event_price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(networkAgent.isConnectedToInternet()){
+                    Log.e("AddEventFragment","Internet connection is active");
+                } else {
+                    Log.e("AddEventFragment","Internet connection is not  active");
+                    enablerDialog.askToTurnOnInternetConnection();
                 }
             }
         });
@@ -208,7 +223,18 @@ public class AddEventFragment extends Fragment {
             addEventViewModel.setIsTurnedOnGPS(true);
             Log.e("AddEventFragment","GPS Riattivato");
         }
+        if(networkAgent.isConnectedToInternet()){
+            addEventViewModel.setIsConnectedToInternet(true);
+            Log.e("AddEventFragment","Connessione Internet riattivata");
+        }
         Log.e("AddEventFragment","OnResume");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        networkAgent.cancelRequestQueue();
+        networkAgent.unregisterNetworkCallback();
     }
 
     private void imageChooser(){
