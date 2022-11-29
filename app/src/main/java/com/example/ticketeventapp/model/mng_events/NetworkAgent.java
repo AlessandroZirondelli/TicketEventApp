@@ -101,13 +101,16 @@ public class NetworkAgent {
     }
 
     public void sendVolleyRequest(String latitude, String longitude){
+        AddEventViewModel addEventViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(AddEventViewModel.class);
         String url = "https://nominatim.openstreetmap.org/reverse?lat="+latitude+"&lon="+longitude+"&format=jsonv2&limit=1";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.e("AddEventFragment",response.get("name").toString());
+                    String display_name = response.get("display_name").toString();
+                    addEventViewModel.setPosition_display_name(display_name);
+                    //Log.e("AddEventFragment",response.get("name").toString());
                     Log.e("AddEventFragment",response.get("display_name").toString());
                     unregisterNetworkCallback();
                 } catch (JSONException e) {

@@ -23,8 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="@string/event_place"
-        app:endIconDrawable="@drawable/ic_baseline_gps_fixed_24"
-        app:endIconMode="custom"
+
         app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_price_place"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_all_fields"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_event_place_time"

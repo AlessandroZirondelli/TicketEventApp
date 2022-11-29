@@ -20,6 +20,7 @@ public class AddEventViewModel extends AndroidViewModel {
     private final MutableLiveData<Boolean> isTurnedOnGPS;
     private final MutableLiveData<Location> position;
     private final MutableLiveData<Boolean> isConnectedToInternet;
+    private final MutableLiveData<String> position_display_name;
 
 
 
@@ -32,6 +33,7 @@ public class AddEventViewModel extends AndroidViewModel {
         isTurnedOnGPS = new MutableLiveData<>();
         position = new MutableLiveData<>();
         isConnectedToInternet = new MutableLiveData<>();
+        position_display_name = new MutableLiveData<>();
     }
 
 
@@ -58,6 +60,10 @@ public class AddEventViewModel extends AndroidViewModel {
     }
 
     public void setIsConnectedToInternet(Boolean isConnectedToInternet){this.isConnectedToInternet.postValue(isConnectedToInternet);}
+
+    public void setPosition_display_name(String display_name){ this.position_display_name.setValue(display_name);}
+
+    public MutableLiveData<String> getPosition_display_name() { return position_display_name; }
 
     public MutableLiveData<Boolean> getIsConnectedToInternet(){return this.isConnectedToInternet;}
 

@@ -72,7 +72,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="@string/event_place"
-        app:endIconMode="custom"
+
 
 
         app:layout_constraintBottom_toTopOf="@+id/guideline_bottom_event_place"
@@ -81,7 +81,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_top_event_place"
         app:startIconContentDescription="@string/acc_event_place"
         app:startIconDrawable="@drawable/location_on"
-        app:endIconDrawable="@drawable/ic_baseline_gps_fixed_24"
+
         >
 
         <com.google.android.material.textfield.TextInputEditText

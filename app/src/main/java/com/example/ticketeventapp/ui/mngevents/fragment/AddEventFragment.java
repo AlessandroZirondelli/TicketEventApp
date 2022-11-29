@@ -148,6 +148,13 @@ public class AddEventFragment extends Fragment {
                 networkAgent.sendVolleyRequest(String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()));
             }
         });
+
+        addEventViewModel.getPosition_display_name().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                event_place.setText(s);
+            }
+        });
         
 
         event_date.setOnClickListener(new View.OnClickListener() {
