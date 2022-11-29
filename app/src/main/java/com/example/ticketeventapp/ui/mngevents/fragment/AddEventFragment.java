@@ -85,9 +85,11 @@ public class AddEventFragment extends Fragment {
 
         event_date.setFocusable(false);
         event_time.setFocusable(false);
-        event_price.setFocusable(false);
+        
 
-        event_place.setFocusable(false);
+
+
+
         permissionManager = new PermissionManager(getActivity(),this);
         permissionDialog = new PermissionDialog(getActivity());
         locationGpsAgent = new LocationGpsAgent(getActivity(),permissionManager);
@@ -178,10 +180,10 @@ public class AddEventFragment extends Fragment {
             }
         });
 
-
-        event_place.setOnClickListener(new View.OnClickListener() {
+        event_place.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
+                Log.e("Press","LongPress");
                 if(permissionManager.isPermissionGPSAllowed()){ //GPS permission allowed
                     if(!locationGpsAgent.isTurnedOnGPS()){
                         Log.e("AddEventFragment","GPS is not active");
@@ -197,6 +199,14 @@ public class AddEventFragment extends Fragment {
                 } else {//GPS permission denied, so ask for it
                     permissionManager.launchPermissionRequestGPS();
                 }
+                return true;
+            }
+        });
+
+        event_place.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("Press","ShortPress");
             }
         });
 
