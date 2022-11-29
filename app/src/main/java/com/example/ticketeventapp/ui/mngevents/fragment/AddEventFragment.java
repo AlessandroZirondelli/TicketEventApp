@@ -192,8 +192,6 @@ public class AddEventFragment extends Fragment {
                         addEventViewModel.setIsTurnedOnGPS(true);
                         Log.e("AddEventFragment","GPS is active");
                         locationGpsAgent.startLocationUpdates();
-
-
                     }
 
                 } else {//GPS permission denied, so ask for it
