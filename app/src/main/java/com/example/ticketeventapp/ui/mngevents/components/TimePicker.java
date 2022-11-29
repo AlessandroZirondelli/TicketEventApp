@@ -1,19 +1,15 @@
 package com.example.ticketeventapp.ui.mngevents.components;
 
-import android.util.Log;
+import android.content.DialogInterface;
 import android.view.View;
 
 import androidx.fragment.app.FragmentManager;
 
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 public class TimePicker {
     private final int DEFAULT_HOUR = 12;
@@ -27,6 +23,7 @@ public class TimePicker {
 
     private Integer hour;
     private Integer minutes;
+    private boolean isOpen;
 
     public TimePicker(FragmentManager fragmentManager, AddEventViewModel addEventViewModel){
         this.addEventViewModel = addEventViewModel;
@@ -42,17 +39,25 @@ public class TimePicker {
                             .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
                             .build();
 
-        setPositiveClickListener();
+        setClickListeners();
+        isOpen = false;
 
     }
 
-    private void setPositiveClickListener(){
+    private void setClickListeners(){
         materialTimePicker.addOnPositiveButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 hour = materialTimePicker.getHour();
                 minutes = materialTimePicker.getMinute();
                 setTimeOnViewModel(hour,minutes);
+            }
+        });
+
+        materialTimePicker.addOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                isOpen = false;
             }
         });
 
@@ -70,7 +75,10 @@ public class TimePicker {
 
 
     public void show(){
-        materialTimePicker.show(fragmentManager,"MATERIAL_TIME_PICKER");
+        if(!isOpen){
+            isOpen = true;
+            materialTimePicker.show(fragmentManager,"MATERIAL_TIME_PICKER");
+        }
     }
 
 }
