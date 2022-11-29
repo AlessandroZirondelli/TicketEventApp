@@ -71,7 +71,7 @@ public class NetworkAgent {
     }
 
     public void cancelRequestQueue(){
-       requestQueue.cancelAll(OSM_REQUEST_TAG);
+       if(requestQueue != null){requestQueue.cancelAll(OSM_REQUEST_TAG);}
     }
 
     public boolean isConnectedToInternet(){
