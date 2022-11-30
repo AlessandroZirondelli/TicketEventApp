@@ -108,13 +108,14 @@ public class NetworkAgent {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONObject obj = (JSONObject) response.get("address");
-                    String road = obj.get("road").toString();
-                    String house_number = obj.get("house_number").toString();
+                    JSONObject address = (JSONObject) response.get("address");
+                    String road = address.get("road").toString();
+                    //if(address.has("house_number")) //check if fields exists
+                    //String house_number = address.get("house_number").toString();
+                    //addEventViewModel.setPosition_display_name(road+" "+house_number);
 
-                    addEventViewModel.setPosition_display_name(road+" "+house_number);
-                    //Log.e("AddEventFragment",response.get("name").toString());
-                    //Log.e("AddEventFragment",response.get("display_name").toString());
+                    addEventViewModel.setPosition_display_name(road);
+
                     unregisterNetworkCallback();
                 } catch (JSONException e) {
                     e.printStackTrace();
