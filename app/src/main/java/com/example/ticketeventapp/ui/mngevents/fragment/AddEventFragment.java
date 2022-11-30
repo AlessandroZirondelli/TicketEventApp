@@ -115,6 +115,7 @@ public class AddEventFragment extends Fragment {
         addEventViewModel.getImageURI().observe(getActivity(), new Observer<Uri>() {
             @Override
             public void onChanged(Uri uri) {
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
                 event_photo.setImageURI(uri);
             }
         });
