@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.mng_events.AddEventManager;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.model.mng_events.NetworkAgent;
 import com.example.ticketeventapp.model.utils.PermissionManager;
@@ -31,6 +32,8 @@ import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddEventFragment extends Fragment {
 
@@ -54,6 +57,8 @@ public class AddEventFragment extends Fragment {
     private EnablerDialog enablerDialog;
     private LocationGpsAgent locationGpsAgent;
     private NetworkAgent networkAgent;
+
+    private AddEventManager addEventManager;
 
 
 
@@ -79,9 +84,10 @@ public class AddEventFragment extends Fragment {
         button = view.findViewById(R.id.add_event_button);
 
         addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
+        addEventManager = new AddEventManager();
 
-        datePicker = new DatePicker(getActivity().getSupportFragmentManager(),addEventViewModel);
-        timePicker = new TimePicker(getActivity().getSupportFragmentManager(),addEventViewModel);
+        datePicker = new DatePicker(getActivity().getSupportFragmentManager(),addEventViewModel,event_date);
+        timePicker = new TimePicker(getActivity().getSupportFragmentManager(),addEventViewModel, event_time);
 
         event_date.setFocusable(false);
         event_time.setFocusable(false);
@@ -221,6 +227,32 @@ public class AddEventFragment extends Fragment {
             }
         });
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = String.valueOf(event_name.getText());
+                String description = String.valueOf(event_description.getText());
+                String place = String.valueOf(event_place.getText());
+                String date = String.valueOf(event_date.getText());
+                String time = String.valueOf(event_time.getText());
+                String price = String.valueOf(event_price.getText());
+
+
+                int resFilled = addEventManager.areFilledFields(name,description,place,date,time,price);
+                if(resFilled != 0){
+                    enableEmptyFieldError(resFilled);
+                } else {
+                    if(!addEventManager.isPriceNumber(price)){
+                        enableExistedUsernameError();
+                    }
+                }
+
+
+            }
+        });
+
+
+
 
 
     }
@@ -263,6 +295,46 @@ public class AddEventFragment extends Fragment {
             Log.e("AddEventFragment","No resolver of specific choose picture intent");
         }
 
+    }
+
+
+    private  Map<Integer,TextInputEditText> createMapIntegerErrorTextFields(){
+        Map<Integer,TextInputEditText> map = new HashMap<>();
+        map.put(1, event_name);
+        map.put(2, event_description);
+        map.put(3, event_place);
+        map.put(4, event_date);
+        map.put(5, event_time);
+        map.put(6, event_price);
+        return map;
+    }
+
+    private  void enableEmptyFieldError(int field){
+        Map<Integer,TextInputEditText> map = createMapIntegerErrorTextFields();
+        TextInputEditText view = map.get(field);
+        view.setError(getString(R.string.empty_field));
+        setFocusOutListener(view);
+    }
+
+    private void disableErrorField(TextInputEditText view){
+        view.setError(null);
+    }
+
+    private void setFocusOutListener(TextInputEditText viewT){
+        viewT.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus){
+                    Log.e("RegistrationFragment","Perdo focus");
+                    disableErrorField(viewT);
+                }
+            }
+        });
+    }
+
+    private void enableExistedUsernameError(){
+        event_price.setError(getString(R.string.price_must_be_numeric));
+        setFocusOutListener(event_price);
     }
 
 }

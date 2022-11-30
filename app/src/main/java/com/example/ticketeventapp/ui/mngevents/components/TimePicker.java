@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
@@ -25,7 +26,7 @@ public class TimePicker {
     private Integer minutes;
     private boolean isOpen;
 
-    public TimePicker(FragmentManager fragmentManager, AddEventViewModel addEventViewModel){
+    public TimePicker(FragmentManager fragmentManager, AddEventViewModel addEventViewModel, TextInputEditText event_time){
         this.addEventViewModel = addEventViewModel;
         this.fragmentManager = fragmentManager;
 
@@ -39,18 +40,19 @@ public class TimePicker {
                             .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
                             .build();
 
-        setClickListeners();
+        setClickListeners(event_time);
         isOpen = false;
 
     }
 
-    private void setClickListeners(){
+    private void setClickListeners(TextInputEditText event_time){
         materialTimePicker.addOnPositiveButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 hour = materialTimePicker.getHour();
                 minutes = materialTimePicker.getMinute();
                 setTimeOnViewModel(hour,minutes);
+                event_time.setError(null);
             }
         });
 

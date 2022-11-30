@@ -3,6 +3,7 @@ package com.example.ticketeventapp.ui.mngevents.components;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.util.Log;
+import android.view.View;
 
 import androidx.fragment.app.FragmentManager;
 
@@ -12,6 +13,7 @@ import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -27,12 +29,12 @@ public class DatePicker {
     private AddEventViewModel addEventViewModel;
     private boolean isOpen;
 
-    public DatePicker(FragmentManager fragmentManager, AddEventViewModel addEventViewModel){
+    public DatePicker(FragmentManager fragmentManager, AddEventViewModel addEventViewModel, TextInputEditText event_date){
         materialDateBuilder = MaterialDatePicker.Builder.datePicker().setTitleText(R.string.select_event_date);
         disablePastDatesSelection();
         materialDatePicker = materialDateBuilder.build();
         this.fragmentManager = fragmentManager;
-        setClickListeners();
+        setClickListeners(event_date);
         this.addEventViewModel = addEventViewModel;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             selectedDate = LocalDate.now().toString();
@@ -50,7 +52,7 @@ public class DatePicker {
         }
     }
 
-    private void setClickListeners(){
+    private void setClickListeners(TextInputEditText event_date){
         materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
             @Override
             public void onPositiveButtonClick(Long selection) {
@@ -60,6 +62,7 @@ public class DatePicker {
                 String formattedDate  = format.format(calendar.getTime());
                 selectedDate = formattedDate;
                 setDateOnViewModel();
+                event_date.setError(null); //disable error
             }
         });
 
