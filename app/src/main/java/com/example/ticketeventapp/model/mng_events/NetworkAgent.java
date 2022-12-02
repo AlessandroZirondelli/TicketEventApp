@@ -110,7 +110,10 @@ public class NetworkAgent {
                 try {
                     JSONObject address = (JSONObject) response.get("address");
                     String road = address.get("road").toString();
-                    //if(address.has("house_number")) //check if fields exists
+                    if(address.has("house_number")){
+                        Log.e("AddEventFragment","Campo presente");
+                        road = road+" "+address.get("house_number");
+                    } //check if fields exists
                     //String house_number = address.get("house_number").toString();
                     //addEventViewModel.setPosition_display_name(road+" "+house_number);
 
