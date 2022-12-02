@@ -25,7 +25,6 @@ import com.example.ticketeventapp.model.mng_events.AddEventManager;
 import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.model.mng_events.NetworkAgent;
-import com.example.ticketeventapp.model.mng_users.User;
 import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.ui.mngevents.components.DatePicker;
 import com.example.ticketeventapp.ui.mngevents.components.EnablerDialog;
@@ -248,7 +247,7 @@ public class AddEventFragment extends Fragment {
                     enableEmptyFieldError(resFilled);
                 } else {
                     if(!addEventManager.isPriceNumber(price)){
-                        enableExistedUsernameError();
+                        enablePriceError();
                     } else {
                         Uri imageUri = addEventViewModel.getImageURI().getValue();
                         if(imageUri == null){
@@ -368,7 +367,7 @@ public class AddEventFragment extends Fragment {
         });
     }
 
-    private void enableExistedUsernameError(){
+    private void enablePriceError(){
         event_price.setError(getString(R.string.price_must_be_numeric));
         setFocusOutListener(event_price);
     }
