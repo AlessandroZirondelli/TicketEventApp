@@ -7,13 +7,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 
+import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_users.User;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /*Qui dobbiamo andare a specificare tutte le entities(tabelle) che sono presenti nel database. Nel nostro caso sula una. Dobbiamo esplicitarla come classe.*/
-@Database(entities = {User.class}, version = 1)
+@Database(entities = {User.class, Event.class}, version = 1)
 public abstract class TicketEventAppDatabase extends RoomDatabase {
 
     /* Dobbiamo rendere pubbliche in maniera astratta le classi DAO che sono associate alle varie entities !!*/

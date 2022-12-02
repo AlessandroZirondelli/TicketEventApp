@@ -22,8 +22,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.mng_events.AddEventManager;
+import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.model.mng_events.NetworkAgent;
+import com.example.ticketeventapp.model.mng_users.User;
 import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.ui.mngevents.components.DatePicker;
 import com.example.ticketeventapp.ui.mngevents.components.EnablerDialog;
@@ -264,6 +266,17 @@ public class AddEventFragment extends Fragment {
                             }
 
                         }
+                        String latitude = "";
+                        String longitude = "";
+                        Location position = addEventViewModel.getPosition().getValue();
+                        if(position != null){
+                            latitude = String.valueOf(position.getLatitude());
+                            longitude = String.valueOf(position.getLongitude());
+                        }
+                       ;
+                        Event event = new Event(name,description,date,time,place,price, String.valueOf(imageUri),"","");
+                        addEventViewModel.addEvent(event);
+                        Log.e("AddEventFragment","Inserimento evento effettuato");
                     }
                 }
 

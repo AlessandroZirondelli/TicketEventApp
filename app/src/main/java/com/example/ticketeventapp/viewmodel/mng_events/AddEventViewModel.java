@@ -8,6 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.ticketeventapp.database.TicketEventAppRepository;
+import com.example.ticketeventapp.model.mng_events.Event;
+import com.example.ticketeventapp.model.mng_users.User;
+
 import java.net.URI;
 import java.time.LocalTime;
 
@@ -22,10 +26,14 @@ public class AddEventViewModel extends AndroidViewModel {
     private final MutableLiveData<Boolean> isConnectedToInternet;
     private final MutableLiveData<String> position_display_name;
 
+    private TicketEventAppRepository repository;
+
 
 
     public AddEventViewModel(@NonNull Application application) {
         super(application);
+        repository = new TicketEventAppRepository(application);
+
         imageURI = new MutableLiveData<>();
         selectedDate = new MutableLiveData<>();
         selectedTime = new MutableLiveData<>();
@@ -34,6 +42,10 @@ public class AddEventViewModel extends AndroidViewModel {
         position = new MutableLiveData<>();
         isConnectedToInternet = new MutableLiveData<>();
         position_display_name = new MutableLiveData<>();
+    }
+
+    public void addEvent(Event event){
+        repository.addEvent(event);
     }
 
 

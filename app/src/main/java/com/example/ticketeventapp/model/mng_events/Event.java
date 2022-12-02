@@ -4,7 +4,7 @@ package com.example.ticketeventapp.model.mng_events;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "user")
+@Entity(tableName = "event")
 public class Event {
 
     @PrimaryKey(autoGenerate = true)
@@ -14,10 +14,12 @@ public class Event {
     private String date;
     private String time;
     private String place;
-    private Double price;
+    private String price;
     private String imageUri;
+    private String latitude;
+    private String longitude;
 
-    public Event(String imageUri, String name, String description, String place, String date, String time, Double price) {
+    public Event( String name, String description, String date, String time, String place, String price, String imageUri, String latitude, String longitude) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -25,6 +27,24 @@ public class Event {
         this.place = place;
         this.price = price;
         this.imageUri = imageUri;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public int getId() {
@@ -75,11 +95,11 @@ public class Event {
         this.place = place;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
