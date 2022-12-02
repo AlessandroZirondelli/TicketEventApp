@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.ui.mngevents.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.example.ticketeventapp.ui.mngevents.components.TimePicker;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.IOException;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -122,6 +124,7 @@ public class AddEventFragment extends Fragment {
             @Override
             public void onChanged(Uri uri) {
                 //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                Log.e("AddEventFragment","ImageUriChanged:"+uri.getPath());
                 event_photo.setImageURI(uri);
             }
         });
@@ -244,6 +247,23 @@ public class AddEventFragment extends Fragment {
                 } else {
                     if(!addEventManager.isPriceNumber(price)){
                         enableExistedUsernameError();
+                    } else {
+                        Uri imageUri = addEventViewModel.getImageURI().getValue();
+                        if(imageUri == null){
+                            addEventViewModel.setImageURI(Uri.parse("add_photo_alternate"));
+                            Log.e("AddEventFragment","Image Uri null");
+                        } else {
+                            Log.e("AddEventFragment","Image Uri not null");
+                            try {
+                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri );
+                                addEventManager.saveImage(bitmap,getActivity());
+                                Log.e("AddEventFragment","Immagine salvata");
+                            } catch (IOException e) {
+                                Log.e("AddEventFragment","Errore salvataggio foto");
+                                e.printStackTrace();
+                            }
+
+                        }
                     }
                 }
 
@@ -336,5 +356,8 @@ public class AddEventFragment extends Fragment {
         event_price.setError(getString(R.string.price_must_be_numeric));
         setFocusOutListener(event_price);
     }
+
+
+
 
 }
