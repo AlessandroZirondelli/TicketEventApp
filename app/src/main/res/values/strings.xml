@@ -53,5 +53,7 @@
     <string name="ask_turn_on_gps">The GPS is off, do you want to enable it?</string>
     <string name="gps_features_cannot_run">Some GPS features can\'t run because your GPS is off</string>
     <string name="price_must_be_numeric">Price must be numeric</string>
+    <string name="info_event">Event info</string>
+    <string name="join_event">Join event</string>
 
 </resources>

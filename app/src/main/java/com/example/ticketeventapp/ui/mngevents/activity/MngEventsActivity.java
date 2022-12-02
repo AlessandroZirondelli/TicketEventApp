@@ -13,6 +13,7 @@ import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.utils.AppInfo;
 import com.example.ticketeventapp.ui.mngevents.fragment.ActionSelectFragment;
 import com.example.ticketeventapp.ui.mngevents.fragment.AddEventFragment;
+import com.example.ticketeventapp.ui.mngevents.fragment.InfoEventFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 
@@ -28,7 +29,7 @@ public class MngEventsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reg_log);
 
         if(savedInstanceState == null){
-            Utilities.insertFragment(this, new AddEventFragment(), ActionSelectFragment.class.getSimpleName());
+            Utilities.insertFragment(this, new InfoEventFragment(), InfoEventFragment.class.getSimpleName());
         }
         appInfo = AppInfo.getInstance();
         addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
