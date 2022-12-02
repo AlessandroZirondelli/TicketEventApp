@@ -13,10 +13,12 @@ public class AppPreferences {
 
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor sharedPreferencesEditor;
+    private static AppInfo appInfo;
 
     public AppPreferences(Context context){
         sharedPreferences = context.getSharedPreferences("login",Context.MODE_PRIVATE);
         sharedPreferencesEditor = sharedPreferences.edit();
+        appInfo = AppInfo.getInstance();
     }
 
     public void setLoggedUser(User user){
@@ -33,6 +35,7 @@ public class AppPreferences {
         } else {
             //TODO
         }
+        appInfo.setLoggedUser(user);
     }
 
     public User getLoggedUser(){

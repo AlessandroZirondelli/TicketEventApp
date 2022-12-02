@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
+import com.example.ticketeventapp.model.utils.AppInfo;
 import com.example.ticketeventapp.model.utils.AppPreferences;
 
 import java.time.LocalDate;
@@ -13,10 +14,12 @@ public class LogUserManager {
 
     private List<User> usersList;
     public AppPreferences appPreferences;
+    public AppInfo appInfo;
 
     public LogUserManager(List<User> list, Context context){
         usersList = list;
         appPreferences = new AppPreferences(context);
+        appInfo = AppInfo.getInstance();
     }
 
     public List<User> getUsersList(){
@@ -67,12 +70,14 @@ public class LogUserManager {
     public void startLoginSession(String username,String password){
         User user = new User(username,password);
         appPreferences.setLoggedUser(user);
-
+        appInfo.setLoggedUser(user);
     }
 
     public Boolean canDoAutoLogin(){
         return appPreferences.canDoAutoLogin();
     }
+
+
 
     /*public User getLoggedUser(){
         return appPreferences.getLoggedUser();

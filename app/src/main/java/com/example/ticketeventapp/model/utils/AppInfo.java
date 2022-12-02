@@ -5,7 +5,7 @@ import com.example.ticketeventapp.model.mng_users.User;
 public class AppInfo {
 
     private static AppInfo mInstance= null;
-    public User loggedUser;
+    private User loggedUser;
 
     private AppInfo(){}
 
@@ -19,5 +19,7 @@ public class AppInfo {
     public void setLoggedUser(User user){
         this.loggedUser = user;
     }
+
+    public User getLoggedUser(){return  this.loggedUser;}
 
 }
