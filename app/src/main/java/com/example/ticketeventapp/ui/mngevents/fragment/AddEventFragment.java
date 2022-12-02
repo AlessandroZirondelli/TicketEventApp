@@ -156,7 +156,7 @@ public class AddEventFragment extends Fragment {
             @Override
             public void onChanged(Location location) {
                 event_place.setText(location.getLatitude()+ "  "+location.getLongitude());
-
+                Log.e("AddEventFragment",location.getLatitude()+" "+location.getLongitude());
                 networkAgent.createRequestQueue();
                 networkAgent.registerNetworkCallback();
                 networkAgent.sendVolleyRequest(String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()));
@@ -269,12 +269,15 @@ public class AddEventFragment extends Fragment {
                         String latitude = "";
                         String longitude = "";
                         Location position = addEventViewModel.getPosition().getValue();
+                        Log.e("AddEventFragment","-->"+position.getLatitude());
+                        Log.e("AddEventFragment","-->"+position.getLatitude());
                         if(position != null){
+                            Log.e("AddEventFragment","Trovate coordinate");
                             latitude = String.valueOf(position.getLatitude());
                             longitude = String.valueOf(position.getLongitude());
                         }
                        ;
-                        Event event = new Event(name,description,date,time,place,price, String.valueOf(imageUri),"","");
+                        Event event = new Event(name,description,date,time,place,price, String.valueOf(imageUri),latitude,longitude);
                         addEventViewModel.addEvent(event);
                         Log.e("AddEventFragment","Inserimento evento effettuato");
                     }
