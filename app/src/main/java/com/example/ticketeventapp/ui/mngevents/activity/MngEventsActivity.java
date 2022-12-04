@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.utils.AppInfo;
+import com.example.ticketeventapp.ui.home.fragment.HomeFragment;
 import com.example.ticketeventapp.ui.mngevents.fragment.ActionSelectFragment;
 import com.example.ticketeventapp.ui.mngevents.fragment.AddEventFragment;
 import com.example.ticketeventapp.ui.mngevents.fragment.InfoEventFragment;
@@ -29,10 +30,10 @@ public class MngEventsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mng_events);
 
         if(savedInstanceState == null){
-            Utilities.insertFragment(this, new InfoEventFragment(), InfoEventFragment.class.getSimpleName());
+            Utilities.insertFragment(this, new HomeFragment(), HomeFragment.class.getSimpleName());
         }
         appInfo = AppInfo.getInstance();
-        addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
+        //addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
         Log.e("MngEventsActivity","Logged User:"+appInfo.getLoggedUser().getUsername());
 
     }
