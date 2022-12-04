@@ -26,7 +26,7 @@ public class MngEventsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reg_log);
+        setContentView(R.layout.activity_mng_events);
 
         if(savedInstanceState == null){
             Utilities.insertFragment(this, new InfoEventFragment(), InfoEventFragment.class.getSimpleName());
