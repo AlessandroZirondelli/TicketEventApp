@@ -22,8 +22,11 @@ public class Utilities {
 
     }
 
-    public static void insertHomeFragment(AppCompatActivity activity, Fragment fragment, String tag, int fragmentContainerResId){
-        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+    public static void insertHomeFragment(AppCompatActivity activity, Fragment fragment, String tag, int fragmentContainerResId, Fragment hostFragment ){
+        //host fragment will bve HomeFragment.
+        //getChildFragmentManager return fragment manager of hostFragment. So it manages transaction of child fragments
+        //It works also with getSupportFragmentManager
+        FragmentTransaction transaction = hostFragment.getChildFragmentManager().beginTransaction();;
         transaction.replace(fragmentContainerResId,fragment, tag);
         //transaction.addToBackStack(tag);
         transaction.commit();

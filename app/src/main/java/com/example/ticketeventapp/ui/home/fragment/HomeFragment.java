@@ -20,8 +20,8 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
-        Utilities.insertHomeFragment((AppCompatActivity) getActivity(), new BottomBarEventsFragment(),BottomBarEventsFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
-        Utilities.insertHomeFragment((AppCompatActivity) getActivity(),new RecyclerViewEventsFragment(),RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
+        Utilities.insertHomeFragment((AppCompatActivity) getActivity(), new BottomBarEventsFragment(),BottomBarEventsFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar,this);
+        Utilities.insertHomeFragment((AppCompatActivity) getActivity(),new RecyclerViewEventsFragment(),RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view,this);
         return view;
     }
 
