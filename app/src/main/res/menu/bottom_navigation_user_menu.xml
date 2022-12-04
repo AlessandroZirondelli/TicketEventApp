@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tickets"
+        android:enabled="true"
+        android:icon="@drawable/confirmation_number"
+        android:title="@string/tickets"/>
+    <item
+        android:id="@+id/scan"
+        android:enabled="true"
+        android:icon="@drawable/qr_code_scanner"
+        android:title="@string/scan_qrcode"/>
+</menu>

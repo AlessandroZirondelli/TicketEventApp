@@ -55,5 +55,6 @@
     <string name="price_must_be_numeric">Price must be numeric</string>
     <string name="info_event">Event info</string>
     <string name="join_event">Join event</string>
+    <string name="tickets">Your tickets</string>
 
 </resources>

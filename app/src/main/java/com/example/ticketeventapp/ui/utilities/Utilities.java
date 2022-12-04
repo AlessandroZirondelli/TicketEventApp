@@ -20,4 +20,11 @@ public class Utilities {
         transaction.commit();
 
     }
+
+    public static void insertHomeFragment(AppCompatActivity activity, Fragment fragment, String tag, int fragmentContainerResId){
+        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+        transaction.replace(fragmentContainerResId,fragment, tag);
+        transaction.addToBackStack(tag);
+        transaction.commit();
+    }
 }
