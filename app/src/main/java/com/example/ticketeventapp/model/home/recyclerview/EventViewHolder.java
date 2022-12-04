@@ -1,0 +1,60 @@
+package com.example.ticketeventapp.model.home.recyclerview;
+
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.view.DragEvent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.ticketeventapp.R;
+
+
+public class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+    private ImageView event_photo;
+    private TextView event_name;
+    private TextView event_date;
+    private TextView event_time;
+
+    private final OnItemListener itemListener;
+
+    public EventViewHolder(@NonNull View itemView, OnItemListener itemListener) {
+        super(itemView);
+        event_photo = itemView.findViewById(R.id.event_imageview);
+        event_name = itemView.findViewById(R.id.event_name_textview);
+        event_date = itemView.findViewById(R.id.event_date_textview);
+        event_time = itemView.findViewById(R.id.event_time_textview);
+        this.itemListener = itemListener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        itemListener.onItemClick(getAdapterPosition());
+    }
+
+    public void set_event_name_text(String event_name_text) {
+        this.event_name.setText(event_name_text);
+    }
+
+    public void set_event_date_text(String  event_date_text){
+        this.event_date.setText(event_date_text);
+    }
+
+    public void set_event_time_text(String event_time_text){
+        this.event_time.setText(event_time_text);
+    }
+
+    public void set_event_photo_drawable(Drawable image) {
+        this.event_photo.setImageDrawable(image);
+    }
+
+    public void set_event_photo_bitmap(Bitmap image){
+        this.event_photo.setImageBitmap(image);
+    }
+
+
+}
