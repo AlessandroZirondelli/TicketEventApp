@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_anchor="@+id/recycler_view"
+                app:layout_anchor="@+id/recycler_view_events"
                 app:layout_anchorGravity="center"
                 tools:listitem="@layout/event_card_layout" />
 
