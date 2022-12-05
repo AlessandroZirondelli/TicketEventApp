@@ -29,6 +29,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder implements View.OnC
         event_date = itemView.findViewById(R.id.event_date_textview);
         event_time = itemView.findViewById(R.id.event_time_textview);
         this.itemListener = itemListener;
+        this.itemView.setOnClickListener(this);
     }
 
     @Override

@@ -14,10 +14,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.home.recyclerview.EventsRecyclerView;
+import com.example.ticketeventapp.model.home.recyclerview.OnEventListener;
 import com.example.ticketeventapp.model.home.recyclerview.OnItemListener;
 
 
-public class RecyclerViewEventsFragment extends Fragment implements OnItemListener {
+public class RecyclerViewEventsFragment extends Fragment {
 
     private EventsRecyclerView eventsRecyclerView;
 
@@ -31,19 +32,9 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         eventsRecyclerView = new EventsRecyclerView(getActivity());
-        eventsRecyclerView.setRecyclerView(this);
+        eventsRecyclerView.setRecyclerView(new OnEventListener());
         super.onViewCreated(view, savedInstanceState);
     }
 
-    @Override
-    public void onItemClick(int position) {
-        Activity activity = getActivity();
-        if (activity != null){
-            /*Utilities.insertFragment((AppCompatActivity) activity, new DetailsFragment(),
-                    DetailsFragment.class.getSimpleName());*/
 
-            //listViewModel.setItemSelected(adapter.getItemSelected(position));
-            Log.e("HomeFragment","Clickato");
-        }
-    }
 }
