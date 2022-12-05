@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.ui.mngevents.fragment;
+package com.example.ticketeventapp.ui.main.mngevents.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

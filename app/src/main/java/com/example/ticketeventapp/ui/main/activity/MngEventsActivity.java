@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.ui.mngevents.activity;
+package com.example.ticketeventapp.ui.main.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,10 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.utils.AppInfo;
-import com.example.ticketeventapp.ui.home.fragment.HomeFragment;
-import com.example.ticketeventapp.ui.mngevents.fragment.ActionSelectFragment;
-import com.example.ticketeventapp.ui.mngevents.fragment.AddEventFragment;
-import com.example.ticketeventapp.ui.mngevents.fragment.InfoEventFragment;
+import com.example.ticketeventapp.ui.main.home.fragment.HomeFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 
@@ -27,7 +24,7 @@ public class MngEventsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mng_events);
+        setContentView(R.layout.activity_main);
 
         if(savedInstanceState == null){
             Utilities.insertFragment(this, new HomeFragment(), HomeFragment.class.getSimpleName());

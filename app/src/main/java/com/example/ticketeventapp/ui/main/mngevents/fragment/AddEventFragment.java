@@ -1,8 +1,7 @@
-package com.example.ticketeventapp.ui.mngevents.fragment;
+package com.example.ticketeventapp.ui.main.mngevents.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,10 +26,10 @@ import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.model.mng_events.NetworkAgent;
 import com.example.ticketeventapp.model.utils.PermissionManager;
-import com.example.ticketeventapp.ui.mngevents.components.DatePicker;
-import com.example.ticketeventapp.ui.mngevents.components.EnablerDialog;
-import com.example.ticketeventapp.ui.mngevents.components.PermissionDialog;
-import com.example.ticketeventapp.ui.mngevents.components.TimePicker;
+import com.example.ticketeventapp.ui.main.mngevents.components.DatePicker;
+import com.example.ticketeventapp.ui.main.mngevents.components.EnablerDialog;
+import com.example.ticketeventapp.ui.main.mngevents.components.PermissionDialog;
+import com.example.ticketeventapp.ui.main.mngevents.components.TimePicker;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 

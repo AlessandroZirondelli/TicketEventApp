@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.ui.home.fragment;
+package com.example.ticketeventapp.ui.main.home.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.ui.mngevents.fragment.AddEventFragment;
+import com.example.ticketeventapp.ui.main.mngevents.fragment.AddEventFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

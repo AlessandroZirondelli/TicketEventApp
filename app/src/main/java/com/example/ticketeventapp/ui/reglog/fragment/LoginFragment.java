@@ -20,7 +20,7 @@ import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.mng_users.LogUserManager;
 import com.example.ticketeventapp.model.mng_users.User;
 import com.example.ticketeventapp.model.utils.AppInfo;
-import com.example.ticketeventapp.ui.mngevents.activity.MngEventsActivity;
+import com.example.ticketeventapp.ui.main.activity.MngEventsActivity;
 import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.google.android.material.textfield.TextInputEditText;

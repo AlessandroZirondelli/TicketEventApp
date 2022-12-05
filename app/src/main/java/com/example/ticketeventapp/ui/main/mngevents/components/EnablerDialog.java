@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.ui.mngevents.components;
+package com.example.ticketeventapp.ui.main.mngevents.components;
 
 import android.app.Activity;
 import android.app.AlertDialog;
