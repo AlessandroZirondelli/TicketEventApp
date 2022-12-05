@@ -56,22 +56,19 @@
     </com.google.android.material.chip.ChipGroup>
 
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/chip_group_filter"
-        >
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_events"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chip_group_filter"
+        app:layout_constraintBottom_toBottomOf="parent"
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_events"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_anchor="@+id/recycler_view_events"
-                app:layout_anchorGravity="center"
-                tools:listitem="@layout/event_card_layout" />
+        tools:listitem="@layout/event_card_layout" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
