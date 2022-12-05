@@ -30,7 +30,7 @@ public class MngEventsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mng_events);
 
         if(savedInstanceState == null){
-            Utilities.insertFragment(this, new AddEventFragment(), AddEventFragment.class.getSimpleName());
+            Utilities.insertFragment(this, new HomeFragment(), HomeFragment.class.getSimpleName());
         }
         appInfo = AppInfo.getInstance();
         addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
