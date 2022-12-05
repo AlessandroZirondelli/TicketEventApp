@@ -99,6 +99,13 @@ public class AddEventViewModel extends AndroidViewModel {
         return this.position;
     }
 
+    /*public void clearData(){
+        this.imageURI.setValue(null);
+        this.selectedDate.setValue(null);
+        this.selectedTime.setValue(null);
+        this.position.setValue(null);
+        this.position_display_name.setValue(null);
 
+    }*/
 
 }

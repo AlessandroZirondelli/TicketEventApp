@@ -284,10 +284,11 @@ public class AddEventFragment extends Fragment {
                         Log.e("AddEventFragment","value uri evento:"+event.getImageUri());
                         addEventViewModel.addEvent(event);
                         Log.e("AddEventFragment","Inserimento evento effettuato");
+                        getFragmentManager().popBackStack();
+                        //addEventViewModel.clearData();
+
                     }
                 }
-
-
             }
         });
 
