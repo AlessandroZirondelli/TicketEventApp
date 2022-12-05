@@ -2,7 +2,6 @@ package com.example.ticketeventapp.model.home.recyclerview;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.view.DragEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemListener;
 
 
 public class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

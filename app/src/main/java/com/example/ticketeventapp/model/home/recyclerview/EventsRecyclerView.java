@@ -4,6 +4,7 @@ import android.app.Activity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemListener;
 import com.example.ticketeventapp.model.mng_events.Event;
 
 import java.util.ArrayList;

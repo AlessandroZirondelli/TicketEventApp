@@ -1,21 +1,17 @@
 package com.example.ticketeventapp.ui.home.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.home.recyclerview.EventsRecyclerView;
-import com.example.ticketeventapp.model.home.recyclerview.OnEventListener;
-import com.example.ticketeventapp.model.home.recyclerview.OnItemListener;
+import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnEventListener;
 
 
 public class RecyclerViewEventsFragment extends Fragment {
