@@ -30,10 +30,10 @@ public class MngEventsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mng_events);
 
         if(savedInstanceState == null){
-            Utilities.insertFragment(this, new HomeFragment(), HomeFragment.class.getSimpleName());
+            Utilities.insertFragment(this, new AddEventFragment(), AddEventFragment.class.getSimpleName());
         }
         appInfo = AppInfo.getInstance();
-        //addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
+        addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
         Log.e("MngEventsActivity","Logged User:"+appInfo.getLoggedUser().getUsername());
 
     }
@@ -46,7 +46,8 @@ public class MngEventsActivity extends AppCompatActivity {
 
         if(requestCode == CHOOSE_PICTURE && resultCode==RESULT_OK){
             Uri imageUri = data.getData();
-            addEventViewModel.setImageURI(imageUri);
+            Log.e("AddEventFragment",imageUri.toString());
+            addEventViewModel.setImageURI(imageUri.toString());
         }
     }
 }

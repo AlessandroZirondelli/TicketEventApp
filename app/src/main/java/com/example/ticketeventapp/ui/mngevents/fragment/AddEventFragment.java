@@ -2,6 +2,7 @@ package com.example.ticketeventapp.ui.mngevents.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -121,12 +122,15 @@ public class AddEventFragment extends Fragment {
             }
         });
 
-        addEventViewModel.getImageURI().observe(getActivity(), new Observer<Uri>() {
+        addEventViewModel.getImageURI().observe(getActivity(), new Observer<String>() {
             @Override
-            public void onChanged(Uri uri) {
+            public void onChanged(String uri) {
                 //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-                Log.e("AddEventFragment","ImageUriChanged:"+uri.getPath());
-                event_photo.setImageURI(uri);
+                //Log.e("AddEventFragment","ImageUriChanged:"+uri.getPath());
+                if(!uri.equals("add_photo_alternate")){
+                    event_photo.setImageURI(Uri.parse(uri));
+                }
+
             }
         });
 
@@ -249,14 +253,17 @@ public class AddEventFragment extends Fragment {
                     if(!addEventManager.isPriceNumber(price)){
                         enablePriceError();
                     } else {
-                        Uri imageUri = addEventViewModel.getImageURI().getValue();
+                        String imageUri = addEventViewModel.getImageURI().getValue();
                         if(imageUri == null){
-                            addEventViewModel.setImageURI(Uri.parse("add_photo_alternate"));
+                            imageUri = "add_photo_alternate";
+                            addEventViewModel.setImageURI("add_photo_alternate");
                             Log.e("AddEventFragment","Image Uri null");
+
                         } else {
                             Log.e("AddEventFragment","Image Uri not null");
                             try {
-                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri );
+                                Uri uri = Uri.parse(imageUri);
+                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri );
                                 addEventManager.saveImage(bitmap,getActivity());
                                 Log.e("AddEventFragment","Immagine salvata");
                             } catch (IOException e) {
@@ -268,15 +275,14 @@ public class AddEventFragment extends Fragment {
                         String latitude = "";
                         String longitude = "";
                         Location position = addEventViewModel.getPosition().getValue();
-                        Log.e("AddEventFragment","-->"+position.getLatitude());
-                        Log.e("AddEventFragment","-->"+position.getLatitude());
                         if(position != null){
                             Log.e("AddEventFragment","Trovate coordinate");
                             latitude = String.valueOf(position.getLatitude());
                             longitude = String.valueOf(position.getLongitude());
                         }
-                       ;
-                        Event event = new Event(name,description,date,time,place,price, String.valueOf(imageUri),latitude,longitude);
+
+                        Event event = new Event(name,description,date,time,place,price, imageUri,latitude,longitude);
+                        Log.e("AddEventFragment","value uri evento:"+event.getImageUri());
                         addEventViewModel.addEvent(event);
                         Log.e("AddEventFragment","Inserimento evento effettuato");
                     }

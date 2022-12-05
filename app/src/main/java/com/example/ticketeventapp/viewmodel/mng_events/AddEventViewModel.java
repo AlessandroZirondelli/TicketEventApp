@@ -17,7 +17,7 @@ import java.time.LocalTime;
 
 public class AddEventViewModel extends AndroidViewModel {
 
-    private final MutableLiveData<Uri> imageURI;
+    private final MutableLiveData<String> imageURI;
     private final MutableLiveData<String> selectedDate;
     private final MutableLiveData<LocalTime> selectedTime;
     private final MutableLiveData<Boolean> isPermissionGPSAllowed;
@@ -49,7 +49,7 @@ public class AddEventViewModel extends AndroidViewModel {
     }
 
 
-    public void setImageURI(Uri uri){
+    public void setImageURI(String uri){
         imageURI.setValue(uri);
     }
 
@@ -85,7 +85,7 @@ public class AddEventViewModel extends AndroidViewModel {
 
     public MutableLiveData<LocalTime> getSelectedTime(){return this.selectedTime;}
 
-    public MutableLiveData<Uri> getImageURI(){
+    public MutableLiveData<String> getImageURI(){
         return this.imageURI;
     }
 
