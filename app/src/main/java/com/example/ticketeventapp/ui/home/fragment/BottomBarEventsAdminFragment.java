@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.ticketeventapp.R;
 
-public class BottomBarEventsFragment extends Fragment {
+public class BottomBarEventsAdminFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.navigation_bar_user,container,false);
+        return inflater.inflate(R.layout.navigation_bar_admin,container,false);
     }
 }

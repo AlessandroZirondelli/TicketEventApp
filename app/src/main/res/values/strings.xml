@@ -56,5 +56,6 @@
     <string name="info_event">Event info</string>
     <string name="join_event">Join event</string>
     <string name="tickets">Your tickets</string>
+    <string name="acc_add_mew_event">Add mew event</string>
 
 </resources>

@@ -10,35 +10,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.ui.utilities.Utilities;
-import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
-
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private Activity activity;
     //private EventListViewModel eventListViewModel;
 
-    private BottomBarEventsFragment bottomBarEventsFragment;
+    private BottomBarEventsUserFragment bottomBarEventsUserFragment;
     private RecyclerViewEventsFragment recyclerViewEventsFragment;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
-        bottomBarEventsFragment = new BottomBarEventsFragment();
+        bottomBarEventsUserFragment = new BottomBarEventsUserFragment();
         recyclerViewEventsFragment = new RecyclerViewEventsFragment();
-        Utilities.insertHomeFragment((AppCompatActivity) getActivity(), bottomBarEventsFragment,BottomBarEventsFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar,this);
+        //Utilities.insertHomeFragment((AppCompatActivity) getActivity(), bottomBarEventsUserFragment, BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar,this);
         Utilities.insertHomeFragment((AppCompatActivity) getActivity(), recyclerViewEventsFragment,RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view,this);
-
+        Utilities.insertHomeFragment((AppCompatActivity) getActivity(), new BottomBarEventsAdminFragment(),BottomBarEventsAdminFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar,this);
         return view;
     }
 
