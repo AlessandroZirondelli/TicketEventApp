@@ -13,17 +13,21 @@ public class TicketEventAppRepository {
 
     private TicketEventAppDAO ticketEventAppDAO;
     private LiveData<List<User>> usersLiveData;
+    private LiveData<List<Event>> eventsLiveData;
+
 
     public TicketEventAppRepository(Application application){
         TicketEventAppDatabase db = TicketEventAppDatabase.getDatabase(application);
         ticketEventAppDAO = db.ticketEventAppDAO();
         usersLiveData = ticketEventAppDAO.getUsersLiveData();
+        eventsLiveData = ticketEventAppDAO.getEventsLiveData();
     }
 
     public LiveData<List<User>> getUsersLiveData(){
         return usersLiveData;
     }
 
+    public LiveData<List<Event>> getEventsLiveData(){return eventsLiveData;}
 
     public void addUser(User user){
         TicketEventAppDatabase.executor.execute(new Runnable() {

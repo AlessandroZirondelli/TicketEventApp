@@ -25,6 +25,10 @@ public interface TicketEventAppDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addEvent(Event event);
 
+    @Transaction
+    @Query("SELECT * FROM event")
+    LiveData<List<Event>> getEventsLiveData();
+
 
 
 
