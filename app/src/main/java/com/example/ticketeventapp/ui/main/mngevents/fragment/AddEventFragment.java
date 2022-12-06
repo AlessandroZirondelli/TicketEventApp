@@ -203,9 +203,15 @@ public class AddEventFragment extends Fragment {
                         Log.e("AddEventFragment","GPS is not active");
                         enablerDialog.askTurnOnGPS();
                     } else {
-                        addEventViewModel.setIsTurnedOnGPS(true);
                         Log.e("AddEventFragment","GPS is active");
-                        locationGpsAgent.startLocationUpdates();
+                        if(networkAgent.isConnectedToInternet()){
+                            Log.e("AddEventFragment","Internet connection is active");
+                            addEventViewModel.setIsTurnedOnGPS(true);
+                            locationGpsAgent.startLocationUpdates();
+                        } else {
+                            Log.e("AddEventFragment","Internet connection is not  active");
+                            enablerDialog.askToTurnOnInternetConnection();
+                        }
                     }
 
                 } else {//GPS permission denied, so ask for it
@@ -222,17 +228,7 @@ public class AddEventFragment extends Fragment {
             }
         });
 
-        event_price.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(networkAgent.isConnectedToInternet()){
-                    Log.e("AddEventFragment","Internet connection is active");
-                } else {
-                    Log.e("AddEventFragment","Internet connection is not  active");
-                    enablerDialog.askToTurnOnInternetConnection();
-                }
-            }
-        });
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -279,6 +275,7 @@ public class AddEventFragment extends Fragment {
                             latitude = String.valueOf(position.getLatitude());
                             longitude = String.valueOf(position.getLongitude());
                         }
+
 
                         Event event = new Event(name,description,date,time,place,price, imageUri,latitude,longitude);
                         Log.e("AddEventFragment","value uri evento:"+event.getImageUri());
