@@ -1,7 +1,9 @@
 package com.example.ticketeventapp.ui.main.mngevents.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -63,6 +66,8 @@ public class AddEventFragment extends Fragment {
 
     private AddEventManager addEventManager;
 
+    private Activity activity;
+
 
 
 
@@ -76,6 +81,7 @@ public class AddEventFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        activity = getActivity();
         fragment_title = view.findViewById(R.id.info_add_event);
         event_photo = view.findViewById(R.id.event_icon_image_view);
         event_name = view.findViewById(R.id.event_name_text_input_edit_text);
@@ -110,14 +116,22 @@ public class AddEventFragment extends Fragment {
         addEventViewModel.getSelectedDate().observe(getActivity(), new Observer<String>() {
             @Override
             public void onChanged(String date) {
-                event_date.setText(date);
+                if(date == null){
+                    event_date.setText("");
+                } else{
+                    event_date.setText(date);
+                }
             }
         });
 
         addEventViewModel.getSelectedTime().observe(getActivity(), new Observer<LocalTime>() {
             @Override
             public void onChanged(LocalTime localTime) {
-                event_time.setText(localTime.toString());
+                if(localTime == null){
+                    event_time.setText("");
+                } else{
+                    event_time.setText(localTime.toString());
+                }
             }
         });
 
@@ -126,7 +140,10 @@ public class AddEventFragment extends Fragment {
             public void onChanged(String uri) {
                 //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
                 //Log.e("AddEventFragment","ImageUriChanged:"+uri.getPath());
-                if(!uri.equals("add_photo_alternate")){
+                if(uri == null){
+                    Drawable drawable = AppCompatResources.getDrawable(activity, activity.getResources().getIdentifier("add_photo_alternate","drawable",activity.getPackageName()));
+                }
+                else if(!uri.equals("add_photo_alternate")){
                     event_photo.setImageURI(Uri.parse(uri));
                 }
 
@@ -157,18 +174,25 @@ public class AddEventFragment extends Fragment {
         addEventViewModel.getPosition().observe(getActivity(), new Observer<Location>() {
             @Override
             public void onChanged(Location location) {
-                event_place.setText(location.getLatitude()+ "  "+location.getLongitude());
-                Log.e("AddEventFragment",location.getLatitude()+" "+location.getLongitude());
-                networkAgent.createRequestQueue();
-                networkAgent.registerNetworkCallback();
-                networkAgent.sendVolleyRequest(String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()));
+                if(location != null){
+                    event_place.setText(location.getLatitude()+ "  "+location.getLongitude());
+                    Log.e("AddEventFragment",location.getLatitude()+" "+location.getLongitude());
+                    networkAgent.createRequestQueue();
+                    networkAgent.registerNetworkCallback();
+                    networkAgent.sendVolleyRequest(String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()));
+                }
+
             }
         });
 
         addEventViewModel.getPosition_display_name().observe(getActivity(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                event_place.setText(s);
+                if(s==null){
+                    event_place.setText("");
+                } else {
+                    event_place.setText(s);
+                }
             }
         });
         
@@ -282,7 +306,7 @@ public class AddEventFragment extends Fragment {
                         addEventViewModel.addEvent(event);
                         Log.e("AddEventFragment","Inserimento evento effettuato");
                         getFragmentManager().popBackStack();
-                        //addEventViewModel.clearData();
+                        addEventViewModel.clearData();
 
                     }
                 }
