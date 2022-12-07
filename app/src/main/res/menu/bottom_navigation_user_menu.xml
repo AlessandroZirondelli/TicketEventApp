@@ -4,7 +4,7 @@
         android:id="@+id/events"
         android:enabled="true"
         android:icon="@drawable/celebration"
-        android:title="Events" />
+        android:title="@string/events" />
     <item
         android:id="@+id/tickets"
         android:enabled="true"
