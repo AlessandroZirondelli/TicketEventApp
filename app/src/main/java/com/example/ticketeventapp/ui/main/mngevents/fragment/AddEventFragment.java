@@ -93,6 +93,7 @@ public class AddEventFragment extends Fragment {
         button = view.findViewById(R.id.add_event_button);
 
         addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
+        addEventViewModel.clearData();
         addEventManager = new AddEventManager();
 
         datePicker = new DatePicker(getActivity().getSupportFragmentManager(),addEventViewModel,event_date);

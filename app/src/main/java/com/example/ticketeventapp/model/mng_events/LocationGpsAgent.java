@@ -22,6 +22,7 @@ import androidx.room.Ignore;
 
 import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
+import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -60,6 +61,8 @@ public class LocationGpsAgent {
                 //update view model
                 addEventViewModel.setPosition(location);
 
+                EventListViewModel eventListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(EventListViewModel.class);
+                eventListViewModel.setLocation(location);
                 //here i can send volley request to translate
 
                 stopLocationUpdates();

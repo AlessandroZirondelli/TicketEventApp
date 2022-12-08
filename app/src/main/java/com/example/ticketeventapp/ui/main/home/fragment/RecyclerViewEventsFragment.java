@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.ui.main.home.fragment;
 
 import android.app.Activity;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -148,21 +149,23 @@ public class RecyclerViewEventsFragment extends Fragment {
                 if(isChecked){
                     if(permissionManager.isPermissionGPSAllowed()){
                         if(locationGpsAgent.isTurnedOnGPS()){
-                            //eventItemAdapter.getFilter().filter("near");
-                            Log.e("HomeFragment","CIAOOO");
-                            chipNext.setCheckable(false);
-                            chipCurrent.setCheckable(false);
+                            locationGpsAgent.startLocationUpdates();
                         } else {
                             enablerDialog.askTurnOnGPS();
                         }
                     }else {
                         permissionManager.launchPermissionRequestGPS();
                     }
-                } else{
-                    //Log.e("HomeFragment","Not checked");
-                    chipNext.setCheckable(true);
-                    chipCurrent.setCheckable(true);
                 }
+            }
+        });
+
+        eventListViewModel.getLocationLiveData().observe(getActivity(), new Observer<Location>() {
+            @Override
+            public void onChanged(Location location) {
+                //Continue to filter list
+                Log.e("HomeFragment","Location restituita"+location.toString());
+                //eventItemAdapter.getFilter().filter("near");
             }
         });
 
