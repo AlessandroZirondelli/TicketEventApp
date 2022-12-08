@@ -118,6 +118,22 @@ public class RecyclerViewEventsFragment extends Fragment {
             }
         });
 
+        chipPast.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    //Log.e("HomeFragment","Checked");
+                    eventItemAdapter.getFilter().filter("past");
+                    chipNext.setCheckable(false);
+                    chipCurrent.setCheckable(false);
+                } else{
+                    //Log.e("HomeFragment","Not checked");
+                    chipNext.setCheckable(true);
+                    chipCurrent.setCheckable(true);
+                }
+            }
+        });
+
 
 
 
