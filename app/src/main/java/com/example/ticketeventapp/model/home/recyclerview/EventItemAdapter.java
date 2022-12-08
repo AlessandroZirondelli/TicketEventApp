@@ -133,7 +133,21 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
                             //TODO
                         }
                     }
+                }
+                else if(filterType.equals("next")){
+                    for(Event event : eventsNotFilteredList){
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
+                            LocalDate eventDate  = LocalDate.parse(event.getDate());
+
+                            LocalDate today = LocalDate.now();;
+                            if(eventDate.isAfter(today)){
+                                filteredList.add(event);
+                            }
+                        } else{
+                            //TODO
+                        }
+                    }
                 }
                 // TODO Other filters
                 FilterResults results = new FilterResults();

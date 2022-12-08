@@ -37,6 +37,9 @@ public class RecyclerViewEventsFragment extends Fragment {
     private EventItemAdapter eventItemAdapter;
     private ChipGroup chipGroup;
     private Chip chipCurrent;
+    private Chip chipNext;
+    private Chip chipPast;
+    private Chip chipNear;
 
     @Nullable
     @Override
@@ -70,20 +73,52 @@ public class RecyclerViewEventsFragment extends Fragment {
             @Override
             public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
                 //Multiple checks with Near+Current or Near+Future or Near+
+                if(checkedIds.isEmpty()){
+                    Log.e("HomeFragment","Vuotooo");
+                    eventItemAdapter.getFilter().filter("all");
+                }
             }
         });
+
         chipCurrent = view.findViewById(R.id.current_events_chip);
+        chipNext = view.findViewById(R.id.next_events_chip);
+        chipPast = view.findViewById(R.id.past_events_chip);
+        chipNear = view.findViewById(R.id.near_events_chip);
+
+
         chipCurrent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
                     //Log.e("HomeFragment","Checked");
                     eventItemAdapter.getFilter().filter("current");
+                    chipPast.setCheckable(false);
+                    chipNext.setCheckable(false);
                 } else{
                     //Log.e("HomeFragment","Not checked");
+                    chipPast.setCheckable(true);
+                    chipNext.setCheckable(true);
                 }
             }
         });
+
+        chipNext.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    //Log.e("HomeFragment","Checked");
+                    eventItemAdapter.getFilter().filter("next");
+                    chipPast.setCheckable(false);
+                    chipCurrent.setCheckable(false);
+                } else{
+                    //Log.e("HomeFragment","Not checked");
+                    chipPast.setCheckable(true);
+                    chipCurrent.setCheckable(true);
+                }
+            }
+        });
+
+
 
 
     }
