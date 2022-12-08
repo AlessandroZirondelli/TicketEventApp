@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -19,19 +23,25 @@ import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemL
 import com.example.ticketeventapp.model.mng_events.Event;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> {
+public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> implements Filterable {
 
     private Activity activity;
-    private List<Event> eventList;
+    private List<Event> eventsNotFilteredList;
+    private List<Event> eventsFilteredList;
     private OnItemListener listener;
+    private Filter eventFilter;
+
 
     public EventItemAdapter(Activity activity,List<Event> eventList, OnItemListener listener){
-        this.eventList = eventList;
+        this.eventsNotFilteredList = eventList;
+        this.eventsFilteredList = eventList;
         this.activity = activity;
         this.listener = listener;
+        this.createFilter();
     }
 
     @NonNull
@@ -43,7 +53,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
-        Event event = eventList.get(position);
+        Event event = eventsFilteredList.get(position);
         holder.set_event_name_text(event.getName());
         holder.set_event_date_text(event.getDate());
         holder.set_event_time_text(event.getTime());
@@ -69,15 +79,100 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
     @Override
     public int getItemCount() {
-        return this.eventList.size();
+        return this.eventsFilteredList.size();
     }
 
     public void setData(List<Event> eventList){
-        final CardItemDiffCallback diffCallback = new CardItemDiffCallback(this.eventList, eventList);
+        final CardItemDiffCallback diffCallback = new CardItemDiffCallback(this.eventsFilteredList, eventList);
         final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-
-        this.eventList = new ArrayList<>(eventList);
+        this.eventsFilteredList  = new ArrayList<>(eventList);
+        this.eventsNotFilteredList = new ArrayList<>(eventList);
         //check difference between lists and update only changes
         diffResult.dispatchUpdatesTo(this);
+    }
+
+
+    private void createFilter(){
+        this.eventFilter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String filterType = charSequence.toString();
+                List<Event> filteredList = new ArrayList<>();
+                String temp="ciao";
+
+                Log.e("HomeFragment",filterType);
+                if (filterType.isEmpty() || filterType.equals("all")) { //all events
+                    filteredList.addAll(eventsNotFilteredList);
+
+                }
+                else  if(filterType.equals("past")){ //past events
+                    for(Event event : eventsNotFilteredList){
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            LocalDate eventDate  = LocalDate.parse(event.getDate());
+                            LocalDate today = LocalDate.now();;
+                            if(eventDate.isBefore(today)){
+                                filteredList.add(event);
+                            }
+                        } else{
+                            //TODO
+                        }
+                    }
+                }
+                else if(filterType.equals("current")){
+                    Log.e("HomeFragment","Sonoqui");
+                    for(Event event : eventsNotFilteredList){
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                            LocalDate eventDate  = LocalDate.parse(event.getDate());
+
+                            LocalDate today = LocalDate.now();;
+                            if(eventDate.isEqual(today)){
+                                filteredList.add(event);
+                            }
+                        } else{
+                            //TODO
+                        }
+                    }
+
+                }
+                // TODO Other filters
+                FilterResults results = new FilterResults();
+                results.values = filteredList;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                List<Event> filteredList = new ArrayList<>();
+                List<?> result = (List<?>) filterResults.values;
+                for (Object object : result) {
+                    if (object instanceof Event) {
+                        filteredList.add((Event) object);
+                    }
+                }
+
+                //warn the adapter that the data are changed after the filtering
+                Log.e("HomeFragment","size:"+filteredList.size());
+                updateCardListItems(filteredList);
+            }
+        };
+    }
+
+    private  void updateCardListItems(List<Event> filteredList) {
+        final CardItemDiffCallback diffCallback =
+                new CardItemDiffCallback(this.eventsFilteredList, filteredList);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+        this.eventsFilteredList = new ArrayList<>(filteredList);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
+
+    @Override
+    public Filter getFilter() {
+        return this.eventFilter;
+    }
+
+    public Event getItemSelected(int position) {
+        return eventsFilteredList.get(position);
     }
 }

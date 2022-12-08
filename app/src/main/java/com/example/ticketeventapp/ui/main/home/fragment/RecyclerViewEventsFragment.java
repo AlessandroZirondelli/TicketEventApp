@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,8 @@ import com.example.ticketeventapp.model.home.recyclerview.EventsRecyclerView;
 import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnEventListener;
 import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
 import java.util.List;
 
@@ -32,6 +35,8 @@ public class RecyclerViewEventsFragment extends Fragment {
     private EventListViewModel eventListViewModel;
     private Activity activity;
     private EventItemAdapter eventItemAdapter;
+    private ChipGroup chipGroup;
+    private Chip chipCurrent;
 
     @Nullable
     @Override
@@ -59,6 +64,27 @@ public class RecyclerViewEventsFragment extends Fragment {
                 eventItemAdapter.setData(eventList);
             }
         });
+
+        chipGroup = view.findViewById(R.id.chip_group_filter);
+        chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
+                //Multiple checks with Near+Current or Near+Future or Near+
+            }
+        });
+        chipCurrent = view.findViewById(R.id.current_events_chip);
+        chipCurrent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    //Log.e("HomeFragment","Checked");
+                    eventItemAdapter.getFilter().filter("current");
+                } else{
+                    //Log.e("HomeFragment","Not checked");
+                }
+            }
+        });
+
 
     }
 
