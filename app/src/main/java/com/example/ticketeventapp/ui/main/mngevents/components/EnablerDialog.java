@@ -34,6 +34,7 @@ public class EnablerDialog {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();
+                        showInfoTurnedOnGPS();
                     }
                 }).setCancelable(false).create().show();
     }

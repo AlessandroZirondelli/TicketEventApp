@@ -150,16 +150,16 @@ public class AddEventFragment extends Fragment {
             }
         });
 
-        addEventViewModel.getIsPermissionGPSAllowed().observe(getActivity(), new Observer<Boolean>() {
+        /*addEventViewModel.getIsPermissionGPSAllowed().observe(getActivity(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isPermissionGPSAllowed) {
                 if(!isPermissionGPSAllowed){
-                    permissionDialog.shoInfoDeniedPermissionGPS();
+                    permissionDialog.showInfoDeniedPermissionGPS();
 
                 }
                 Log.e("AddEventFragment","Permessi cambiati in: "+ isPermissionGPSAllowed);
             }
-        });
+        });*/
 
         addEventViewModel.getIsTurnedOnGPS().observe(getActivity(), new Observer<Boolean>() {
             @Override

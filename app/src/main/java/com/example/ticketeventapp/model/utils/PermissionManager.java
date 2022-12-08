@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.example.ticketeventapp.ui.main.mngevents.components.EnablerDialog;
+import com.example.ticketeventapp.ui.main.mngevents.components.PermissionDialog;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 
 public class PermissionManager {
@@ -38,6 +40,8 @@ public class PermissionManager {
                 }
                 else{ //permission denied
                      alreadyAskedPermissionGPS = true;
+                     PermissionDialog permissionDialog = new PermissionDialog(activity);
+                     permissionDialog.showInfoDeniedPermissionGPS();
                 }
                 AddEventViewModel addEventViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(AddEventViewModel.class);
                 addEventViewModel.setIsPermissionGPSAllowed(result);

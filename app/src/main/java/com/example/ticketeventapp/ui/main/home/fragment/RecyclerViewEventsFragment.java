@@ -24,6 +24,7 @@ import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.ui.main.mngevents.components.EnablerDialog;
+import com.example.ticketeventapp.ui.main.mngevents.components.PermissionDialog;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
