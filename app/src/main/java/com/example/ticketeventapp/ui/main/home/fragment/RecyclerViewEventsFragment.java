@@ -15,13 +15,15 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.home.recyclerview.EventItemAdapter;
 import com.example.ticketeventapp.model.home.recyclerview.EventsRecyclerView;
 import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnEventListener;
 import com.example.ticketeventapp.model.mng_events.Event;
+import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
+import com.example.ticketeventapp.model.utils.PermissionManager;
+import com.example.ticketeventapp.ui.main.mngevents.components.EnablerDialog;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -40,6 +42,9 @@ public class RecyclerViewEventsFragment extends Fragment {
     private Chip chipNext;
     private Chip chipPast;
     private Chip chipNear;
+    private PermissionManager permissionManager;
+    private LocationGpsAgent locationGpsAgent;
+    private EnablerDialog enablerDialog;
 
     @Nullable
     @Override
@@ -54,6 +59,10 @@ public class RecyclerViewEventsFragment extends Fragment {
         if(activity==null){
             Log.e("HomeFragment","activity null in recyclervieeweventsfragemnt");
         }
+
+        permissionManager = new PermissionManager(activity,this);
+        locationGpsAgent = new LocationGpsAgent(activity,permissionManager);
+        enablerDialog = new EnablerDialog(activity);
         eventsRecyclerView = new EventsRecyclerView(getActivity());
         eventsRecyclerView.setRecyclerView(new OnEventListener());
 
@@ -122,10 +131,32 @@ public class RecyclerViewEventsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
-                    //Log.e("HomeFragment","Checked");
                     eventItemAdapter.getFilter().filter("past");
                     chipNext.setCheckable(false);
                     chipCurrent.setCheckable(false);
+                } else{
+                    chipNext.setCheckable(true);
+                    chipCurrent.setCheckable(true);
+                }
+            }
+        });
+
+        chipNear.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    if(permissionManager.isPermissionGPSAllowed()){
+                        if(locationGpsAgent.isTurnedOnGPS()){
+                            //eventItemAdapter.getFilter().filter("near");
+                            Log.e("HomeFragment","CIAOOO");
+                            chipNext.setCheckable(false);
+                            chipCurrent.setCheckable(false);
+                        } else {
+                            enablerDialog.askTurnOnGPS();
+                        }
+                    }else {
+                        permissionManager.launchPermissionRequestGPS();
+                    }
                 } else{
                     //Log.e("HomeFragment","Not checked");
                     chipNext.setCheckable(true);
@@ -133,6 +164,7 @@ public class RecyclerViewEventsFragment extends Fragment {
                 }
             }
         });
+
 
 
 

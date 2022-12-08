@@ -149,7 +149,12 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
                         }
                     }
                 }
-                // TODO Other filters
+                else if(filterType.equals("near")){ //near 30 km
+                    for(Event event : eventsNotFilteredList){
+
+                    }
+                }
+
                 FilterResults results = new FilterResults();
                 results.values = filteredList;
                 return results;
