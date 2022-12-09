@@ -20,12 +20,11 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.home.recyclerview.EventItemAdapter;
 import com.example.ticketeventapp.model.home.recyclerview.EventsRecyclerView;
-import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnEventListener;
+import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemListener;
 import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.ui.main.mngevents.components.EnablerDialog;
-import com.example.ticketeventapp.ui.main.mngevents.components.PermissionDialog;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -33,7 +32,7 @@ import com.google.android.material.chip.ChipGroup;
 import java.util.List;
 
 
-public class RecyclerViewEventsFragment extends Fragment {
+public class RecyclerViewEventsFragment extends Fragment implements OnItemListener {
 
     private EventsRecyclerView eventsRecyclerView;
     private EventListViewModel eventListViewModel;
@@ -66,7 +65,7 @@ public class RecyclerViewEventsFragment extends Fragment {
         locationGpsAgent = new LocationGpsAgent(activity,permissionManager);
         enablerDialog = new EnablerDialog(activity);
         eventsRecyclerView = new EventsRecyclerView(getActivity());
-        eventsRecyclerView.setRecyclerView(new OnEventListener());
+        eventsRecyclerView.setRecyclerView(this);
 
         eventListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(EventListViewModel.class);
 
@@ -177,4 +176,10 @@ public class RecyclerViewEventsFragment extends Fragment {
     }
 
 
+    @Override
+    public void onItemClick(int position) {
+
+        Event clickedEvent = eventItemAdapter.getItemSelected(position);
+        Log.e("HomeFragment","Clickato"+clickedEvent.getName());
+    }
 }
