@@ -87,4 +87,11 @@ public class EnablerDialog {
         snackbar.show();
     }
 
+    public void showInfoAcquisitionPosition(){
+        Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
+                R.string.load_position,
+                Snackbar.ANIMATION_MODE_SLIDE);
+        snackbar.show();
+    }
+
 }

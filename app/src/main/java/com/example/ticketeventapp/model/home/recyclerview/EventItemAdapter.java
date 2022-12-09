@@ -3,6 +3,7 @@ package com.example.ticketeventapp.model.home.recyclerview;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -15,12 +16,16 @@ import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemListener;
 import com.example.ticketeventapp.model.mng_events.Event;
+import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
+import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -34,6 +39,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
     private List<Event> eventsFilteredList;
     private OnItemListener listener;
     private Filter eventFilter;
+    private EventListViewModel eventListViewModel;
 
 
     public EventItemAdapter(Activity activity,List<Event> eventList, OnItemListener listener){
@@ -42,6 +48,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
         this.activity = activity;
         this.listener = listener;
         this.createFilter();
+        eventListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(EventListViewModel.class);
     }
 
     @NonNull
@@ -150,8 +157,22 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
                     }
                 }
                 else if(filterType.equals("near")){ //near 30 km
+                    Location userPosition = eventListViewModel.getLocationLiveData().getValue();
                     for(Event event : eventsNotFilteredList){
-
+                        String latitude = event.getLatitude();
+                        String longitude = event.getLongitude();
+                        if(!latitude.isEmpty() && !longitude.isEmpty() && userPosition!=null){
+                            Location location = new Location("");
+                            location.setLatitude(Double.parseDouble(latitude));
+                            location.setLongitude(Double.parseDouble(longitude));
+                            Double distance = LocationGpsAgent.getDistanceKmBetweenLocations(userPosition,location);
+                            if(distance <= 30){ //if distance is less than 30 kilometers
+                                filteredList.add(event);
+                            }
+                        }
+                        else{
+                            Log.e("HomeFragment","Salto evento");
+                        }
                     }
                 }
 

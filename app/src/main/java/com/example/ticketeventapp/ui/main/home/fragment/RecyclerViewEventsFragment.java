@@ -149,6 +149,7 @@ public class RecyclerViewEventsFragment extends Fragment {
                 if(isChecked){
                     if(permissionManager.isPermissionGPSAllowed()){
                         if(locationGpsAgent.isTurnedOnGPS()){
+                            enablerDialog.showInfoAcquisitionPosition();
                             locationGpsAgent.startLocationUpdates();
                         } else {
                             enablerDialog.askTurnOnGPS();
@@ -165,7 +166,7 @@ public class RecyclerViewEventsFragment extends Fragment {
             public void onChanged(Location location) {
                 //Continue to filter list
                 Log.e("HomeFragment","Location restituita"+location.toString());
-                //eventItemAdapter.getFilter().filter("near");
+                eventItemAdapter.getFilter().filter("near");
             }
         });
 
