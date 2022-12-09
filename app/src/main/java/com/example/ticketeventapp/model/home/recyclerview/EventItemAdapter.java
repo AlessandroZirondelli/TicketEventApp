@@ -26,6 +26,7 @@ import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemL
 import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -74,12 +75,14 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
             holder.placeImageView.setImageBitmap(bitmap);*/
 
             //My solution below
-            try {
+            /*try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), Uri.parse(image_uri)); //
                 holder.set_event_photo_bitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
+
+            Picasso.get().load(Uri.parse(image_uri)).into(holder.event_photo);
         }
 
     }

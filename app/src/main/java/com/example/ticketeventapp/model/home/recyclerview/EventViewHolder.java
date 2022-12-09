@@ -15,7 +15,7 @@ import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemL
 
 public class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    private ImageView event_photo;
+    public ImageView event_photo;
     private TextView event_name;
     private TextView event_date;
     private TextView event_time;

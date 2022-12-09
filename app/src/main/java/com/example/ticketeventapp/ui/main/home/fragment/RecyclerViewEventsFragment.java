@@ -32,6 +32,7 @@ import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -78,9 +79,25 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
         eventListViewModel.getEventsLiveData().observe((LifecycleOwner) activity, new Observer<List<Event>>() {
             @Override
             public void onChanged(List<Event> eventList) {
+                Log.e("HomeFragment","Chiamato");
+                eventItemAdapter.notifyDataSetChanged();
                 eventItemAdapter.setData(eventList);
+
             }
         });
+        /*List<Event> list = new ArrayList<>();
+        list.add(new Event("sjssj","ssj","sjsjsj","sssj","ssj","sksksk","content://media/external/images/media/334","",""));
+        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
+        list.add(new Event("sscscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
+        list.add(new Event("cscs","ssj","sjsjsj","sssj","ssj","sksksk","content://media/external/images/media/334","",""));
+        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
+        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
+        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
+        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
+        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
+        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
+        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
+        eventItemAdapter.setData(list);*/
 
         chipGroup = view.findViewById(R.id.chip_group_filter);
         chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
