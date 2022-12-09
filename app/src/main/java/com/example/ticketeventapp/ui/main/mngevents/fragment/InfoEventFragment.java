@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.ui.main.mngevents.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.ui.main.home.fragment.HomeFragment;
+import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -57,6 +62,15 @@ public class InfoEventFragment extends Fragment {
         button.setText(R.string.join_event);
         this.disableFocusOnEditText();
 
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                Log.e("HomeFragment","Indietro");
+                //getFragmentManager().popBackStack();
+                Utilities.insertFragment((AppCompatActivity) getActivity(),new HomeFragment(),HomeFragment.class.getSimpleName());
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
     }
 
 
