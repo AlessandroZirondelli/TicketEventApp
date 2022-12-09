@@ -17,6 +17,7 @@ public class EventListViewModel extends AndroidViewModel {
 
     private LiveData<List<Event>> eventItems;
     private MutableLiveData<Location> location;
+    private MutableLiveData<Event> selectedEventItem;
 
     private TicketEventAppRepository repository;
 
@@ -25,6 +26,7 @@ public class EventListViewModel extends AndroidViewModel {
         repository = new TicketEventAppRepository(application);
         eventItems = repository.getEventsLiveData();
         location = new MutableLiveData<>();
+        selectedEventItem = new MutableLiveData<>();
     }
 
     public LiveData<List<Event>> getEventsLiveData(){
@@ -37,5 +39,17 @@ public class EventListViewModel extends AndroidViewModel {
 
     public LiveData<Location> getLocationLiveData(){
         return this.location;
+    }
+
+    public void setSelectedEventItem(Event selectedEventItem) {
+        this.selectedEventItem.setValue(selectedEventItem);
+    }
+
+    public LiveData<Event> getSelectedEventItem(){
+        return selectedEventItem;
+    }
+
+    public void clearSelectedItem() {
+        this.selectedEventItem.setValue(null);
     }
 }

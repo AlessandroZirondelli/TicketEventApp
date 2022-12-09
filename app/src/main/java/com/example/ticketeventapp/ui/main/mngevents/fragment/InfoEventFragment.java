@@ -11,8 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class InfoEventFragment extends Fragment {
@@ -27,6 +29,7 @@ public class InfoEventFragment extends Fragment {
     private TextInputEditText event_time;
     private TextInputEditText event_price;
     private Button button;
+    private EventListViewModel eventListViewModel;
 
 
     @Nullable
@@ -39,6 +42,7 @@ public class InfoEventFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        eventListViewModel = new ViewModelProvider(getActivity()).get(EventListViewModel.class);
         fragment_title = view.findViewById(R.id.info_add_event);
         event_photo = view.findViewById(R.id.event_icon_image_view);
         event_name = view.findViewById(R.id.event_name_text_input_edit_text);

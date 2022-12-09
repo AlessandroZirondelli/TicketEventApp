@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
@@ -25,6 +26,8 @@ import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.ui.main.mngevents.components.EnablerDialog;
+import com.example.ticketeventapp.ui.main.mngevents.fragment.InfoEventFragment;
+import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -68,6 +71,7 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
         eventsRecyclerView.setRecyclerView(this);
 
         eventListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(EventListViewModel.class);
+        eventListViewModel.clearSelectedItem();
 
         eventItemAdapter = eventsRecyclerView.getEventItemAdapter();
 
@@ -169,6 +173,16 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             }
         });
 
+        eventListViewModel.getSelectedEventItem().observe(getActivity(), new Observer<Event>() {
+            @Override
+            public void onChanged(Event event) {
+                /*if(AppInfo.getInstance().getLoggedUser().getType()){
+        }*/     if(event!=null){
+                    Utilities.insertFragment((AppCompatActivity) activity, new InfoEventFragment(), InfoEventFragment.class.getSimpleName());
+                }
+            }
+        });
+
 
 
 
@@ -178,8 +192,7 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
 
     @Override
     public void onItemClick(int position) {
-
         Event clickedEvent = eventItemAdapter.getItemSelected(position);
-        Log.e("HomeFragment","Clickato"+clickedEvent.getName());
+        eventListViewModel.setSelectedEventItem(clickedEvent);
     }
 }
