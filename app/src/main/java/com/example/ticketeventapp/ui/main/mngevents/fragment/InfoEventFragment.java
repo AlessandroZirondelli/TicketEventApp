@@ -1,6 +1,10 @@
 package com.example.ticketeventapp.ui.main.mngevents.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +17,18 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.ui.main.home.fragment.HomeFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.io.IOException;
 
 public class InfoEventFragment extends Fragment {
 
@@ -61,6 +69,7 @@ public class InfoEventFragment extends Fragment {
         fragment_title.setText(R.string.info_event);
         button.setText(R.string.join_event);
         this.disableFocusOnEditText();
+        setFields();
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
@@ -81,5 +90,32 @@ public class InfoEventFragment extends Fragment {
         this.event_date.setFocusable(false);
         this.event_time.setFocusable(false);
         this.event_price.setFocusable(false);
+    }
+
+    private void setFields(){
+        Event selectedEvent = eventListViewModel.getSelectedEventItem().getValue();
+
+        this.event_name.setText(selectedEvent.getName());
+        this.event_date.setText(selectedEvent.getDate());
+        this.event_place.setText(selectedEvent.getPlace());
+        this.event_price.setText(selectedEvent.getPrice());
+        this.event_time.setText(selectedEvent.getTime());
+        this.event_description.setText(selectedEvent.getDescription());
+
+        String image_uri = selectedEvent.getImageUri();
+        if(image_uri.contains("add_photo_alternate")){
+            Drawable drawable = AppCompatResources.getDrawable(getActivity(), getActivity().getResources().getIdentifier(image_uri,"drawable",getActivity().getPackageName()));
+            this.event_photo.setImageDrawable(drawable);
+        } else { //User loaded a photo
+            /*Bitmap bitmap = Utilities.getImageBitmap(activity, Uri.parse(image));
+            holder.placeImageView.setImageBitmap(bitmap);*/
+            //My solution below
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.parse(image_uri)); //
+                this.event_photo.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
