@@ -27,6 +27,7 @@ import com.example.ticketeventapp.ui.main.home.fragment.HomeFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.textfield.TextInputEditText;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -110,12 +111,15 @@ public class InfoEventFragment extends Fragment {
             /*Bitmap bitmap = Utilities.getImageBitmap(activity, Uri.parse(image));
             holder.placeImageView.setImageBitmap(bitmap);*/
             //My solution below
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.parse(image_uri)); //
-                this.event_photo.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.parse(image_uri)); //
+
+                //this.event_photo.setImageBitmap(bitmap);
+            Picasso.get().load(Uri.parse(image_uri)).fit().centerCrop()
+                        .placeholder(R.drawable.add_photo_alternate)
+                        .into(this.event_photo);
+
+
         }
     }
 }

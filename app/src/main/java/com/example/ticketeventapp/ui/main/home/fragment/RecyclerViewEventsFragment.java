@@ -80,7 +80,7 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             @Override
             public void onChanged(List<Event> eventList) {
                 Log.e("HomeFragment","Chiamato");
-                eventItemAdapter.notifyDataSetChanged();
+                //eventItemAdapter.notifyDataSetChanged();
                 eventItemAdapter.setData(eventList);
 
             }
