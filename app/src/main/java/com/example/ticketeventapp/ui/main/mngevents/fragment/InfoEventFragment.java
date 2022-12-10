@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.ui.main.mngevents.fragment;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,7 +57,7 @@ public class InfoEventFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        view.setBackgroundColor(Color.WHITE); // Add background color beacause it's transparent
         eventListViewModel = new ViewModelProvider(getActivity()).get(EventListViewModel.class);
         fragment_title = view.findViewById(R.id.info_add_event);
         event_photo = view.findViewById(R.id.event_icon_image_view);
@@ -71,16 +73,6 @@ public class InfoEventFragment extends Fragment {
         button.setText(R.string.join_event);
         this.disableFocusOnEditText();
         setFields();
-
-        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-            @Override
-            public void handleOnBackPressed() {
-                Log.e("HomeFragment","Indietro");
-                //getFragmentManager().popBackStack();
-                Utilities.insertFragment((AppCompatActivity) getActivity(),new HomeFragment(),HomeFragment.class.getSimpleName());
-            }
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
     }
 
 
@@ -108,13 +100,6 @@ public class InfoEventFragment extends Fragment {
             Drawable drawable = AppCompatResources.getDrawable(getActivity(), getActivity().getResources().getIdentifier(image_uri,"drawable",getActivity().getPackageName()));
             this.event_photo.setImageDrawable(drawable);
         } else { //User loaded a photo
-            /*Bitmap bitmap = Utilities.getImageBitmap(activity, Uri.parse(image));
-            holder.placeImageView.setImageBitmap(bitmap);*/
-            //My solution below
-
-                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.parse(image_uri)); //
-
-                //this.event_photo.setImageBitmap(bitmap);
             Picasso.get().load(Uri.parse(image_uri)).fit().centerCrop()
                         .placeholder(R.drawable.add_photo_alternate)
                         .into(this.event_photo);

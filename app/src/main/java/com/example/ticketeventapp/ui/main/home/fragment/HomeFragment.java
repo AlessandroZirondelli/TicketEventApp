@@ -2,6 +2,7 @@ package com.example.ticketeventapp.ui.main.home.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +27,15 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
-        bottomBarEventsUserFragment = new BottomBarEventsUserFragment();
+        //bottomBarEventsUserFragment = new BottomBarEventsUserFragment();
         recyclerViewEventsFragment = new RecyclerViewEventsFragment();
         //Utilities.insertHomeFragment((AppCompatActivity) getActivity(), bottomBarEventsUserFragment, BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar,this);
-        Utilities.insertHomeFragment((AppCompatActivity) getActivity(), recyclerViewEventsFragment,RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view,this);
-        Utilities.insertHomeFragment((AppCompatActivity) getActivity(), new BottomBarEventsAdminFragment(),BottomBarEventsAdminFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar,this);
+        Log.e("BackStack","OnCreateView Home Fragment");
+        if( savedInstanceState == null){
+            Log.e("BackStack","OnSavedInstance null");
+            Utilities.insertHomeFragment((AppCompatActivity) getActivity(), recyclerViewEventsFragment,RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view,this);
+            Utilities.insertHomeFragment((AppCompatActivity) getActivity(), new BottomBarEventsAdminFragment(),BottomBarEventsAdminFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar,this);
+        }
         return view;
     }
 

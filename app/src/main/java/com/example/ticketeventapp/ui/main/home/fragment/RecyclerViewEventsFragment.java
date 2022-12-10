@@ -85,19 +85,6 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
 
             }
         });
-        /*List<Event> list = new ArrayList<>();
-        list.add(new Event("sjssj","ssj","sjsjsj","sssj","ssj","sksksk","content://media/external/images/media/334","",""));
-        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
-        list.add(new Event("sscscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
-        list.add(new Event("cscs","ssj","sjsjsj","sssj","ssj","sksksk","content://media/external/images/media/334","",""));
-        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
-        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
-        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
-        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
-        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
-        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
-        list.add(new Event("scscs","ssj","sjsjsj","sssj","ssj","sksksk","add_photo_alternate","",""));
-        eventItemAdapter.setData(list);*/
 
         chipGroup = view.findViewById(R.id.chip_group_filter);
         chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
@@ -195,8 +182,9 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             public void onChanged(Event event) {
                 /*if(AppInfo.getInstance().getLoggedUser().getType()){
         }*/     if(event!=null){
-                    Utilities.insertFragment((AppCompatActivity) activity, new InfoEventFragment(), InfoEventFragment.class.getSimpleName());
-                }
+                    // ERRORR!!!!!  Utilities.insertFragment((AppCompatActivity) activity, new InfoEventFragment(), InfoEventFragment.class.getSimpleName());
+                    Utilities.insertInfoDetailFragment((AppCompatActivity) activity,new InfoEventFragment(),InfoEventFragment.class.getSimpleName());
+                 }
             }
         });
 
