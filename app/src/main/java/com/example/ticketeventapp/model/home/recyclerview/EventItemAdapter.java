@@ -82,7 +82,9 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
                 e.printStackTrace();
             }*/
 
-            Picasso.get().load(Uri.parse(image_uri)).into(holder.event_photo);
+            Picasso.get().load(Uri.parse(image_uri)).fit().centerCrop()
+                    .placeholder(R.drawable.add_photo_alternate)
+                    .into(holder.event_photo);
         }
 
     }

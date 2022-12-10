@@ -14,9 +14,9 @@ public class Utilities {
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container_view,fragment, tag);
 
-        /*if(!(fragment instanceof LoginFragment)) {
+        if(!(fragment instanceof LoginFragment)) {
             transaction.addToBackStack(tag);
-        }*/
+        }
         transaction.commit();
 
     }
