@@ -3,6 +3,7 @@ package com.example.ticketeventapp.ui.main.mngevents.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
@@ -81,6 +82,8 @@ public class AddEventFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.setBackgroundColor(Color.WHITE);
+
         activity = getActivity();
         fragment_title = view.findViewById(R.id.info_add_event);
         event_photo = view.findViewById(R.id.event_icon_image_view);

@@ -48,7 +48,9 @@
                 android:value="" />
         </activity>
 
-        <activity android:name=".ui.main.activity.MngEventsActivity" />
+        <activity android:name=".ui.main.activity.MngEventsActivity"
+            android:windowSoftInputMode="adjustPan"
+            />
     </application>
 
 </manifest>

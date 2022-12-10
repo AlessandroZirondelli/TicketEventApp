@@ -15,6 +15,8 @@ import com.example.ticketeventapp.ui.main.mngevents.fragment.AddEventFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import okhttp3.internal.Util;
+
 public class BottomBarEventsAdminFragment extends Fragment {
 
     private FloatingActionButton floatingActionButton;
@@ -33,7 +35,8 @@ public class BottomBarEventsAdminFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utilities.insertFragment((AppCompatActivity) getActivity(), new AddEventFragment(), AddEventFragment.class.getSimpleName());
+                //Utilities.insertFragment((AppCompatActivity) getActivity(), new AddEventFragment(), AddEventFragment.class.getSimpleName());
+                Utilities.insertAddEventFragment((AppCompatActivity) getActivity(), new AddEventFragment(), AddEventFragment.class.getSimpleName());
             }
         });
 

@@ -47,4 +47,15 @@ public class Utilities {
         transaction.commit();
 
     }
+
+    public static void insertAddEventFragment(AppCompatActivity activity, Fragment fragment, String tag){
+        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_container_view,fragment, tag);
+
+        transaction.addToBackStack(tag);
+
+        Log.e("BackStack","Aggiungo fragment:"+fragment.getClass().getSimpleName()+"by insertInfoDetailFragment");
+        transaction.commit();
+
+    }
 }
