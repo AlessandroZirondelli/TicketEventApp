@@ -67,10 +67,17 @@ public class LogUserManager {
 
     }
 
-    public void startLoginSession(String username,String password){
-        User user = new User(username,password);
+    public void startLoginSession(String username, String password){
+        Boolean type = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            type = usersList.stream().filter((user)->user.getUsername().equals(username)).findFirst().get().getType();
+        } else {
+            //TODO
+        }
+        User user = new User(username,password,type);
         appPreferences.setLoggedUser(user);
         appInfo.setLoggedUser(user);
+
     }
 
     public Boolean canDoAutoLogin(){

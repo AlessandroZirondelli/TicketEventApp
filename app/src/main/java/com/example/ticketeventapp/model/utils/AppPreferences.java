@@ -8,6 +8,7 @@ import android.util.Log;
 import com.example.ticketeventapp.model.mng_users.User;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 public class AppPreferences {
 
@@ -26,6 +27,9 @@ public class AppPreferences {
         sharedPreferencesEditor.commit();
         sharedPreferencesEditor.putString("logged_password",user.getPassword());
         sharedPreferencesEditor.commit();
+        sharedPreferencesEditor.putString("logged_type",String.valueOf(user.getType()));
+        sharedPreferencesEditor.commit();
+
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             LocalDate expirationDate = LocalDate.now().plusDays(21); //yyyy-mm-dd
@@ -41,7 +45,8 @@ public class AppPreferences {
     public User getLoggedUser(){
         String username = sharedPreferences.getString("logged_username",null);
         String password = sharedPreferences.getString("logged_password",null);
-        return new User(username,password);
+        Boolean type = Boolean.valueOf(sharedPreferences.getString("logged_type",null));
+        return new User(username,password,type);
     }
 
     public LocalDate getExpirationDate(){
@@ -63,6 +68,7 @@ public class AppPreferences {
 
     public Boolean canDoAutoLogin(){ /*Check if it's possible to do autologin */
         User user = getLoggedUser();
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDate todayDate = LocalDate.now();

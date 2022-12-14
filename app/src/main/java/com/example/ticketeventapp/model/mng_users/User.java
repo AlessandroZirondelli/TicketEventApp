@@ -26,9 +26,10 @@ public class User {
         this.type = type;
     }
     @Ignore
-    public User(String username,String password){
+    public User(String username,String password, Boolean type){
         this.username = username;
         this.password = password;
+        this.type = type;
     }
 
     public void setId(int id) {
@@ -77,6 +78,11 @@ public class User {
 
     public void setPassword(final String password) {
         this.password = password;
+    }
+
+    @Ignore
+    public Boolean isUser(){
+        return  this.type;
     }
 
     @Override
