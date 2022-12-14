@@ -86,10 +86,10 @@ public class LogUserManager {
 
 
 
-    /*public User getLoggedUser(){
+    public User getLoggedUser(){
         return appPreferences.getLoggedUser();
     }
-
+/*
     public LocalDate getExpirationDateLogin(){
         return appPreferences.getExpirationDate();
     }*/

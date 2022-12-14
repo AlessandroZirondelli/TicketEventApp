@@ -31,7 +31,7 @@ public class MngEventsActivity extends AppCompatActivity {
         }
         appInfo = AppInfo.getInstance();
         addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
-        Log.e("MngEventsActivity","Logged User:"+appInfo.getLoggedUser().getUsername());
+        //Log.e("MngEventsActivity","Logged User:"+appInfo.getLoggedUser().getUsername());
 
     }
 

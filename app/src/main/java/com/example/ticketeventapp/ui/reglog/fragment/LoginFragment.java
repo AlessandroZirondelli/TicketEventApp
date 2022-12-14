@@ -115,6 +115,7 @@ public class LoginFragment extends Fragment {
                         //redirect to activity with home
                         Log.e("LoginFragment","Login corretto");
                         logUserManager.startLoginSession(username_string,password_string);
+                        Log.e("Login","Utente che si stya loggamdo: "+logUserManager.getLoggedUser().getUsername());
                         Intent intent = new Intent(getActivity(), MngEventsActivity.class); //esplicitiamo la classe che andiamo a richiamare
                         getActivity().startActivity(intent);
 

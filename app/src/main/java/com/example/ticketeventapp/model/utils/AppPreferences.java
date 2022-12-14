@@ -23,30 +23,40 @@ public class AppPreferences {
     }
 
     public void setLoggedUser(User user){
-        sharedPreferencesEditor.putString("logged_username", user.getUsername());
-        sharedPreferencesEditor.commit();
-        sharedPreferencesEditor.putString("logged_password",user.getPassword());
-        sharedPreferencesEditor.commit();
-        sharedPreferencesEditor.putString("logged_type",String.valueOf(user.getType()));
-        sharedPreferencesEditor.commit();
-
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            LocalDate expirationDate = LocalDate.now().plusDays(21); //yyyy-mm-dd
-            sharedPreferencesEditor.putString("logged_expiration",expirationDate.toString());
-            sharedPreferencesEditor.commit();
-            Log.e("LoginFragment","Expiration date aggiunta");
-        } else {
-            //TODO
+        if(this.getLoggedUser() != null){
+            Log.e("Login","Utente già presente in shared preferences"+ this.getLoggedUser().getUsername());
+            this.logoutUser();
         }
-        appInfo.setLoggedUser(user);
+            sharedPreferencesEditor.putString("logged_username", user.getUsername());
+            sharedPreferencesEditor.apply();
+            sharedPreferencesEditor.putString("logged_password",user.getPassword());
+            sharedPreferencesEditor.apply();
+            sharedPreferencesEditor.putString("logged_type",String.valueOf(user.getType()));
+            sharedPreferencesEditor.apply();
+
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                LocalDate expirationDate = LocalDate.now().plusDays(21); //yyyy-mm-dd
+                sharedPreferencesEditor.putString("logged_expiration",expirationDate.toString());
+                sharedPreferencesEditor.apply();
+                Log.e("LoginFragment","Expiration date aggiunta");
+            } else {
+                //TODO
+            }
+            appInfo.setLoggedUser(user);
+
     }
 
     public User getLoggedUser(){
         String username = sharedPreferences.getString("logged_username",null);
         String password = sharedPreferences.getString("logged_password",null);
         Boolean type = Boolean.valueOf(sharedPreferences.getString("logged_type",null));
-        return new User(username,password,type);
+        if(!username.isEmpty() && !password.isEmpty() && type!=null){
+            return new User(username,password,type);
+        } else {
+            return null;
+        }
+
     }
 
     public LocalDate getExpirationDate(){
@@ -72,15 +82,15 @@ public class AppPreferences {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDate todayDate = LocalDate.now();
-            if(user.getUsername()==null || user.getUsername()== null || getExpirationDate()==null ){
+            if(user == null || user.getUsername()==null || user.getUsername()== null || getExpirationDate()==null ){
                 return false;
             }
             if(!user.getUsername().isEmpty() && !user.getPassword().isEmpty() && !todayDate.isAfter(getExpirationDate()) ){
                 return true;
             }
             //Expiration date or username/password not saved in shared preferences
-            sharedPreferencesEditor.clear();
-            sharedPreferencesEditor.commit();
+            Log.e("Login","Pulisco sharedPreferences");
+            this.logoutUser();
             return false;
         }
         else{
@@ -88,6 +98,12 @@ public class AppPreferences {
             //TODO
         }
 
+    }
+
+    public void logoutUser(){
+        appInfo.setLoggedUser(null);
+        sharedPreferencesEditor.clear();
+        sharedPreferencesEditor.apply();
     }
 
 
