@@ -47,4 +47,12 @@ public class TicketEventAppRepository {
         });
     }
 
+    public void updateEvent(Event event){
+        TicketEventAppDatabase.executor.execute(new Runnable() {
+
+            @Override
+            public void run() { ticketEventAppDAO.updateEvent(event);}
+        });
+    }
+
 }

@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_users.User;
@@ -28,6 +29,9 @@ public interface TicketEventAppDAO {
     @Transaction
     @Query("SELECT * FROM event")
     LiveData<List<Event>> getEventsLiveData();
+
+    @Update
+    void updateEvent(Event event);
 
 
 
