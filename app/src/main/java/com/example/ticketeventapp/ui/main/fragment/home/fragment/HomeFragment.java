@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.ui.main.fragment.home.fragment;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.fragment.app.Fragment;
 
 import com.example.ticketeventapp.R;
@@ -35,6 +38,15 @@ public class HomeFragment extends Fragment {
             }
 
             
+        }
+
+        int orientation = this.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // code for landscape mode
+            Guideline guideLine = (Guideline) view.findViewById(R.id.guideline_bottom_bar);
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideLine.getLayoutParams();
+            params.guidePercent = 0.80f; // 45% // range: 0 <-> 1
+            guideLine.setLayoutParams(params);
         }
         return view;
     }
