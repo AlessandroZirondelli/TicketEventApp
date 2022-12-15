@@ -73,7 +73,7 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
         eventsRecyclerView.setRecyclerView(this);
 
         eventListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(EventListViewModel.class);
-        eventListViewModel.clearSelectedItem();
+        //eventListViewModel.clearSelectedItem();
 
         eventItemAdapter = eventsRecyclerView.getEventItemAdapter();
 

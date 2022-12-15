@@ -1,5 +1,6 @@
 package com.example.ticketeventapp.ui.main.fragment.mngevents.fragment;
 
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -59,7 +62,10 @@ public class InfoEventFragment extends Fragment {
         event_price = view.findViewById(R.id.event_price_text_input_edit_text);
         button = view.findViewById(R.id.add_event_button);
 
-        fragment_title.setText(R.string.info_event);
+        int orientation = this.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            fragment_title.setText(R.string.info_event);
+        }
         button.setText(R.string.join_event);
         this.disableFocusOnEditText();
         setFields();
