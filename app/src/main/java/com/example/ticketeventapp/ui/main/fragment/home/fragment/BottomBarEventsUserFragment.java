@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.ui.main.home.fragment;
+package com.example.ticketeventapp.ui.main.fragment.home.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

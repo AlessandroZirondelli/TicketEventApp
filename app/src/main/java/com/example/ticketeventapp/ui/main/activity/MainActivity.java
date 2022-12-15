@@ -11,11 +11,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.utils.AppInfo;
-import com.example.ticketeventapp.ui.main.home.fragment.HomeFragment;
+import com.example.ticketeventapp.ui.main.fragment.home.fragment.HomeFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 
-public class MngEventsActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private AddEventViewModel addEventViewModel;
     private AppInfo appInfo;

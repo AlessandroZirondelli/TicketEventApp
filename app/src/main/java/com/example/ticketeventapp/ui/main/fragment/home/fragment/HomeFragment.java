@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.ui.main.home.fragment;
+package com.example.ticketeventapp.ui.main.fragment.home.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;

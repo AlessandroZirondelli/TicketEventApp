@@ -20,7 +20,7 @@ import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.mng_users.LogUserManager;
 import com.example.ticketeventapp.model.mng_users.User;
 import com.example.ticketeventapp.model.utils.AppInfo;
-import com.example.ticketeventapp.ui.main.activity.MngEventsActivity;
+import com.example.ticketeventapp.ui.main.activity.MainActivity;
 import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.google.android.material.textfield.TextInputEditText;
@@ -90,7 +90,7 @@ public class LoginFragment extends Fragment {
             Log.e("LoginFragment","Auto login possibile");
             AppInfo appInfo = AppInfo.getInstance();
             appInfo.setLoggedUser(logUserManager.appPreferences.getLoggedUser());
-            Intent intent = new Intent(getActivity(), MngEventsActivity.class); //esplicitiamo la classe che andiamo a richiamare
+            Intent intent = new Intent(getActivity(), MainActivity.class); //esplicitiamo la classe che andiamo a richiamare
             this.startActivity(intent);
         }else{
             Log.e("LoginFragment","Auto login NON possibile");
@@ -115,7 +115,7 @@ public class LoginFragment extends Fragment {
 
                         logUserManager.startLoginSession(username_string,password_string);
                         Log.e("Login","Utente che si stya loggamdo: "+logUserManager.getLoggedUser().getUsername());
-                        Intent intent = new Intent(getActivity(), MngEventsActivity.class); //esplicitiamo la classe che andiamo a richiamare
+                        Intent intent = new Intent(getActivity(), MainActivity.class); //esplicitiamo la classe che andiamo a richiamare
                         getActivity().startActivity(intent);
                     }
                 }

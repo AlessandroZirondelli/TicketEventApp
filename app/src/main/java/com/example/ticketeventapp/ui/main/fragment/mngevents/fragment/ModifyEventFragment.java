@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.ui.main.mngevents.fragment;
+package com.example.ticketeventapp.ui.main.fragment.mngevents.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -30,11 +30,12 @@ import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.model.mng_events.NetworkAgent;
 import com.example.ticketeventapp.model.utils.PermissionManager;
-import com.example.ticketeventapp.ui.main.mngevents.components.DatePicker;
-import com.example.ticketeventapp.ui.main.mngevents.components.EnablerDialog;
-import com.example.ticketeventapp.ui.main.mngevents.components.PermissionDialog;
-import com.example.ticketeventapp.ui.main.mngevents.components.TimePicker;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.components.PermissionDialog;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.components.DatePicker;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.components.TimePicker;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
+import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 
@@ -43,9 +44,10 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddEventFragment extends Fragment {
+public class ModifyEventFragment extends Fragment {
 
     private AddEventViewModel addEventViewModel;
+    private EventListViewModel eventListViewModel;
 
     private TextView fragment_title;
     private ImageView event_photo;
@@ -70,6 +72,8 @@ public class AddEventFragment extends Fragment {
 
     private Activity activity;
 
+    private Boolean locationChanged;
+
 
 
 
@@ -85,6 +89,8 @@ public class AddEventFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         view.setBackgroundColor(Color.WHITE);
 
+        locationChanged = false;
+
         activity = getActivity();
         fragment_title = view.findViewById(R.id.info_add_event);
         event_photo = view.findViewById(R.id.event_icon_image_view);
@@ -96,18 +102,46 @@ public class AddEventFragment extends Fragment {
         event_price = view.findViewById(R.id.event_price_text_input_edit_text);
         button = view.findViewById(R.id.add_event_button);
 
+        button.setText(R.string.modify_event);
+
         addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
         addEventViewModel.clearData();
+
         addEventManager = new AddEventManager();
+
+        eventListViewModel = new ViewModelProvider(getActivity()).get(EventListViewModel.class);
 
         datePicker = new DatePicker(getActivity().getSupportFragmentManager(),addEventViewModel,event_date);
         timePicker = new TimePicker(getActivity().getSupportFragmentManager(),addEventViewModel, event_time);
 
         event_date.setFocusable(false);
         event_time.setFocusable(false);
-        
+
+        Event selectedEvent = eventListViewModel.getSelectedEventItem().getValue();
+        if( selectedEvent !=null){
+            event_name.setText(selectedEvent.getName());
+            this.event_name.setText(selectedEvent.getName());
+            this.event_date.setText(selectedEvent.getDate());
+            this.event_place.setText(selectedEvent.getPlace());
+            this.event_price.setText(selectedEvent.getPrice());
+            this.event_time.setText(selectedEvent.getTime());
+            this.event_description.setText(selectedEvent.getDescription());
+
+            String image_uri = selectedEvent.getImageUri();
+            if(image_uri.contains("add_photo_alternate")){
+                Drawable drawable = AppCompatResources.getDrawable(getActivity(), getActivity().getResources().getIdentifier(image_uri,"drawable",getActivity().getPackageName()));
+                this.event_photo.setImageDrawable(drawable);
+            } else { //User loaded a photo
+                Picasso.get().load(Uri.parse(image_uri)).fit().centerCrop()
+                        .placeholder(R.drawable.add_photo_alternate)
+                        .into(this.event_photo);
+
+            }
+            addEventViewModel.setData(selectedEvent.getImageUri(),selectedEvent.getDate(),selectedEvent.getTime(),selectedEvent.getLatitude(),selectedEvent.getLongitude(),selectedEvent.getPlace());
+        }
 
 
+        Log.e("Modify",addEventViewModel.getImageURI().getValue()+"  "+addEventViewModel.getSelectedTime().getValue());
 
 
         permissionManager = new PermissionManager(getActivity(),this);
@@ -157,17 +191,6 @@ public class AddEventFragment extends Fragment {
             }
         });
 
-        /*addEventViewModel.getIsPermissionGPSAllowed().observe(getActivity(), new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean isPermissionGPSAllowed) {
-                if(!isPermissionGPSAllowed){
-                    permissionDialog.showInfoDeniedPermissionGPS();
-
-                }
-                Log.e("AddEventFragment","Permessi cambiati in: "+ isPermissionGPSAllowed);
-            }
-        });*/
-
         addEventViewModel.getIsTurnedOnGPS().observe(getActivity(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isTurnedOnGPS) {
@@ -182,6 +205,7 @@ public class AddEventFragment extends Fragment {
             @Override
             public void onChanged(Location location) {
                 if(location != null){
+                    locationChanged = true;
                     event_place.setText(location.getLatitude()+ "  "+location.getLongitude());
                     Log.e("AddEventFragment",location.getLatitude()+" "+location.getLongitude());
                     networkAgent.createRequestQueue();
@@ -300,7 +324,13 @@ public class AddEventFragment extends Fragment {
                         }
                         String latitude = "";
                         String longitude = "";
+
+                        if(!locationChanged && !event_place.getText().equals(selectedEvent.getPlace()) ){
+                            addEventViewModel.setPosition(null);
+                        }
+
                         Location position = addEventViewModel.getPosition().getValue();
+
                         if(position != null){
                             Log.e("AddEventFragment","Trovate coordinate");
                             latitude = String.valueOf(position.getLatitude());
@@ -309,11 +339,13 @@ public class AddEventFragment extends Fragment {
 
 
                         Event event = new Event(name,description,date,time,place,price, imageUri,latitude,longitude);
-                        Log.e("AddEventFragment","value uri evento:"+event.getImageUri());
-                        addEventViewModel.addEvent(event);
+                        event.setId(selectedEvent.getId());
+                        Log.e("Modify","Modifico evento");
+                        addEventViewModel.editEvent(event);
+                        Log.e("id",""+event.getId());
                         Log.e("AddEventFragment","Inserimento evento effettuato");
                         getFragmentManager().popBackStack();
-
+                        eventListViewModel.clearSelectedItem();
                     }
                 }
             }

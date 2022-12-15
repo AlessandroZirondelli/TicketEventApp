@@ -3,7 +3,6 @@ package com.example.ticketeventapp.model.utils;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.util.Log;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -13,8 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
-import com.example.ticketeventapp.ui.main.mngevents.components.EnablerDialog;
-import com.example.ticketeventapp.ui.main.mngevents.components.PermissionDialog;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.components.PermissionDialog;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 
 public class PermissionManager {

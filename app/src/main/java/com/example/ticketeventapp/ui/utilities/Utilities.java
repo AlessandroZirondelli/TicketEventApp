@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.ui.main.home.fragment.HomeFragment;
+import com.example.ticketeventapp.ui.main.fragment.home.fragment.HomeFragment;
 import com.example.ticketeventapp.ui.reglog.fragment.LoginFragment;
 
 

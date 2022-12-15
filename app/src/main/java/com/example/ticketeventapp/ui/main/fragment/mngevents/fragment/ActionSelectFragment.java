@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.ui.main.mngevents.fragment;
+package com.example.ticketeventapp.ui.main.fragment.mngevents.fragment;
 
 import android.app.Activity;
 import android.graphics.Color;

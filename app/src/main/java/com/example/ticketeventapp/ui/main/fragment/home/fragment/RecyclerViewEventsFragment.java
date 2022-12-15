@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.ui.main.home.fragment;
+package com.example.ticketeventapp.ui.main.fragment.home.fragment;
 
 import android.app.Activity;
 import android.location.Location;
@@ -26,9 +26,9 @@ import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.model.utils.AppInfo;
 import com.example.ticketeventapp.model.utils.PermissionManager;
-import com.example.ticketeventapp.ui.main.mngevents.components.EnablerDialog;
-import com.example.ticketeventapp.ui.main.mngevents.fragment.ActionSelectFragment;
-import com.example.ticketeventapp.ui.main.mngevents.fragment.InfoEventFragment;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.fragment.ActionSelectFragment;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.fragment.InfoEventFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.chip.Chip;
