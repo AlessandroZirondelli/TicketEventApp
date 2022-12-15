@@ -25,7 +25,7 @@ public class Utilities {
 
     }
 
-    public static void insertHomeFragment(AppCompatActivity activity, Fragment fragment, String tag, int fragmentContainerResId, Fragment hostFragment ){
+    public static void replaceFragmentInHomeFragment(AppCompatActivity activity, Fragment fragment, String tag, int fragmentContainerResId, Fragment hostFragment ){
         //host fragment will bve HomeFragment.
         //getChildFragmentManager return fragment manager of hostFragment. So it manages transaction of child fragments
         //It works also with getSupportFragmentManager
@@ -37,7 +37,7 @@ public class Utilities {
         Log.e("BackStack","Aggiungo fragment:"+fragment.getClass().getSimpleName()+"by InsertHomeragment");
     }
 
-    public static void insertInfoDetailFragment(AppCompatActivity activity, Fragment fragment, String tag){
+    public static void addFragmentOn(AppCompatActivity activity, Fragment fragment, String tag){
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_container_view,fragment, tag);
 
@@ -48,14 +48,4 @@ public class Utilities {
 
     }
 
-    public static void insertAddEventFragment(AppCompatActivity activity, Fragment fragment, String tag){
-        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_container_view,fragment, tag);
-
-        transaction.addToBackStack(tag);
-
-        Log.e("BackStack","Aggiungo fragment:"+fragment.getClass().getSimpleName()+"by insertInfoDetailFragment");
-        transaction.commit();
-
-    }
 }

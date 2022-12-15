@@ -1,5 +1,6 @@
 package com.example.ticketeventapp.ui.main.mngevents.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,5 +20,9 @@ public class ActionSelectFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_action_select, container, false);
     }
 
-
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        view.setBackgroundColor(Color.WHITE); // Add background color beacause it's transparent
+    }
 }

@@ -24,15 +24,16 @@ import com.example.ticketeventapp.model.home.recyclerview.EventsRecyclerView;
 import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemListener;
 import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
+import com.example.ticketeventapp.model.utils.AppInfo;
 import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.ui.main.mngevents.components.EnablerDialog;
+import com.example.ticketeventapp.ui.main.mngevents.fragment.ActionSelectFragment;
 import com.example.ticketeventapp.ui.main.mngevents.fragment.InfoEventFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -180,10 +181,12 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
         eventListViewModel.getSelectedEventItem().observe(getActivity(), new Observer<Event>() {
             @Override
             public void onChanged(Event event) {
-                /*if(AppInfo.getInstance().getLoggedUser().getType()){
-        }*/     if(event!=null){
-                    // ERRORR!!!!!  Utilities.insertFragment((AppCompatActivity) activity, new InfoEventFragment(), InfoEventFragment.class.getSimpleName());
-                    Utilities.insertInfoDetailFragment((AppCompatActivity) activity,new InfoEventFragment(),InfoEventFragment.class.getSimpleName());
+                 if(event!=null){
+                     if(AppInfo.getInstance().getLoggedUser().isUser()){
+                         Utilities.addFragmentOn((AppCompatActivity) activity,new InfoEventFragment(),InfoEventFragment.class.getSimpleName());
+                     } else {
+                         Utilities.addFragmentOn((AppCompatActivity) activity,new ActionSelectFragment(),ActionSelectFragment.class.getSimpleName());
+                     }
                  }
             }
         });

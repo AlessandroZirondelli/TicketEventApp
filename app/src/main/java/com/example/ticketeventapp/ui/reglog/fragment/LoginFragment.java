@@ -110,27 +110,29 @@ public class LoginFragment extends Fragment {
                     int resCredentials = logUserManager.areCorrectCredentials(username_string,password_string);
                     if(resCredentials != 0){
                         enableCredentialsError(resCredentials);
-                        Log.e("LoginFragment","Login non corretto");
                     } else{ //correct credentials
                         //redirect to activity with home
-                        Log.e("LoginFragment","Login corretto");
+
                         logUserManager.startLoginSession(username_string,password_string);
                         Log.e("Login","Utente che si stya loggamdo: "+logUserManager.getLoggedUser().getUsername());
                         Intent intent = new Intent(getActivity(), MngEventsActivity.class); //esplicitiamo la classe che andiamo a richiamare
                         getActivity().startActivity(intent);
-
                     }
                 }
-
-                /*Log.e("LoginFragment","username:"+logUserManager.getLoggedUser().getUsername()+" password:"+logUserManager.getLoggedUser().getPassword());
-                Log.e("LoginFragment","Expiration date is:"+logUserManager.getExpirationDateLogin());*/
 
             }
         });
 
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        username.setText("");
+        password.setText("");
+        username.clearFocus();
+        password.clearFocus();
+    }
 
     private void enableEmptyFieldError(int field){
         Map<Integer,TextInputEditText> map = createMapIntegerErrorTextFields();
