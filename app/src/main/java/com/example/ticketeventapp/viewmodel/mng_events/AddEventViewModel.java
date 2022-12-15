@@ -3,6 +3,7 @@ package com.example.ticketeventapp.viewmodel.mng_events;
 import android.app.Application;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -46,6 +47,10 @@ public class AddEventViewModel extends AndroidViewModel {
 
     public void addEvent(Event event){
         repository.addEvent(event);
+    }
+
+    public void editEvent(Event event){
+        repository.updateEvent(event);
     }
 
 
@@ -106,6 +111,24 @@ public class AddEventViewModel extends AndroidViewModel {
         this.position.setValue(null);
         this.position_display_name.setValue(null);
 
+    }
+
+    public void setData(String imageUri, String selectedDate, String selectedTime, String positionLatitude, String positionLongitude, String position_display_name ){
+        this.imageURI.setValue(imageUri);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            this.selectedTime.setValue(LocalTime.parse(selectedTime));
+        } else{
+            //TODO
+        }
+        this.selectedDate.setValue(selectedDate);
+        if(this.position.getValue()!=null){
+            Double latitude = Double.parseDouble(positionLatitude);
+            Double longitude = Double.parseDouble(positionLongitude);
+            this.position.setValue(new Location(""));
+            this.position.getValue().setLatitude(latitude);
+            this.position.getValue().setLongitude(longitude);
+        }
+        this.position_display_name.setValue(position_display_name);
     }
 
 }
