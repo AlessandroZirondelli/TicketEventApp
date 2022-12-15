@@ -180,6 +180,75 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
                         }
                     }
                 }
+                else if(filterType.equals("next-near")){ //near 30 km
+                    Location userPosition = eventListViewModel.getLocationLiveData().getValue();
+                    for(Event event : eventsNotFilteredList){
+                        String latitude = event.getLatitude();
+                        String longitude = event.getLongitude();
+                        if(!latitude.isEmpty() && !longitude.isEmpty() && userPosition!=null){
+                            Location location = new Location("");
+                            location.setLatitude(Double.parseDouble(latitude));
+                            location.setLongitude(Double.parseDouble(longitude));
+                            Double distance = LocationGpsAgent.getDistanceKmBetweenLocations(userPosition,location);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                LocalDate eventDate  = LocalDate.parse(event.getDate());
+                                LocalDate today = LocalDate.now();;
+                                if(distance <= 30 && today.isBefore(eventDate)){ //if distance is less than 30 kilometers
+                                    filteredList.add(event);
+                                }
+                            }
+                        }
+                        else{
+                            Log.e("HomeFragment","Salto evento");
+                        }
+                    }
+                }
+                else if(filterType.equals("past-near")){ //near 30 km
+                    Location userPosition = eventListViewModel.getLocationLiveData().getValue();
+                    for(Event event : eventsNotFilteredList){
+                        String latitude = event.getLatitude();
+                        String longitude = event.getLongitude();
+                        if(!latitude.isEmpty() && !longitude.isEmpty() && userPosition!=null){
+                            Location location = new Location("");
+                            location.setLatitude(Double.parseDouble(latitude));
+                            location.setLongitude(Double.parseDouble(longitude));
+                            Double distance = LocationGpsAgent.getDistanceKmBetweenLocations(userPosition,location);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                LocalDate eventDate  = LocalDate.parse(event.getDate());
+                                LocalDate today = LocalDate.now();;
+                                if(distance <= 30 && today.isAfter(eventDate)){ //if distance is less than 30 kilometers
+                                    filteredList.add(event);
+                                }
+                            }
+                        }
+                        else{
+                            Log.e("HomeFragment","Salto evento");
+                        }
+                    }
+                }
+                else if(filterType.equals("current-near")){ //near 30 km
+                    Location userPosition = eventListViewModel.getLocationLiveData().getValue();
+                    for(Event event : eventsNotFilteredList){
+                        String latitude = event.getLatitude();
+                        String longitude = event.getLongitude();
+                        if(!latitude.isEmpty() && !longitude.isEmpty() && userPosition!=null){
+                            Location location = new Location("");
+                            location.setLatitude(Double.parseDouble(latitude));
+                            location.setLongitude(Double.parseDouble(longitude));
+                            Double distance = LocationGpsAgent.getDistanceKmBetweenLocations(userPosition,location);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                LocalDate eventDate  = LocalDate.parse(event.getDate());
+                                LocalDate today = LocalDate.now();;
+                                if(distance <= 30 && today.isEqual(eventDate)){ //if distance is less than 30 kilometers
+                                    filteredList.add(event);
+                                }
+                            }
+                        }
+                        else{
+                            Log.e("HomeFragment","Salto evento");
+                        }
+                    }
+                }
 
                 FilterResults results = new FilterResults();
                 results.values = filteredList;

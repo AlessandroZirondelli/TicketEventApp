@@ -95,6 +95,19 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
                 if(checkedIds.isEmpty()){
                     Log.e("HomeFragment","Vuotooo");
                     eventItemAdapter.getFilter().filter("all");
+                } else {
+                    int countSelectedItems = checkedIds.size();
+                    if(countSelectedItems == 2){
+                        if(chipNear.isChecked() && chipNext.isChecked()){
+                            eventItemAdapter.getFilter().filter("next-near");
+                        }
+                        if(chipNear.isChecked() && chipPast.isChecked()){
+                            eventItemAdapter.getFilter().filter("past-near");
+                        }
+                        if(chipNear.isChecked() && chipCurrent.isChecked()){
+                            eventItemAdapter.getFilter().filter("current-near");
+                        }
+                    }
                 }
             }
         });
@@ -110,13 +123,19 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
                     //Log.e("HomeFragment","Checked");
-                    eventItemAdapter.getFilter().filter("current");
+                    if(chipGroup.getCheckedChipIds().size()==1){
+                        eventItemAdapter.getFilter().filter("current");
+                    }
                     chipPast.setCheckable(false);
                     chipNext.setCheckable(false);
                 } else{
                     //Log.e("HomeFragment","Not checked");
                     chipPast.setCheckable(true);
                     chipNext.setCheckable(true);
+                    if(chipNear.isChecked()){
+                        //enablerDialog.showInfoAcquisitionPosition();
+                        locationGpsAgent.startLocationUpdates();
+                    }
                 }
             }
         });
@@ -126,13 +145,19 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
                     //Log.e("HomeFragment","Checked");
-                    eventItemAdapter.getFilter().filter("next");
+                    if(chipGroup.getCheckedChipIds().size()==1){
+                        eventItemAdapter.getFilter().filter("next");
+                    }
                     chipPast.setCheckable(false);
                     chipCurrent.setCheckable(false);
                 } else{
                     //Log.e("HomeFragment","Not checked");
                     chipPast.setCheckable(true);
                     chipCurrent.setCheckable(true);
+                    if(chipNear.isChecked()){
+                        //enablerDialog.showInfoAcquisitionPosition();
+                        locationGpsAgent.startLocationUpdates();
+                    }
                 }
             }
         });
@@ -141,12 +166,19 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
-                    eventItemAdapter.getFilter().filter("past");
+                    if(chipGroup.getCheckedChipIds().size()==1){
+                        Log.e("Filter","Sono l'unico");
+                        eventItemAdapter.getFilter().filter("past");
+                    }
                     chipNext.setCheckable(false);
                     chipCurrent.setCheckable(false);
                 } else{
                     chipNext.setCheckable(true);
                     chipCurrent.setCheckable(true);
+                    if(chipNear.isChecked()){
+                        //enablerDialog.showInfoAcquisitionPosition();
+                        locationGpsAgent.startLocationUpdates();
+                    }
                 }
             }
         });
@@ -157,13 +189,25 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
                 if(isChecked){
                     if(permissionManager.isPermissionGPSAllowed()){
                         if(locationGpsAgent.isTurnedOnGPS()){
-                            enablerDialog.showInfoAcquisitionPosition();
-                            locationGpsAgent.startLocationUpdates();
+                            if(chipGroup.getCheckedChipIds().size()==1){
+                                enablerDialog.showInfoAcquisitionPosition();
+                                locationGpsAgent.startLocationUpdates();
+                            }
                         } else {
                             enablerDialog.askTurnOnGPS();
                         }
                     }else {
                         permissionManager.launchPermissionRequestGPS();
+                    }
+                } else {
+                    if(chipNext.isChecked()){
+                        eventItemAdapter.getFilter().filter("next");
+                    }
+                    if(chipCurrent.isChecked()){
+                        eventItemAdapter.getFilter().filter("current");
+                    }
+                    if(chipPast.isChecked()){
+                        eventItemAdapter.getFilter().filter("past");
                     }
                 }
             }
