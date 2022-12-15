@@ -36,6 +36,7 @@ import com.example.ticketeventapp.ui.main.mngevents.components.PermissionDialog;
 import com.example.ticketeventapp.ui.main.mngevents.components.TimePicker;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.google.android.material.textfield.TextInputEditText;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -148,7 +149,9 @@ public class AddEventFragment extends Fragment {
                     Drawable drawable = AppCompatResources.getDrawable(activity, activity.getResources().getIdentifier("add_photo_alternate","drawable",activity.getPackageName()));
                 }
                 else if(!uri.equals("add_photo_alternate")){
-                    event_photo.setImageURI(Uri.parse(uri));
+                    Picasso.get().load(Uri.parse(uri)).fit().centerCrop()
+                            .placeholder(R.drawable.add_photo_alternate)
+                            .into(event_photo);
                 }
 
             }
