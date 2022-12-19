@@ -21,7 +21,7 @@ public class RegLogActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reg_log);
+        setContentView(R.layout.activity_template);
 
         if(savedInstanceState == null){
             Utilities.insertFragment(this,new LoginFragment(), LoginFragment.class.getSimpleName());
