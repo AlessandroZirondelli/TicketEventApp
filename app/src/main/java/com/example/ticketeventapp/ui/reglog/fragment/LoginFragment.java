@@ -91,6 +91,7 @@ public class LoginFragment extends Fragment {
             AppInfo appInfo = AppInfo.getInstance();
             appInfo.setLoggedUser(logUserManager.appPreferences.getLoggedUser());
             Intent intent = new Intent(getActivity(), MainActivity.class); //esplicitiamo la classe che andiamo a richiamare
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             this.startActivity(intent);
         }else{
             Log.e("LoginFragment","Auto login NON possibile");
@@ -116,6 +117,7 @@ public class LoginFragment extends Fragment {
                         logUserManager.startLoginSession(username_string,password_string);
                         Log.e("Login","Utente che si stya loggamdo: "+logUserManager.getLoggedUser().getUsername());
                         Intent intent = new Intent(getActivity(), MainActivity.class); //esplicitiamo la classe che andiamo a richiamare
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         getActivity().startActivity(intent);
                     }
                 }
