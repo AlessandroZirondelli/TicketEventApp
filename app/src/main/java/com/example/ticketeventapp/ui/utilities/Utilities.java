@@ -37,6 +37,7 @@ public class Utilities {
         transaction.replace(fragmentContainerId,childFragment, tag);
         transaction.addToBackStack(tag);
         transaction.commit();
+        Log.e("BackStack","Aggiungo nested fragment nel back stack:"+childFragment.getClass().getSimpleName());
     }
 
 }

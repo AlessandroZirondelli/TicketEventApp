@@ -27,8 +27,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_template);
 
         if(savedInstanceState == null){
-            Log.e("BackStack","Inserisco home");
+            Log.e("BackStack","SavedInstanceState in Main Activity is null, so Insert Home");
             Utilities.replaceFragmentOnContainer(this, new HomeFragment(), HomeFragment.class.getSimpleName(), R.id.fragment_container_view);
+        } else {
+            Log.e("BackStack","SavedInstanceState in Main Activity NOT NULL");
         }
         appInfo = AppInfo.getInstance();
         addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
