@@ -17,8 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.ui.main.fragment.qr_code_scanner.QrCodeScannerFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
+
+import okhttp3.internal.Util;
 
 public class ActionSelectFragment extends Fragment {
 
@@ -65,6 +68,12 @@ public class ActionSelectFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ModifyEventFragment(),ModifyEventFragment.class.getSimpleName(), R.id.fragment_container_view);
+            }
+        });
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utilities.replaceFragmentOnContainer((AppCompatActivity) activity, new QrCodeScannerFragment(), QrCodeScannerFragment.class.getSimpleName(), R.id.fragment_container_view);
             }
         });
 

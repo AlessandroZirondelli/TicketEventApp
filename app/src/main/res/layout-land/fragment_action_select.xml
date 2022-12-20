@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
     <ImageView
-        android:id="@+id/scan_qrcode__image_view"
+        android:id="@+id/scan_qrcode_image_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/scan_qrcode"
