@@ -1,12 +1,15 @@
 package com.example.ticketeventapp.ui.utilities;
 
 
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.ui.main.activity.MainActivity;
 import com.example.ticketeventapp.ui.main.fragment.home.fragment.BottomBarEventsAdminFragment;
 import com.example.ticketeventapp.ui.main.fragment.home.fragment.BottomBarEventsUserFragment;
 import com.example.ticketeventapp.ui.main.fragment.home.fragment.HomeFragment;

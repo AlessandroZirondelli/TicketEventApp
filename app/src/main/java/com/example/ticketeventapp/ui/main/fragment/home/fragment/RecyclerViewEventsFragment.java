@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,6 +52,7 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
     private PermissionManager permissionManager;
     private LocationGpsAgent locationGpsAgent;
     private EnablerDialog enablerDialog;
+    private ImageView logout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             Log.e("HomeFragment","activity null in recyclervieeweventsfragemnt");
         }
 
+        logout = view.findViewById(R.id.logout_image_view);
         permissionManager = new PermissionManager(activity,this);
         locationGpsAgent = new LocationGpsAgent(activity,permissionManager);
         enablerDialog = new EnablerDialog(activity);
@@ -92,6 +95,14 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
                 //eventItemAdapter.notifyDataSetChanged();
                 eventItemAdapter.setData(eventList);
 
+            }
+        });
+
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                enablerDialog.askToLogout();
             }
         });
 
@@ -259,5 +270,11 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
         } else {
             Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ActionSelectFragment(),ActionSelectFragment.class.getSimpleName(), R.id.fragment_container_view);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        eventItemAdapter.getFilter().filter("all");
     }
 }

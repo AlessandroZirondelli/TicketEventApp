@@ -61,5 +61,6 @@
     <string name="next_events_chip">Next</string>
     <string name="load_position">Position acquisition, wait few seconds</string>
     <string name="modify_event">Modify event</string>
+    <string name="logout_icon">Logout Icon</string>
 
 </resources>

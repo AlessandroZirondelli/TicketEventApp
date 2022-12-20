@@ -51,7 +51,7 @@ public class AppPreferences {
         String username = sharedPreferences.getString("logged_username",null);
         String password = sharedPreferences.getString("logged_password",null);
         Boolean type = Boolean.valueOf(sharedPreferences.getString("logged_type",null));
-        if(!username.isEmpty() && !password.isEmpty() && type!=null){
+        if(username!= null && !username.isEmpty() && password!= null && !password.isEmpty() && type!=null){
             return new User(username,password,type);
         } else {
             return null;

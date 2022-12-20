@@ -11,16 +11,20 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.utils.AppPreferences;
+import com.example.ticketeventapp.ui.main.activity.MainActivity;
+import com.example.ticketeventapp.ui.reglog.activity.RegLogActivity;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class EnablerDialog {
 
     private Activity activity;
-
+    private AppPreferences appPreferences;
 
     public EnablerDialog(Activity activity){
         this.activity = activity;
+        this.appPreferences = new AppPreferences(activity);
     }
 
     public void askTurnOnGPS(){
@@ -92,6 +96,24 @@ public class EnablerDialog {
                 R.string.load_position,
                 Snackbar.ANIMATION_MODE_SLIDE);
         snackbar.show();
+    }
+
+    public void askToLogout(){
+        new AlertDialog.Builder(activity).setMessage("Do you really want to logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        appPreferences.logoutUser();
+                        Intent intent = new Intent(activity, RegLogActivity.class); //esplicitiamo la classe che andiamo a richiamare
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        activity.startActivity(intent);
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                }).setCancelable(false).create().show();
     }
 
 }
