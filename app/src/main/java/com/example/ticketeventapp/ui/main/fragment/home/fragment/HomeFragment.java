@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.e("Bug","Create HomeFragment");
         super.onCreate(savedInstanceState);
     }
 
@@ -39,11 +40,15 @@ public class HomeFragment extends Fragment {
 
         if(savedInstanceState == null){
             Log.e("Bug"," savedInstanceState null in HomeFragment");
-            Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new RecyclerViewEventsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
+            //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new RecyclerViewEventsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
+            Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, new RecyclerViewEventsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
+
             if(AppInfo.getInstance().getLoggedUser().isUser()){
-                Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new BottomBarEventsUserFragment(),BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
+                //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new BottomBarEventsUserFragment(),BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
+                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, new BottomBarEventsUserFragment(), BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
             } else {
-                Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new BottomBarEventsAdminFragment(),BottomBarEventsAdminFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
+                //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new BottomBarEventsAdminFragment(),BottomBarEventsAdminFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
+                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, new BottomBarEventsAdminFragment(), BottomBarEventsAdminFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
             }
         }
 

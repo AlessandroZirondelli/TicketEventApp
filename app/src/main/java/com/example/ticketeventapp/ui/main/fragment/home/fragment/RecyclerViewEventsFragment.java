@@ -52,10 +52,16 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
     private LocationGpsAgent locationGpsAgent;
     private EnablerDialog enablerDialog;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.e("Bug","Create RecyclerViewEventsFragment");
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.e("Bug","Creo RecyclerViewEventsFragment");
+        Log.e("Bug","OnCreateView RecyclerViewEventsFragment");
         return inflater.inflate(R.layout.recycler_view_events_layout, container, false);
     }
 
@@ -63,6 +69,7 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         activity = getActivity();
+        Log.e("Bug","OnViewCreated RecyclerVuewEventFragment");
         if(activity==null){
             Log.e("HomeFragment","activity null in recyclervieeweventsfragemnt");
         }

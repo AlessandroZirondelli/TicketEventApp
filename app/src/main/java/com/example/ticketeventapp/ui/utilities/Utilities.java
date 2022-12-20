@@ -32,4 +32,11 @@ public class Utilities {
         transaction.commit();
     }
 
+    public static void replaceNestedFragmentOnHomeFragment(AppCompatActivity activity, Fragment hostFragment, Fragment childFragment, String tag, int fragmentContainerId){
+        FragmentTransaction transaction = hostFragment.getChildFragmentManager().beginTransaction();
+        transaction.replace(fragmentContainerId,childFragment, tag);
+        transaction.addToBackStack(tag);
+        transaction.commit();
+    }
+
 }
