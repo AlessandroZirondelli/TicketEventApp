@@ -116,4 +116,11 @@ public class EnablerDialog {
                 }).setCancelable(false).create().show();
     }
 
+    public void showInfoSavingQrCodeIntoGallery(){
+        Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
+               R.string.saving_qr_code,
+                Snackbar.ANIMATION_MODE_SLIDE);
+        snackbar.show();
+    }
+
 }
