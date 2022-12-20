@@ -64,7 +64,7 @@ public class ActionSelectFragment extends Fragment {
         modify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ModifyEventFragment(),ModifyEventFragment.class.getSimpleName(), R.id.fragment_container_recycler_view);
+                Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ModifyEventFragment(),ModifyEventFragment.class.getSimpleName(), R.id.fragment_container_view);
             }
         });
 
