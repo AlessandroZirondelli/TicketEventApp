@@ -34,7 +34,7 @@ public class BottomBarEventsAdminFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //Utilities.insertFragment((AppCompatActivity) getActivity(), new AddEventFragment(), AddEventFragment.class.getSimpleName());
-                Utilities.addFragmentOn((AppCompatActivity) getActivity(), new AddEventFragment(), AddEventFragment.class.getSimpleName());
+                Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new AddEventFragment(), AddEventFragment.class.getSimpleName(), R.id.fragment_container_view);
             }
         });
 

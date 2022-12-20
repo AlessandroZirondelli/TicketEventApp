@@ -51,19 +51,8 @@ public class InfoEventFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.e("Bug","Creo InfoEvemtFragment");
         super.onCreate(savedInstanceState);
-
-        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-            @Override
-            public void handleOnBackPressed() {
-                // Handle the back button event
-                Log.e("HomeFrament","Turn indrì");
-                eventListViewModel.setSelectedEventItem(null);
-                getFragmentManager().popBackStack();
-            }
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
-
     }
 
     @Override
@@ -122,4 +111,5 @@ public class InfoEventFragment extends Fragment {
 
         }
     }
+
 }

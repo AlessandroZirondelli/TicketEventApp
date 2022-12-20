@@ -24,7 +24,7 @@ public class RegLogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_template);
 
         if(savedInstanceState == null){
-            Utilities.insertFragment(this,new LoginFragment(), LoginFragment.class.getSimpleName());
+            Utilities.replaceFragmentOnContainer(this,new LoginFragment(), LoginFragment.class.getSimpleName(),R.id.fragment_container_view);
         }
 
         usersViewModelRegLog = new ViewModelProvider(this).get(UsersViewModelRegLog.class);

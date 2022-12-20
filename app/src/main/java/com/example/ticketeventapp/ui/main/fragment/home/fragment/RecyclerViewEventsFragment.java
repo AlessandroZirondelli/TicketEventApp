@@ -55,6 +55,7 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.e("Bug","Creo RecyclerViewEventsFragment");
         return inflater.inflate(R.layout.recycler_view_events_layout, container, false);
     }
 
@@ -222,18 +223,18 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             }
         });
 
-        eventListViewModel.getSelectedEventItem().observe(getActivity(), new Observer<Event>() {
+        /*eventListViewModel.getSelectedEventItem().observe(getActivity(), new Observer<Event>() {
             @Override
             public void onChanged(Event event) {
                  if(event!=null){
                      if(AppInfo.getInstance().getLoggedUser().isUser()){
-                         Utilities.addFragmentOn((AppCompatActivity) activity,new InfoEventFragment(),InfoEventFragment.class.getSimpleName());
+                         Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new InfoEventFragment(),InfoEventFragment.class.getSimpleName(), R.id.fragment_container_view);
                      } else {
-                         Utilities.addFragmentOn((AppCompatActivity) activity,new ActionSelectFragment(),ActionSelectFragment.class.getSimpleName());
+                         Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ActionSelectFragment(),ActionSelectFragment.class.getSimpleName(), R.id.fragment_container_view);
                      }
                  }
             }
-        });
+        });*/
 
 
 
@@ -246,5 +247,10 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
     public void onItemClick(int position) {
         Event clickedEvent = eventItemAdapter.getItemSelected(position);
         eventListViewModel.setSelectedEventItem(clickedEvent);
+        if(AppInfo.getInstance().getLoggedUser().isUser()){
+            Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new InfoEventFragment(),InfoEventFragment.class.getSimpleName(), R.id.fragment_container_view);
+        } else {
+            Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ActionSelectFragment(),ActionSelectFragment.class.getSimpleName(), R.id.fragment_container_view);
+        }
     }
 }

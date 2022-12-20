@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_template);
 
         if(savedInstanceState == null){
-            Utilities.insertFragment(this, new HomeFragment(), HomeFragment.class.getSimpleName());
+            Log.e("BackStack","Inserisco home");
+            Utilities.replaceFragmentOnContainer(this, new HomeFragment(), HomeFragment.class.getSimpleName(), R.id.fragment_container_view);
         }
         appInfo = AppInfo.getInstance();
         addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);

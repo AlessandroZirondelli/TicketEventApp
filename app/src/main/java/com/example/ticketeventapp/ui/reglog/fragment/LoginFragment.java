@@ -82,7 +82,7 @@ public class LoginFragment extends Fragment {
         registerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utilities.insertFragment((AppCompatActivity) activity,new RegistrationFragment(), RegistrationFragment.class.getSimpleName());
+                Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new RegistrationFragment(), RegistrationFragment.class.getSimpleName(), R.id.fragment_container_view);
             }
         });
 
