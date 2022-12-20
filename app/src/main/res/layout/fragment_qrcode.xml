@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline18" />
 
     <ImageView
-        android:id="@+id/event_icon_image_view"
+        android:id="@+id/qrcode_image_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/event_icon"
