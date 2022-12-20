@@ -3,6 +3,7 @@ package com.example.ticketeventapp.model.utils;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -17,10 +18,12 @@ import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 
 public class PermissionManager {
 
-    private ActivityResultLauncher<String> requestPermissionLauncher;
+    private ActivityResultLauncher<String> requestGpsPermissionLauncher;
+    private ActivityResultLauncher<String> requestCameraPermissionLauncher;
     private Fragment fragment;
     private Activity activity;
-    private String PERMISSION_REQUESTED = Manifest.permission.ACCESS_FINE_LOCATION;
+    private String PERMISSION_GPS_REQUESTED = Manifest.permission.ACCESS_FINE_LOCATION;
+    private String PERMISSION_CAMERA_REQUESTED = Manifest.permission.CAMERA;
 
     private Boolean alreadyAskedPermissionGPS;
 
@@ -29,7 +32,7 @@ public class PermissionManager {
         this.fragment = fragment;
         this.alreadyAskedPermissionGPS = false;
 
-        this.requestPermissionLauncher = fragment.registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
+        this.requestGpsPermissionLauncher = fragment.registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
             @Override
             public void onActivityResult(Boolean result) { //result ci indica se l'utente ha dato o meno il permesso
                 if(result){ //permission granted
@@ -45,16 +48,39 @@ public class PermissionManager {
                 addEventViewModel.setIsPermissionGPSAllowed(result);
             }
         });
+
+        this.requestCameraPermissionLauncher = fragment.registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
+            @Override
+            public void onActivityResult(Boolean result) {
+                if(result){ //permission granted
+                    // Update boolean variable in ViewModel
+                }
+                else{ //permission denied
+                    /*PermissionDialog permissionDialog = new PermissionDialog(activity);
+                    permissionDialog.showInfoDeniedPermissionGPS();*/
+                    Log.e("Camera","Accesso alla camera negato");
+                }
+
+            }
+        });
     }
 
     public boolean isPermissionGPSAllowed(){
-        return ActivityCompat.checkSelfPermission(activity, PERMISSION_REQUESTED) == PackageManager.PERMISSION_GRANTED;
+        return ActivityCompat.checkSelfPermission(activity, PERMISSION_GPS_REQUESTED) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public boolean isPermissionCameraAllowed(){
+        return ActivityCompat.checkSelfPermission(activity, PERMISSION_CAMERA_REQUESTED) == PackageManager.PERMISSION_GRANTED;
     }
 
     public void launchPermissionRequestGPS(){
         if(!this.alreadyAskedPermissionGPS){ //Ask only if the user has not deny yet
-            requestPermissionLauncher.launch(PERMISSION_REQUESTED);
+            requestGpsPermissionLauncher.launch(PERMISSION_GPS_REQUESTED);
         }
+    }
+
+    public void launchPermissionRequestCamera(){
+        requestCameraPermissionLauncher.launch(PERMISSION_CAMERA_REQUESTED);
     }
 
 

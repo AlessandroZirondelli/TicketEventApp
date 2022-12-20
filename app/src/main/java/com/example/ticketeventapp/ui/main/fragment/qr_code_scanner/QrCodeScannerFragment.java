@@ -28,6 +28,7 @@ import androidx.lifecycle.LifecycleOwner;
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.qr_code_scanner.QRCodeFoundListener;
 import com.example.ticketeventapp.model.qr_code_scanner.QRCodeImageAnalyzer;
+import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.ExecutionException;
@@ -40,6 +41,8 @@ public class QrCodeScannerFragment extends Fragment {
 
     private Button qrCodeFoundButton;
     private String qrCode;
+
+    private PermissionManager permissionManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,8 +60,8 @@ public class QrCodeScannerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         activity = getActivity();
+        permissionManager = new PermissionManager(activity,this);
         cameraProviderFuture = ProcessCameraProvider.getInstance(activity);
-        requestCamera();
         previewView = activity.findViewById(R.id.activity_main_previewView);
 
         qrCodeFoundButton = activity.findViewById(R.id.activity_main_qrCodeFoundButton);
@@ -70,20 +73,28 @@ public class QrCodeScannerFragment extends Fragment {
                 //Log.i(MainActivity.class.getSimpleName(), "QR Code Found: " + qrCode);
             }
         });
+
+        if(permissionManager.isPermissionCameraAllowed()){
+            startCamera();
+        } else {
+            permissionManager.launchPermissionRequestCamera();
+            getFragmentManager().popBackStack();
+        }
+
     }
 
 
-    private void requestCamera() {
+    /*private void requestCamera() {
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             startCamera();
-        } /*else {
+        } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
             }
-        }*/
-    }
+        }
+    }*/
 
     private void startCamera() {
         cameraProviderFuture.addListener(() -> {
