@@ -257,7 +257,7 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
 
 
 
-
+        eventItemAdapter.getFilter().filter("all");
     }
 
 
