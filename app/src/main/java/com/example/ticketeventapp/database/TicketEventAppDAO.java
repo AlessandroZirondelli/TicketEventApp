@@ -9,6 +9,7 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.ticketeventapp.model.mng_events.Event;
+import com.example.ticketeventapp.model.mng_tickets.Ticket;
 import com.example.ticketeventapp.model.mng_users.User;
 
 import java.util.List;
@@ -32,6 +33,9 @@ public interface TicketEventAppDAO {
 
     @Update
     void updateEvent(Event event);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void addTicket(Ticket ticket);
 
 
 
