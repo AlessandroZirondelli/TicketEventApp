@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.utils.AppInfo;
+import com.example.ticketeventapp.model.utils.AppPreferences;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 
@@ -42,7 +43,6 @@ public class HomeFragment extends Fragment {
             Log.e("Bug"," savedInstanceState null in HomeFragment");
             //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new RecyclerViewEventsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
             Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, new RecyclerViewEventsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
-
             if(AppInfo.getInstance().getLoggedUser().isUser()){
                 //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new BottomBarEventsUserFragment(),BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
                 Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, new BottomBarEventsUserFragment(), BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);

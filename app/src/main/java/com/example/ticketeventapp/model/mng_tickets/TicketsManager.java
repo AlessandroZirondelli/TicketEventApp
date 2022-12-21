@@ -8,6 +8,9 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import com.example.ticketeventapp.database.TicketEventAppRepository;
+import com.example.ticketeventapp.model.mng_users.User;
+import com.example.ticketeventapp.model.utils.AppInfo;
 import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -24,6 +27,9 @@ import java.util.Date;
 import java.util.Locale;
 
 public class TicketsManager {
+
+    private TicketEventAppRepository repository;
+
 
     public static Bitmap generateBitmapQrCode(String str) throws WriterException {
         QRCodeWriter writer = new QRCodeWriter();

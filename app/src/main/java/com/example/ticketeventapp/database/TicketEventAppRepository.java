@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.ticketeventapp.model.mng_events.Event;
+import com.example.ticketeventapp.model.mng_tickets.Ticket;
 import com.example.ticketeventapp.model.mng_users.User;
 
 import java.util.List;
@@ -52,6 +53,14 @@ public class TicketEventAppRepository {
 
             @Override
             public void run() { ticketEventAppDAO.updateEvent(event);}
+        });
+    }
+
+    public void addTicket(Ticket ticket){
+        TicketEventAppDatabase.executor.execute(new Runnable() {
+
+            @Override
+            public void run() { ticketEventAppDAO.addTicket(ticket);}
         });
     }
 

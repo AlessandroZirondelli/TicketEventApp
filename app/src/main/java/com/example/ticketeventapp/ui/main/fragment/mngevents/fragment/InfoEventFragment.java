@@ -25,9 +25,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.mng_events.Event;
+import com.example.ticketeventapp.model.mng_tickets.Ticket;
+import com.example.ticketeventapp.model.mng_tickets.TicketsManager;
+import com.example.ticketeventapp.model.mng_users.User;
+import com.example.ticketeventapp.model.utils.AppInfo;
 import com.example.ticketeventapp.ui.main.fragment.mngtickets.TicketResultFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
+import com.example.ticketeventapp.viewmodel.mng_events.InfoTicketViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 
@@ -44,6 +49,7 @@ public class InfoEventFragment extends Fragment {
     private TextInputEditText event_price;
     private Button button;
     private EventListViewModel eventListViewModel;
+    private InfoTicketViewModel infoTicketViewModel;
 
 
     @Nullable
@@ -63,6 +69,7 @@ public class InfoEventFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         view.setBackgroundColor(Color.WHITE); // Add background color beacause it's transparent
         eventListViewModel = new ViewModelProvider(getActivity()).get(EventListViewModel.class);
+        infoTicketViewModel = new ViewModelProvider(getActivity()).get(InfoTicketViewModel.class);
         fragment_title = view.findViewById(R.id.info_add_event);
         event_photo = view.findViewById(R.id.event_icon_image_view);
         event_name = view.findViewById(R.id.event_name_text_input_edit_text);
@@ -84,7 +91,13 @@ public class InfoEventFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(),new TicketResultFragment(),TicketResultFragment.class.getSimpleName(), R.id.fragment_container_view);
+                Event selectedEvent = eventListViewModel.getSelectedEventItem().getValue();
+
+                User buyer = AppInfo.getInstance().getLoggedUser();
+                String event_code = TicketsManager.generateRandomString();
+                Ticket ticket = new Ticket(event_code, selectedEvent.getId(), buyer.getUsername(), false);
+                infoTicketViewModel.addTicket(ticket);
+                //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(),new TicketResultFragment(),TicketResultFragment.class.getSimpleName(), R.id.fragment_container_view);
             }
         });
     }

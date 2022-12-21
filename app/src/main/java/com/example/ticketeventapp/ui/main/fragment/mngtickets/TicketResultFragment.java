@@ -43,7 +43,8 @@ public class TicketResultFragment extends Fragment {
         save = view.findViewById(R.id.save_to_gallery_image_view);
         enablerDialog = new EnablerDialog(getActivity());
         try {
-            generatedQrCode = TicketsManager.generateBitmapQrCode(TicketsManager.generateRandomString());
+            String event_code = TicketsManager.generateRandomString();
+            generatedQrCode = TicketsManager.generateBitmapQrCode(event_code);
             qrcode.setImageBitmap(generatedQrCode);
             //Log.e("String", );
         } catch (WriterException e) {

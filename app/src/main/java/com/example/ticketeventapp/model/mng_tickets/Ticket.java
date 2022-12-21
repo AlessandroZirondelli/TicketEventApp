@@ -12,7 +12,23 @@ public class Ticket {
     private int id;
     private String code;
     private int id_event;
-    private int id_user;
+
+    public Ticket(String code, int id_event, String username, Boolean validated) {
+        this.code = code;
+        this.id_event = id_event;
+        this.username = username;
+        this.validated = validated;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    private String username;
     private Boolean validated;
 
     public int getId() {
@@ -39,13 +55,6 @@ public class Ticket {
         this.id_event = id_event;
     }
 
-    public int getId_user() {
-        return id_user;
-    }
-
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
-    }
 
     public Boolean getValidated() {
         return validated;
