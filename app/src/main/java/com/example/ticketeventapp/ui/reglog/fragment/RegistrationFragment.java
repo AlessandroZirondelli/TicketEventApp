@@ -83,7 +83,7 @@ public class RegistrationFragment extends Fragment {
                 }
                 else { // We can continue with registration
                     if(regUserManager.isUsernameAvailable(username_string)){
-                        User user = new User(name_string,surname_string,username_string,password_string,false);
+                        User user = new User(name_string,surname_string,username_string,password_string,true);
                         usersViewModelRegLog.addUser(user);
                         Snackbar snackbar  =  Snackbar.make(getActivity().findViewById(R.id.fragment_container_view),
                                 R.string.successful_registration,

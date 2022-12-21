@@ -97,7 +97,8 @@ public class InfoEventFragment extends Fragment {
                 String event_code = TicketsManager.generateRandomString();
                 Ticket ticket = new Ticket(event_code, selectedEvent.getId(), buyer.getUsername(), false);
                 infoTicketViewModel.addTicket(ticket);
-                //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(),new TicketResultFragment(),TicketResultFragment.class.getSimpleName(), R.id.fragment_container_view);
+                infoTicketViewModel.setSelectedTicket(ticket);
+                Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(),new TicketResultFragment(),TicketResultFragment.class.getSimpleName(), R.id.fragment_container_view);
             }
         });
     }
