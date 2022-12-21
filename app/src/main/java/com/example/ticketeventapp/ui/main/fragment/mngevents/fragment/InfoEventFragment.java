@@ -13,13 +13,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.Guideline;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -32,7 +29,7 @@ import com.example.ticketeventapp.model.utils.AppInfo;
 import com.example.ticketeventapp.ui.main.fragment.mngtickets.TicketResultFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
-import com.example.ticketeventapp.viewmodel.mng_events.InfoTicketViewModel;
+import com.example.ticketeventapp.viewmodel.mng_tickets.InfoTicketViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 

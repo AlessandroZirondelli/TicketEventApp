@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 
 import com.example.ticketeventapp.database.TicketEventAppRepository;
@@ -24,11 +25,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 public class TicketsManager {
 
-    private TicketEventAppRepository repository;
+    private List<Ticket> ticketList;
 
 
     public static Bitmap generateBitmapQrCode(String str) throws WriterException {
@@ -78,5 +81,23 @@ public class TicketsManager {
 
         return imageURI;
 
+    }
+
+    public void setTicketList(List<Ticket> ticketList){
+        this.ticketList = ticketList;
+    }
+
+    public int isValidTicket(String code, int event_id){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Optional<Ticket> extractedTicket = ticketList.stream().filter((ticket)-> ticket.getId_event() == event_id && ticket.getCode().equals(code)).findFirst();
+            if(extractedTicket.isPresent()){
+                return extractedTicket.get().isValidated() ? 2:1; //if it's already validated, return 2. Otherwise if everything is ok, reeturn 1
+            } else {
+                return 0; //Ticket doesn't exist
+            }
+        } else {
+            //TODO
+        }
+        return 0;
     }
 }

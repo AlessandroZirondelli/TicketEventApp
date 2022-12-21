@@ -15,6 +15,7 @@ public class TicketEventAppRepository {
     private TicketEventAppDAO ticketEventAppDAO;
     private LiveData<List<User>> usersLiveData;
     private LiveData<List<Event>> eventsLiveData;
+    private LiveData<List<Ticket>> ticketsLiveData;
 
 
     public TicketEventAppRepository(Application application){
@@ -22,6 +23,7 @@ public class TicketEventAppRepository {
         ticketEventAppDAO = db.ticketEventAppDAO();
         usersLiveData = ticketEventAppDAO.getUsersLiveData();
         eventsLiveData = ticketEventAppDAO.getEventsLiveData();
+        ticketsLiveData = ticketEventAppDAO.getTicketsLiveData();
     }
 
     public LiveData<List<User>> getUsersLiveData(){
@@ -62,6 +64,10 @@ public class TicketEventAppRepository {
             @Override
             public void run() { ticketEventAppDAO.addTicket(ticket);}
         });
+    }
+
+    public LiveData<List<Ticket>> getTicketsLiveData(){
+        return ticketsLiveData;
     }
 
 }

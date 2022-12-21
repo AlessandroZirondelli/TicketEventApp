@@ -56,11 +56,11 @@ public class Ticket {
     }
 
 
-    public Boolean getValidated() {
+    public Boolean isValidated() {
         return validated;
     }
 
-    public void setValidated(Boolean validated) {
+    public void setIsValidated(Boolean validated) {
         this.validated = validated;
     }
 }

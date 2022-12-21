@@ -2,7 +2,6 @@ package com.example.ticketeventapp.ui.main.fragment.mngtickets;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,7 @@ import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.mng_tickets.Ticket;
 import com.example.ticketeventapp.model.mng_tickets.TicketsManager;
 import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
-import com.example.ticketeventapp.ui.utilities.Utilities;
-import com.example.ticketeventapp.viewmodel.mng_events.InfoTicketViewModel;
+import com.example.ticketeventapp.viewmodel.mng_tickets.InfoTicketViewModel;
 import com.google.zxing.WriterException;
 
 public class TicketResultFragment extends Fragment {

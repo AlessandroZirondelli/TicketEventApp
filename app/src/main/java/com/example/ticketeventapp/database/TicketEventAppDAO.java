@@ -37,6 +37,10 @@ public interface TicketEventAppDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addTicket(Ticket ticket);
 
+    @Transaction
+    @Query("SELECT * FROM ticket")
+    LiveData<List<Ticket>> getTicketsLiveData();
+
 
 
 
