@@ -18,7 +18,10 @@ import com.example.ticketeventapp.model.home.recyclerview.EventsRecyclerView;
 import com.example.ticketeventapp.model.home.recyclerview.TicketsRecyclerView;
 import com.example.ticketeventapp.model.home.recyclerview.adapter.TicketItemAdapter;
 import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemListener;
+import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_tickets.Ticket;
+import com.example.ticketeventapp.model.mng_tickets.TicketsManager;
+import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.example.ticketeventapp.viewmodel.mng_tickets.TicketListViewModel;
 
 import java.util.List;
@@ -29,6 +32,9 @@ public class RecyclerViewTicketsFragment extends Fragment implements OnItemListe
     private TicketListViewModel ticketListViewModel;
     private TicketItemAdapter ticketItemAdapter;
     private ImageView logout;
+    private TicketsManager ticketsManager;
+    private EventListViewModel eventListViewModel;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,20 +51,24 @@ public class RecyclerViewTicketsFragment extends Fragment implements OnItemListe
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ticketListViewModel = new ViewModelProvider(getActivity()).get(TicketListViewModel.class);
+        eventListViewModel = new ViewModelProvider(getActivity()).get(EventListViewModel.class);
         ticketsRecyclerView = new TicketsRecyclerView(getActivity());
         ticketsRecyclerView.setRecyclerView(this);
         ticketItemAdapter = ticketsRecyclerView.getEventItemAdapter();
+        ticketsManager = new TicketsManager();
 
         ticketListViewModel.getTicketsLiveData().observe(getActivity(), new Observer<List<Ticket>>() {
             @Override
             public void onChanged(List<Ticket> ticketList) {
-                ticketItemAdapter.setData(ticketList);
+                ticketsManager.setTicketList(ticketList);
+                List<Event> allEvents = eventListViewModel.getEventsLiveData().getValue();
+                ticketItemAdapter.setData(ticketsManager.getTicketsListOfNextEventsByUser(allEvents));
             }
         });
     }
 
     @Override
     public void onItemClick(int position) {
-        Log.e("Tickets","Click on ticket");
+       // Log.e("Tickets", "OOOOO size:"+filteredList.size());
     }
 }

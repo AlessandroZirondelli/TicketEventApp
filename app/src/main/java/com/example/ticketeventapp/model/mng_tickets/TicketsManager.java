@@ -8,8 +8,10 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import com.example.ticketeventapp.database.TicketEventAppRepository;
+import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_users.User;
 import com.example.ticketeventapp.model.utils.AppInfo;
 import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
@@ -24,10 +26,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TicketsManager {
 
@@ -100,4 +104,43 @@ public class TicketsManager {
         }
         return 0;
     }
+
+    public List<Ticket> getTicketsListOfNextEventsByUser(List<Event> eventList){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+
+            //Filter tickets of users
+            List<Ticket> personalTicket = ticketList.stream()
+                                        .filter((ticket)->ticket.getUsername().equals(AppInfo.getInstance().getLoggedUser().getUsername()))
+                                        .collect(Collectors.toList());
+
+
+            //Filter tickets of event with  current/next events
+            List<Ticket> resultTicketsList = personalTicket.stream().filter((ticket)->{
+                Event correspondingEvent = eventList.stream().filter((event)->event.getId() == ticket.getId_event()).findFirst().get();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    return isCurrentOrNextEvent(LocalDate.parse(correspondingEvent.getDate()));
+                } else {
+                    //TODO
+                    return false;
+                }
+            }).collect(Collectors.toList());
+            return resultTicketsList;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean isCurrentOrNextEvent(LocalDate dateToCheck){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            LocalDate today = LocalDate.now();
+            return dateToCheck.isAfter(today) || dateToCheck.isEqual(today);
+        } else {
+            //TODO
+        }
+        return false;
+    }
+
+
+
+
 }

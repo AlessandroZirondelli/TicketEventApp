@@ -12,6 +12,8 @@ public class Ticket {
     private int id;
     private String code;
     private int id_event;
+    private String username;
+    private Boolean validated;
 
     public Ticket(String code, int id_event, String username, Boolean validated) {
         this.code = code;
@@ -28,8 +30,7 @@ public class Ticket {
         this.username = username;
     }
 
-    private String username;
-    private Boolean validated;
+
 
     public int getId() {
         return id;
