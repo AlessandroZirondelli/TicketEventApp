@@ -105,4 +105,8 @@ public class TicketItemAdapter extends RecyclerView.Adapter<TicketViewHolder>{
         //check difference between lists and update only changes
         diffResult.dispatchUpdatesTo(this);
     }
+
+    public Ticket getItemSelected(int position) {
+        return ticketsList.get(position);
+    }
 }

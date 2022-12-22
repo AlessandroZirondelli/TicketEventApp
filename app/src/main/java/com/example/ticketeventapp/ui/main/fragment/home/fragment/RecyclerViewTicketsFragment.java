@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,6 +22,8 @@ import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemL
 import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_tickets.Ticket;
 import com.example.ticketeventapp.model.mng_tickets.TicketsManager;
+import com.example.ticketeventapp.ui.main.fragment.mngtickets.TicketResultFragment;
+import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.example.ticketeventapp.viewmodel.mng_tickets.TicketListViewModel;
 
@@ -69,6 +72,8 @@ public class RecyclerViewTicketsFragment extends Fragment implements OnItemListe
 
     @Override
     public void onItemClick(int position) {
-       // Log.e("Tickets", "OOOOO size:"+filteredList.size());
+        Ticket clickedTicket = ticketItemAdapter.getItemSelected(position);
+        ticketListViewModel.setSelectedTicket(clickedTicket);
+        Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(),new TicketResultFragment(),TicketResultFragment.class.getSimpleName(),R.id.fragment_container_view);
     }
 }
