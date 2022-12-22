@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:padding="10dp">
     <TextView
-        android:id="@+id/joiner"
+        android:id="@+id/joiner_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="John Doe"
@@ -16,7 +16,7 @@
         />
 
     <ImageView
-        android:id="@+id/logout_image_view"
+        android:id="@+id/presence_image_view"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:contentDescription="@string/logout_icon"
