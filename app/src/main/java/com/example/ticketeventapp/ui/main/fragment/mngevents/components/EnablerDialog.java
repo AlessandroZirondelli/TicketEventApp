@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.provider.Settings;
 import android.view.View;
 
@@ -121,6 +122,35 @@ public class EnablerDialog {
                R.string.saving_qr_code,
                 Snackbar.ANIMATION_MODE_SLIDE);
         snackbar.show();
+    }
+
+    public void showInfoScannedQrCode(int res){
+        String message = "Valid ticket";
+
+        if(res == 0){
+            Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
+                    "Invalid Ticket",
+                    Snackbar.ANIMATION_MODE_SLIDE);
+             snackbar.setBackgroundTint(Color.RED);
+            snackbar.setTextColor(Color.BLACK);
+            snackbar.show();
+        } else if(res ==2){
+            Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
+                    "Ticket already used",
+                    Snackbar.ANIMATION_MODE_SLIDE);
+            snackbar.setBackgroundTint(Color.RED);
+            snackbar.setTextColor(Color.BLACK);
+            snackbar.show();
+        } else if(res == 1){
+            Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
+                    "Valid Ticket",
+                    Snackbar.ANIMATION_MODE_SLIDE);
+            snackbar.setBackgroundTint(Color.GREEN);
+            snackbar.setTextColor(Color.BLACK);
+            snackbar.show();
+        }
+
+
     }
 
 }

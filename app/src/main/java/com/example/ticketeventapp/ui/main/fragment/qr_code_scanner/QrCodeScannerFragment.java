@@ -32,6 +32,7 @@ import com.example.ticketeventapp.model.mng_tickets.TicketsManager;
 import com.example.ticketeventapp.model.qr_code_scanner.QRCodeFoundListener;
 import com.example.ticketeventapp.model.qr_code_scanner.QRCodeImageAnalyzer;
 import com.example.ticketeventapp.model.utils.PermissionManager;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.example.ticketeventapp.viewmodel.mng_tickets.TicketListViewModel;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -52,6 +53,7 @@ public class QrCodeScannerFragment extends Fragment {
     private TicketsManager ticketsManager;
     private TicketListViewModel infoTicketViewModel;
     private EventListViewModel eventListViewModel;
+    private EnablerDialog enablerDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,7 +77,7 @@ public class QrCodeScannerFragment extends Fragment {
         permissionManager = new PermissionManager(activity,this);
         cameraProviderFuture = ProcessCameraProvider.getInstance(activity);
         previewView = activity.findViewById(R.id.activity_main_previewView);
-
+        enablerDialog = new EnablerDialog(activity);
         qrCodeFoundButton = activity.findViewById(R.id.activity_main_qrCodeFoundButton);
         qrCodeFoundButton.setVisibility(View.INVISIBLE);
         qrCodeFoundButton.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +170,7 @@ public class QrCodeScannerFragment extends Fragment {
                     MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_error);
                     mediaPlayer.start();
                 }
+                enablerDialog.showInfoScannedQrCode(res);
             }
 
             @Override
