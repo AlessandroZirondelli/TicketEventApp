@@ -13,7 +13,7 @@ public class JoinersManager { //JoinersManager for specific event
 
 
     public boolean isPresentJoiner(User joiner){
-
+        return false;
     }
 
     public void setJoinersList(List<User> joinersList) {
