@@ -105,6 +105,15 @@ public class TicketsManager {
         return 0;
     }
 
+    public Ticket getTicketByCode(String code){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+           return ticketList.stream().filter((ticket)->ticket.getCode().equals(code)).findFirst().get();
+        } else {
+            //TODO
+            return null;
+        }
+    }
+
     public List<Ticket> getTicketsListOfNextEventsByUser(List<Event> eventList){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 

@@ -45,4 +45,8 @@ public class TicketListViewModel extends AndroidViewModel {
     public LiveData<List<Ticket>> getTicketsLiveData(){
         return this.ticketsLiveData;
     }
+
+    public void updateTicket(Ticket ticket){
+        repository.updateTicket(ticket);
+    }
 }

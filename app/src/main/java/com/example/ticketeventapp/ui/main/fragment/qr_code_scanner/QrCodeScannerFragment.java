@@ -3,7 +3,6 @@ package com.example.ticketeventapp.ui.main.fragment.qr_code_scanner;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
@@ -51,7 +50,7 @@ public class QrCodeScannerFragment extends Fragment {
 
     private PermissionManager permissionManager;
     private TicketsManager ticketsManager;
-    private TicketListViewModel infoTicketViewModel;
+    private TicketListViewModel ticketListViewModel;
     private EventListViewModel eventListViewModel;
     private EnablerDialog enablerDialog;
 
@@ -71,7 +70,7 @@ public class QrCodeScannerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         activity = getActivity();
-        infoTicketViewModel = new ViewModelProvider(getActivity()).get(TicketListViewModel.class);
+        ticketListViewModel = new ViewModelProvider(getActivity()).get(TicketListViewModel.class);
         eventListViewModel = new ViewModelProvider(getActivity()).get(EventListViewModel.class);
         ticketsManager = new TicketsManager();
         permissionManager = new PermissionManager(activity,this);
@@ -95,12 +94,13 @@ public class QrCodeScannerFragment extends Fragment {
             getFragmentManager().popBackStack();
         }
 
-        infoTicketViewModel.getTicketsLiveData().observe(getActivity(), new Observer<List<Ticket>>() {
+        ticketListViewModel.getTicketsLiveData().observe(getActivity(), new Observer<List<Ticket>>() {
             @Override
             public void onChanged(List<Ticket> tickets) {
                 ticketsManager.setTicketList(tickets);
             }
         });
+
 
     }
 
@@ -159,6 +159,9 @@ public class QrCodeScannerFragment extends Fragment {
                 int res = ticketsManager.isValidTicket(_qrCode, eventListViewModel.getSelectedEventItem().getValue().getId());
                 if(res == 1){
                     Log.e("QrCode","Ticket valido");
+                    Ticket scannedTicket = ticketsManager.getTicketByCode(_qrCode);
+                    scannedTicket.setIsValidated(true);
+                    ticketListViewModel.updateTicket(scannedTicket);
                     MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_ok);
                     mediaPlayer.start();
                 } else if(res == 0){

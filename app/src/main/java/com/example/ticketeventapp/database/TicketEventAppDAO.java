@@ -41,6 +41,9 @@ public interface TicketEventAppDAO {
     @Query("SELECT * FROM ticket")
     LiveData<List<Ticket>> getTicketsLiveData();
 
+    @Update
+    void updateTicket(Ticket ticket);
+
 
 
 

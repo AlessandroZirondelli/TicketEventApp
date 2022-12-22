@@ -70,4 +70,13 @@ public class TicketEventAppRepository {
         return ticketsLiveData;
     }
 
+
+    public void updateTicket(Ticket ticket){
+        TicketEventAppDatabase.executor.execute(new Runnable() {
+
+            @Override
+            public void run() { ticketEventAppDAO.updateTicket(ticket);}
+        });
+    }
+
 }
