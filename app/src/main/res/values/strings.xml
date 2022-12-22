@@ -63,5 +63,6 @@
     <string name="modify_event">Modify event</string>
     <string name="logout_icon">Logout Icon</string>
     <string name="saving_qr_code">Saving QrCode in your gallery</string>
+    <string name="your_tickets">Your Tickets</string>
 
 </resources>

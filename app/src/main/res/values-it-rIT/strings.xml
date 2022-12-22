@@ -55,4 +55,19 @@
 
     <string name="ask_turn_on_gps">Il GPS è spento, vuoi abilitarlo?</string>
     <string name="gps_features_cannot_run">Alcune funzionalità del GPS non possono funzionare perchè il GPS è spento</string>
+
+    <string name="price_must_be_numeric">Il prezzo deve essere un valore numerico</string>
+    <string name="info_event">Info Evento</string>
+    <string name="join_event">Partecipa</string>
+    <string name="tickets">I tuoi biglietti</string>
+    <string name="acc_add_mew_event">Aggiungi evento</string>
+    <string name="events">Eventi</string>
+    <string name="next_events_chip">Prossimi</string>
+    <string name="load_position">Acquisizione posizione, attendi qualche secondo</string>
+    <string name="modify_event">Modifica evento</string>
+    <string name="logout_icon">Icon logout</string>
+    <string name="saving_qr_code">Salvataggio QrCode nella tua galleia </string>
+    <string name="your_tickets">I tuoi biglietti</string>
+
+
 </resources>
