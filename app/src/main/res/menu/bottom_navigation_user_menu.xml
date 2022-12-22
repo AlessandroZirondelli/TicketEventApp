@@ -1,17 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/events"
+        android:id="@+id/events_bottom_navigation"
         android:enabled="true"
         android:icon="@drawable/celebration"
         android:title="@string/events" />
     <item
-        android:id="@+id/tickets"
+        android:id="@+id/tickets_bottom_navigation"
         android:enabled="true"
         android:icon="@drawable/confirmation_number"
         android:title="@string/tickets"/>
     <item
-        android:id="@+id/scan"
+        android:id="@+id/scan_bottom_navigation"
         android:enabled="true"
         android:icon="@drawable/qr_code_scanner"
         android:title="@string/scan_qrcode"/>

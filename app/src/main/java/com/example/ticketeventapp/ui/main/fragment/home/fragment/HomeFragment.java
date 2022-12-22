@@ -45,7 +45,9 @@ public class HomeFragment extends Fragment {
             Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, new RecyclerViewEventsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
             if(AppInfo.getInstance().getLoggedUser().isUser()){
                 //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new BottomBarEventsUserFragment(),BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
-                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, new BottomBarEventsUserFragment(), BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
+                BottomBarEventsUserFragment bottomBarEventsUserFragment = new BottomBarEventsUserFragment();
+                bottomBarEventsUserFragment.setHostFragment(this);
+                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, bottomBarEventsUserFragment, BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
             } else {
                 //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new BottomBarEventsAdminFragment(),BottomBarEventsAdminFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
                 Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, new BottomBarEventsAdminFragment(), BottomBarEventsAdminFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
