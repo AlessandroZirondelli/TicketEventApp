@@ -1,7 +1,9 @@
 package com.example.ticketeventapp.ui.main.fragment.qr_code_scanner;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
@@ -155,10 +157,16 @@ public class QrCodeScannerFragment extends Fragment {
                 int res = ticketsManager.isValidTicket(_qrCode, eventListViewModel.getSelectedEventItem().getValue().getId());
                 if(res == 1){
                     Log.e("QrCode","Ticket valido");
+                    MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_ok);
+                    mediaPlayer.start();
                 } else if(res == 0){
                     Log.e("QrCode","Ticket non valido");
+                    MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_error);
+                    mediaPlayer.start();
                 } else if(res == 2){
                     Log.e("QrCode","Ticket già usatp");
+                    MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_error);
+                    mediaPlayer.start();
                 }
             }
 
