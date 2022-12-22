@@ -2,6 +2,7 @@ package com.example.ticketeventapp.model.home.recyclerview.adapter;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemL
 import com.example.ticketeventapp.model.home.recyclerview.viewholder.TicketViewHolder;
 import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_tickets.Ticket;
+import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.example.ticketeventapp.viewmodel.mng_tickets.TicketListViewModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -34,6 +36,8 @@ public class TicketItemAdapter extends RecyclerView.Adapter<TicketViewHolder>{
     private List<Ticket> ticketsList;
     private OnItemListener listener;
     private TicketListViewModel ticketListViewModel;
+    private EventListViewModel eventListViewModel;
+    private List<Event> eventList;
 
 
     public TicketItemAdapter(Activity activity, List<Ticket> ticketList, OnItemListener listener){
@@ -41,6 +45,8 @@ public class TicketItemAdapter extends RecyclerView.Adapter<TicketViewHolder>{
         this.activity = activity;
         this.listener = listener;
         ticketListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(TicketListViewModel.class);
+        eventListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(EventListViewModel.class);
+        eventList = eventListViewModel.getEventsLiveData().getValue();
     }
 
 
@@ -54,9 +60,18 @@ public class TicketItemAdapter extends RecyclerView.Adapter<TicketViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull TicketViewHolder holder, int position) {
         Ticket ticket = ticketsList.get(position);
-        holder.set_event_name_text("TestName");
-        holder.set_event_date_text("TestDate");
-        holder.set_event_time_text("TestTime");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Event referredEvent = eventList.stream().filter((event)->event.getId()==ticket.getId_event()).findFirst().get();
+            holder.set_event_name_text(referredEvent.getName());
+            holder.set_event_date_text(referredEvent.getDate());
+            holder.set_event_time_text(referredEvent.getTime());
+        } else {
+            //TODO
+        }
+
+        Drawable drawable = AppCompatResources.getDrawable(activity, activity.getResources().getIdentifier("@drawable/qr_code_2","drawable",activity.getPackageName()));
+        holder.set_event_photo_drawable(drawable);
+
         /*if(holder.qrcode!=null){
             Log.e("Bug","Holder qrcode NOT null");
         }
@@ -75,9 +90,6 @@ public class TicketItemAdapter extends RecyclerView.Adapter<TicketViewHolder>{
             }
         });
         Drawable drawable;*/
-
-        Drawable drawable = AppCompatResources.getDrawable(activity, activity.getResources().getIdentifier("@drawable/qr_code_2","drawable",activity.getPackageName()));
-        holder.set_event_photo_drawable(drawable);
 
     }
 
