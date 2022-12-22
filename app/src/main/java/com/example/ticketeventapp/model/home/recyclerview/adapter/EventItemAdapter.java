@@ -1,12 +1,10 @@
-package com.example.ticketeventapp.model.home.recyclerview;
+package com.example.ticketeventapp.model.home.recyclerview.adapter;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +20,14 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.home.recyclerview.item_diff_callback.EventCardItemDiffCallback;
 import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemListener;
+import com.example.ticketeventapp.model.home.recyclerview.viewholder.EventViewHolder;
 import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +94,7 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
     }
 
     public void setData(List<Event> eventList){
-        final CardItemDiffCallback diffCallback = new CardItemDiffCallback(this.eventsFilteredList, eventList);
+        final EventCardItemDiffCallback diffCallback = new EventCardItemDiffCallback(this.eventsFilteredList, eventList);
         final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
         this.eventsFilteredList  = new ArrayList<>(eventList);
         this.eventsNotFilteredList = new ArrayList<>(eventList);
@@ -273,8 +272,8 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
     }
 
     private  void updateCardListItems(List<Event> filteredList) {
-        final CardItemDiffCallback diffCallback =
-                new CardItemDiffCallback(this.eventsFilteredList, filteredList);
+        final EventCardItemDiffCallback diffCallback =
+                new EventCardItemDiffCallback(this.eventsFilteredList, filteredList);
         final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
         this.eventsFilteredList = new ArrayList<>(filteredList);
         diffResult.dispatchUpdatesTo(this);

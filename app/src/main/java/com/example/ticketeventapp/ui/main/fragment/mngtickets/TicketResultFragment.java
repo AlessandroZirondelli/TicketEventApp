@@ -16,7 +16,7 @@ import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.mng_tickets.Ticket;
 import com.example.ticketeventapp.model.mng_tickets.TicketsManager;
 import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
-import com.example.ticketeventapp.viewmodel.mng_tickets.InfoTicketViewModel;
+import com.example.ticketeventapp.viewmodel.mng_tickets.TicketListViewModel;
 import com.google.zxing.WriterException;
 
 public class TicketResultFragment extends Fragment {
@@ -25,7 +25,7 @@ public class TicketResultFragment extends Fragment {
     private ImageView save;
     private Bitmap generatedQrCode;
     private EnablerDialog enablerDialog;
-    private InfoTicketViewModel infoTicketViewModel;
+    private TicketListViewModel infoTicketViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class TicketResultFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        infoTicketViewModel = new ViewModelProvider(getActivity()).get(InfoTicketViewModel.class);
+        infoTicketViewModel = new ViewModelProvider(getActivity()).get(TicketListViewModel.class);
         qrcode = view.findViewById(R.id.qrcode_image_view);
         save = view.findViewById(R.id.save_to_gallery_image_view);
         enablerDialog = new EnablerDialog(getActivity());

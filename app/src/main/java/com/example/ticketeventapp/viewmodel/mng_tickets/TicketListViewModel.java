@@ -14,14 +14,14 @@ import com.example.ticketeventapp.model.mng_tickets.Ticket;
 
 import java.util.List;
 
-public class InfoTicketViewModel extends AndroidViewModel {
+public class TicketListViewModel extends AndroidViewModel {
 
     private MutableLiveData<Bitmap> qrcode;
     private TicketEventAppRepository repository;
     private MutableLiveData<Ticket> selectedTicket;
     private LiveData<List<Ticket>> ticketsLiveData;
 
-    public InfoTicketViewModel(@NonNull Application application) {
+    public TicketListViewModel(@NonNull Application application) {
         super(application);
         repository = new TicketEventAppRepository(application);
         qrcode = new MutableLiveData<>();

@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.model.home.recyclerview;
+package com.example.ticketeventapp.model.home.recyclerview.viewholder;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -13,18 +13,18 @@ import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemListener;
 
 
-public class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class TicketViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    public ImageView event_photo;
+    public ImageView qrcode;
     private TextView event_name;
     private TextView event_date;
     private TextView event_time;
 
     private final OnItemListener itemListener;
 
-    public EventViewHolder(@NonNull View itemView, OnItemListener itemListener) {
+    public TicketViewHolder(@NonNull View itemView, OnItemListener itemListener) {
         super(itemView);
-        event_photo = itemView.findViewById(R.id.event_imageview);
+        qrcode = itemView.findViewById(R.id.event_imageview);
         event_name = itemView.findViewById(R.id.event_name_textview);
         event_date = itemView.findViewById(R.id.event_date_textview);
         event_time = itemView.findViewById(R.id.event_time_textview);
@@ -50,11 +50,11 @@ public class EventViewHolder extends RecyclerView.ViewHolder implements View.OnC
     }
 
     public void set_event_photo_drawable(Drawable image) {
-        this.event_photo.setImageDrawable(image);
+        this.qrcode.setImageDrawable(image);
     }
 
     public void set_event_photo_bitmap(Bitmap image){
-        this.event_photo.setImageBitmap(image);
+        this.qrcode.setImageBitmap(image);
     }
 
 

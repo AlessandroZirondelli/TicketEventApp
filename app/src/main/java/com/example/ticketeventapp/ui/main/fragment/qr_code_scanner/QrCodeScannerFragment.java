@@ -1,8 +1,6 @@
 package com.example.ticketeventapp.ui.main.fragment.qr_code_scanner;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Size;
@@ -20,7 +18,6 @@ import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
@@ -34,7 +31,7 @@ import com.example.ticketeventapp.model.qr_code_scanner.QRCodeFoundListener;
 import com.example.ticketeventapp.model.qr_code_scanner.QRCodeImageAnalyzer;
 import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
-import com.example.ticketeventapp.viewmodel.mng_tickets.InfoTicketViewModel;
+import com.example.ticketeventapp.viewmodel.mng_tickets.TicketListViewModel;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.List;
@@ -51,7 +48,7 @@ public class QrCodeScannerFragment extends Fragment {
 
     private PermissionManager permissionManager;
     private TicketsManager ticketsManager;
-    private InfoTicketViewModel infoTicketViewModel;
+    private TicketListViewModel infoTicketViewModel;
     private EventListViewModel eventListViewModel;
 
     @Override
@@ -70,7 +67,7 @@ public class QrCodeScannerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         activity = getActivity();
-        infoTicketViewModel = new ViewModelProvider(getActivity()).get(InfoTicketViewModel.class);
+        infoTicketViewModel = new ViewModelProvider(getActivity()).get(TicketListViewModel.class);
         eventListViewModel = new ViewModelProvider(getActivity()).get(EventListViewModel.class);
         ticketsManager = new TicketsManager();
         permissionManager = new PermissionManager(activity,this);

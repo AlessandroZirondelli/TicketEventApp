@@ -1,4 +1,4 @@
-package com.example.ticketeventapp.model.home.recyclerview;
+package com.example.ticketeventapp.model.home.recyclerview.item_diff_callback;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
@@ -12,7 +12,7 @@ import java.util.List;
  *     Android suggests the use of DiffUtil.Callback to improve the performance of the RecyclerView
  *     Each time the list needs to be updated, only the changed items will be reloaded.
  */
-public class CardItemDiffCallback extends DiffUtil.Callback {
+public class EventCardItemDiffCallback extends DiffUtil.Callback {
 
     private final List<Event> oldCardList;
     private final List<Event> newCardList;
@@ -22,7 +22,7 @@ public class CardItemDiffCallback extends DiffUtil.Callback {
      * @param oldList the old list already displayed
      * @param newList the new list to display
      */
-    public CardItemDiffCallback(List<Event> oldList, List<Event> newList) {
+    public EventCardItemDiffCallback(List<Event> oldList, List<Event> newList) {
         this.oldCardList = oldList;
         this.newCardList = newList;
     }

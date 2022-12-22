@@ -29,7 +29,7 @@ import com.example.ticketeventapp.model.utils.AppInfo;
 import com.example.ticketeventapp.ui.main.fragment.mngtickets.TicketResultFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
-import com.example.ticketeventapp.viewmodel.mng_tickets.InfoTicketViewModel;
+import com.example.ticketeventapp.viewmodel.mng_tickets.TicketListViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 
@@ -46,7 +46,7 @@ public class InfoEventFragment extends Fragment {
     private TextInputEditText event_price;
     private Button button;
     private EventListViewModel eventListViewModel;
-    private InfoTicketViewModel infoTicketViewModel;
+    private TicketListViewModel infoTicketViewModel;
 
 
     @Nullable
@@ -66,7 +66,7 @@ public class InfoEventFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         view.setBackgroundColor(Color.WHITE); // Add background color beacause it's transparent
         eventListViewModel = new ViewModelProvider(getActivity()).get(EventListViewModel.class);
-        infoTicketViewModel = new ViewModelProvider(getActivity()).get(InfoTicketViewModel.class);
+        infoTicketViewModel = new ViewModelProvider(getActivity()).get(TicketListViewModel.class);
         fragment_title = view.findViewById(R.id.info_add_event);
         event_photo = view.findViewById(R.id.event_icon_image_view);
         event_name = view.findViewById(R.id.event_name_text_input_edit_text);
