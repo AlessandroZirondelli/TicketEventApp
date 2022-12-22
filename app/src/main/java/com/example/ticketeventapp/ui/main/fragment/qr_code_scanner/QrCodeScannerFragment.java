@@ -143,7 +143,7 @@ public class QrCodeScannerFragment extends Fragment {
                         .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                         .build();
 
-        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(activity), new QRCodeImageAnalyzer(new QRCodeFoundListener() {
+        QRCodeFoundListener qrCodeFoundListener = new QRCodeFoundListener() {
             @Override
             public void onQRCodeFound(String _qrCode) {
                 qrCode = _qrCode;
@@ -166,7 +166,11 @@ public class QrCodeScannerFragment extends Fragment {
             public void qrCodeNotFound() {
                 qrCodeFoundButton.setVisibility(View.INVISIBLE);
             }
-        }));
+        };
+
+        QRCodeImageAnalyzer qrCodeImageAnalyzer = new QRCodeImageAnalyzer(qrCodeFoundListener);
+
+        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(activity),qrCodeImageAnalyzer );
 
         Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, imageAnalysis, preview);
     }

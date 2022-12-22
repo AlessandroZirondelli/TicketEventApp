@@ -4,6 +4,9 @@ import static android.graphics.ImageFormat.YUV_420_888;
 import static android.graphics.ImageFormat.YUV_422_888;
 import static android.graphics.ImageFormat.YUV_444_888;
 
+import android.os.Build;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
@@ -18,12 +21,20 @@ import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.multi.qrcode.QRCodeMultiReader;
 
 import java.nio.ByteBuffer;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 public class QRCodeImageAnalyzer implements ImageAnalysis.Analyzer {
     private QRCodeFoundListener listener;
+    private LocalTime lastScannedTime;
 
     public QRCodeImageAnalyzer(QRCodeFoundListener listener) {
         this.listener = listener;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            this.lastScannedTime = LocalTime.now();
+        } else {
+            //TODO
+        }
     }
 
     @Override
@@ -43,11 +54,16 @@ public class QRCodeImageAnalyzer implements ImageAnalysis.Analyzer {
 
             BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(source));
 
-            try {
-                Result result = new QRCodeMultiReader().decode(binaryBitmap);
-                listener.onQRCodeFound(result.getText());
-            } catch (FormatException | ChecksumException | NotFoundException e) {
-                listener.qrCodeNotFound();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if(lastScannedTime.until(LocalTime.now(), ChronoUnit.SECONDS) > 2){ //difference from two scan
+                    try {
+                        Result result = new QRCodeMultiReader().decode(binaryBitmap);
+                        listener.onQRCodeFound(result.getText());
+                        lastScannedTime = LocalTime.now();
+                    } catch (FormatException | ChecksumException | NotFoundException e) {
+                        listener.qrCodeNotFound();
+                    }
+                }
             }
         }
 
