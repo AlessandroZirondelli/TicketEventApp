@@ -49,9 +49,8 @@ public class JoinerItemAdapter extends RecyclerView.Adapter<JoinerViewHolder> im
 
     private Filter ticketFilter;
 
-    public JoinerItemAdapter(Activity activity, List<Ticket> ticketList, List<User> usersList, OnItemListener listener){
+    public JoinerItemAdapter(Activity activity, List<Ticket> ticketList, List<User> usersList){
         this.activity = activity;
-        this.listener = listener;
         ticketListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(TicketListViewModel.class);
         eventListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(EventListViewModel.class);
         ticketsFilteredList = ticketList;
@@ -63,7 +62,7 @@ public class JoinerItemAdapter extends RecyclerView.Adapter<JoinerViewHolder> im
     @Override
     public JoinerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_joiners_layout, parent, false );
-        return new JoinerViewHolder(layoutView,listener);
+        return new JoinerViewHolder(layoutView);
     }
 
     @Override
@@ -99,6 +98,10 @@ public class JoinerItemAdapter extends RecyclerView.Adapter<JoinerViewHolder> im
         this.ticketsNotFilteredList = new ArrayList<>(ticketList);
         //check difference between lists and update only changes
         diffResult.dispatchUpdatesTo(this);
+    }
+
+    public void setUsersList(List<User> usersList){
+        this.usersList = usersList;
     }
 
     private  void updateCardListItems(List<Ticket> filteredList) {

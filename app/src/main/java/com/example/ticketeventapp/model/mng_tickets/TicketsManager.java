@@ -114,6 +114,14 @@ public class TicketsManager {
         }
     }
 
+    public List<Ticket> getTicketOfEvent(int event_id){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return this.ticketList.stream().filter((event)->event.getId_event() == event_id).collect(Collectors.toList());
+        } else {
+            return null;
+        }
+    }
+
     public List<Ticket> getTicketsListOfNextEventsByUser(List<Event> eventList){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 
