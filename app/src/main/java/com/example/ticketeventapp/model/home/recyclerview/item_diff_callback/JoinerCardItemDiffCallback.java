@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.example.ticketeventapp.model.mng_events.Event;
+import com.example.ticketeventapp.model.mng_tickets.Ticket;
 import com.example.ticketeventapp.model.mng_users.User;
 
 import java.util.List;
@@ -15,15 +16,15 @@ import java.util.List;
  */
 public class JoinerCardItemDiffCallback extends DiffUtil.Callback {
 
-    private final List<User> oldCardList;
-    private final List<User> newCardList;
+    private final List<Ticket> oldCardList;
+    private final List<Ticket> newCardList;
 
     /**
      * Constructor that takes the two lists
      * @param oldList the old list already displayed
      * @param newList the new list to display
      */
-    public JoinerCardItemDiffCallback(List<User> oldList, List<User> newList) {
+    public JoinerCardItemDiffCallback(List<Ticket> oldList, List<Ticket> newList) {
         this.oldCardList = oldList;
         this.newCardList = newList;
     }
@@ -58,8 +59,8 @@ public class JoinerCardItemDiffCallback extends DiffUtil.Callback {
      */
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        final User oldItem = oldCardList.get(oldItemPosition);
-        final User newItem = newCardList.get(newItemPosition);
+        final Ticket oldItem = oldCardList.get(oldItemPosition);
+        final Ticket newItem = newCardList.get(newItemPosition);
         return  oldItem.getId() == newItem.getId();
     }
 
