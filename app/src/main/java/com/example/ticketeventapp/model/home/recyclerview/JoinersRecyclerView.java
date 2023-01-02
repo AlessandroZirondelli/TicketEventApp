@@ -31,8 +31,7 @@ public class JoinersRecyclerView {
         joinersRecyclerView.setHasFixedSize(true);
         // Here I should set Adapter to pass data to display
         List<Ticket> ticketList = new ArrayList<>();
-        List<User> userList = new ArrayList<>();
-        this.joinerItemAdapter = new JoinerItemAdapter(activity, ticketList, userList );//TicketList, USerList
+        this.joinerItemAdapter = new JoinerItemAdapter(activity, ticketList );//TicketList, USerList
         joinersRecyclerView.setAdapter(joinerItemAdapter);
 
     }

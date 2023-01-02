@@ -39,13 +39,12 @@ public class JoinerItemAdapter extends RecyclerView.Adapter<JoinerViewHolder> im
 
     private Filter ticketFilter;
 
-    public JoinerItemAdapter(Activity activity, List<Ticket> ticketList, List<User> usersList){
+    public JoinerItemAdapter(Activity activity, List<Ticket> ticketList){
         this.activity = activity;
         ticketListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(TicketListViewModel.class);
         eventListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(EventListViewModel.class);
         ticketsFilteredList = ticketList;
         ticketsNotFilteredList = ticketList;
-        this.usersList = usersList;
         this.createFilter();
     }
 
@@ -70,7 +69,7 @@ public class JoinerItemAdapter extends RecyclerView.Adapter<JoinerViewHolder> im
         String username_joiner = ticket.getUsername(); //this person can be absent of present ath the event. We need to get his full name
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            User buyer = this.usersList.stream().filter((user)->user.getUsername().equals(username_joiner)).findFirst().get();
+            User buyer = this.usersList.stream().filter((user)->user.getUsername().equals(username_joiner)).findAny().get();
             holder.setJoiner_full_name(buyer.getName()+" "+ buyer.getSurname());
         } else {
             //TODO
