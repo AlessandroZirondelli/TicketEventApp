@@ -2,9 +2,11 @@ package com.example.ticketeventapp.ui.main.fragment.home.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +27,8 @@ import com.example.ticketeventapp.model.mng_users.User;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.example.ticketeventapp.viewmodel.mng_tickets.TicketListViewModel;
 import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
 import java.util.List;
 
@@ -38,6 +42,9 @@ public class RecyclerViewJoinersFragment extends Fragment {
     private JoinerItemAdapter joinerItemAdapter;
     private Activity activity;
     private TicketsManager ticketsManager;
+    private ChipGroup chipGroup;
+    private Chip chipPresent;
+    private Chip chipAbsent;
 
 
     @Override
@@ -63,6 +70,44 @@ public class RecyclerViewJoinersFragment extends Fragment {
         joinersRecyclerView.setRecyclerView();
         joinerItemAdapter = joinersRecyclerView.getJoinerItemAdapter();
         ticketsManager = new TicketsManager();
+
+
+        chipGroup = view.findViewById(R.id.chip_group_filter);
+        chipAbsent = view.findViewById(R.id.absent_joiners_chip);
+        chipPresent = view.findViewById(R.id.present_joiners_chip);
+
+        chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
+                if(checkedIds.isEmpty()){
+                    joinerItemAdapter.getFilter().filter("all");
+                }
+            }
+        });
+
+        chipPresent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    chipAbsent.setCheckable(false);
+                    joinerItemAdapter.getFilter().filter("present");
+                } else {
+                    chipAbsent.setCheckable(true);
+                }
+            }
+        });
+
+        chipAbsent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    chipPresent.setCheckable(false);
+                    joinerItemAdapter.getFilter().filter("absent");
+                } else {
+                    chipPresent.setCheckable(true);
+                }
+            }
+        });
 
 
         usersViewModelRegLog.getUsersLiveData().observe((LifecycleOwner) activity, new Observer<List<User>>() {

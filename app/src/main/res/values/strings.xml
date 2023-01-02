@@ -65,6 +65,7 @@
     <string name="saving_qr_code">Saving QrCode in your gallery</string>
     <string name="your_tickets">Your Tickets</string>
     <string name="all_joiners">All joiners</string>
-    <string name="present_joiners">Present joiners</string>
+    <string name="present_joiners">Present</string>
+    <string name="absent_joiners">Absent</string>
 
 </resources>

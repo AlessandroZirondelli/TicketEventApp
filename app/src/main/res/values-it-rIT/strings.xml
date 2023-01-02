@@ -69,5 +69,9 @@
     <string name="saving_qr_code">Salvataggio QrCode nella tua galleia </string>
     <string name="your_tickets">I tuoi biglietti</string>
 
+    <string name="all_joiners">Tutti i partecipanti</string>
+    <string name="present_joiners">Presenti</string>
+    <string name="absent_joiners">Assenti</string>
+
 
 </resources>
