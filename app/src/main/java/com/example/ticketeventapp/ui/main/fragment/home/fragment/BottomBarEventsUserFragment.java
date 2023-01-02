@@ -45,11 +45,11 @@ public class BottomBarEventsUserFragment extends Fragment {
         activity = getActivity();
         bottomNavigationView = view.findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            if(item.getItemId() == R.id.events_bottom_navigation){
+            if(item.getItemId() == R.id.events_bottom_navigation && !item.isChecked()){ // isChecked is to resolve double tap bu. It displayed blank
                 Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,hostFragment,new RecyclerViewEventsFragment(), RecyclerViewTicketsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
             }
 
-            if(item.getItemId() == R.id.tickets_bottom_navigation){
+            if(item.getItemId() == R.id.tickets_bottom_navigation && !item.isChecked()){
                 Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,hostFragment,new RecyclerViewTicketsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
             }
             return true;
