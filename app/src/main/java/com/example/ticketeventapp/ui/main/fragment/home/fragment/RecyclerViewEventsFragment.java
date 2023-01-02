@@ -88,6 +88,17 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
 
         eventItemAdapter = eventsRecyclerView.getEventItemAdapter();
 
+
+        if (permissionManager.isPermissionStorageAllowed()){
+            Log.e("Permesso","Granted");
+
+        } else {
+            permissionManager.launchPermissionRequestStorage();
+            Log.e("Permesso","Deny");
+        }
+
+
+
         eventListViewModel.getEventsLiveData().observe((LifecycleOwner) activity, new Observer<List<Event>>() {
             @Override
             public void onChanged(List<Event> eventList) {

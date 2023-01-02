@@ -20,10 +20,12 @@ public class PermissionManager {
 
     private ActivityResultLauncher<String> requestGpsPermissionLauncher;
     private ActivityResultLauncher<String> requestCameraPermissionLauncher;
+    private ActivityResultLauncher<String> requestStoragePermissionLauncher;
     private Fragment fragment;
     private Activity activity;
     private String PERMISSION_GPS_REQUESTED = Manifest.permission.ACCESS_FINE_LOCATION;
     private String PERMISSION_CAMERA_REQUESTED = Manifest.permission.CAMERA;
+    private String PERMISSION_STORAGE_REQUESTED = Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
     private Boolean alreadyAskedPermissionGPS;
 
@@ -63,6 +65,17 @@ public class PermissionManager {
 
             }
         });
+
+        this.requestStoragePermissionLauncher = fragment.registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
+            @Override
+            public void onActivityResult(Boolean result) {
+                if(result){
+
+                } else {
+                    Log.e("Storage","Accesso allo storage negato");
+                }
+            }
+        });
     }
 
     public boolean isPermissionGPSAllowed(){
@@ -73,6 +86,10 @@ public class PermissionManager {
         return ActivityCompat.checkSelfPermission(activity, PERMISSION_CAMERA_REQUESTED) == PackageManager.PERMISSION_GRANTED;
     }
 
+    public boolean isPermissionStorageAllowed(){
+        return ActivityCompat.checkSelfPermission(activity, PERMISSION_STORAGE_REQUESTED) == PackageManager.PERMISSION_GRANTED;
+    }
+
     public void launchPermissionRequestGPS(){
         if(!this.alreadyAskedPermissionGPS){ //Ask only if the user has not deny yet
             requestGpsPermissionLauncher.launch(PERMISSION_GPS_REQUESTED);
@@ -81,6 +98,10 @@ public class PermissionManager {
 
     public void launchPermissionRequestCamera(){
         requestCameraPermissionLauncher.launch(PERMISSION_CAMERA_REQUESTED);
+    }
+
+    public void launchPermissionRequestStorage(){
+        requestCameraPermissionLauncher.launch(PERMISSION_STORAGE_REQUESTED);
     }
 
 
