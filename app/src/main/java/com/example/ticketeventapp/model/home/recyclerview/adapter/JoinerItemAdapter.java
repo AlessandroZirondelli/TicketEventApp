@@ -19,28 +19,18 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.model.home.recyclerview.item_diff_callback.EventCardItemDiffCallback;
 import com.example.ticketeventapp.model.home.recyclerview.item_diff_callback.JoinerCardItemDiffCallback;
-import com.example.ticketeventapp.model.home.recyclerview.item_diff_callback.TicketCardItemDiffCallback;
-import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemListener;
 import com.example.ticketeventapp.model.home.recyclerview.viewholder.JoinerViewHolder;
-import com.example.ticketeventapp.model.home.recyclerview.viewholder.TicketViewHolder;
-import com.example.ticketeventapp.model.mng_events.Event;
-import com.example.ticketeventapp.model.mng_events.LocationGpsAgent;
 import com.example.ticketeventapp.model.mng_tickets.Ticket;
 import com.example.ticketeventapp.model.mng_users.User;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.example.ticketeventapp.viewmodel.mng_tickets.TicketListViewModel;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class JoinerItemAdapter extends RecyclerView.Adapter<JoinerViewHolder> implements Filterable {
 
     private Activity activity;
-    private OnItemListener listener;
     private TicketListViewModel ticketListViewModel;
     private EventListViewModel eventListViewModel;
     private List<Ticket> ticketsNotFilteredList;
@@ -56,12 +46,13 @@ public class JoinerItemAdapter extends RecyclerView.Adapter<JoinerViewHolder> im
         ticketsFilteredList = ticketList;
         ticketsNotFilteredList = ticketList;
         this.usersList = usersList;
+        this.createFilter();
     }
 
     @NonNull
     @Override
     public JoinerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_joiners_layout, parent, false );
+        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.joiner_layout, parent, false );
         return new JoinerViewHolder(layoutView);
     }
 
@@ -71,8 +62,10 @@ public class JoinerItemAdapter extends RecyclerView.Adapter<JoinerViewHolder> im
         Ticket ticket = ticketsFilteredList.get(position);
         if(ticket.isValidated()){//user is present at the event
             Drawable drawable = AppCompatResources.getDrawable(activity, activity.getResources().getIdentifier("@drawable/present_joiner","drawable",activity.getPackageName()));
+            holder.setPresenceDrawable(drawable);
         } else { //user is absent at the event
             Drawable drawable = AppCompatResources.getDrawable(activity, activity.getResources().getIdentifier("@drawable/absent_joiner","drawable",activity.getPackageName()));
+            holder.setPresenceDrawable(drawable);
         }
         String username_joiner = ticket.getUsername(); //this person can be absent of present ath the event. We need to get his full name
 
@@ -110,10 +103,6 @@ public class JoinerItemAdapter extends RecyclerView.Adapter<JoinerViewHolder> im
         final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
         this.ticketsFilteredList = new ArrayList<>(filteredList);
         diffResult.dispatchUpdatesTo(this);
-    }
-
-    public Ticket getItemSelected(int position) {
-        return ticketsFilteredList.get(position);
     }
 
 

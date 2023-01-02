@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.ui.main.fragment.home.fragment.RecyclerViewJoinersFragment;
 import com.example.ticketeventapp.ui.main.fragment.qr_code_scanner.QrCodeScannerFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
@@ -63,6 +64,14 @@ public class ActionSelectFragment extends Fragment {
         scan = view.findViewById(R.id.scan_qrcode_image_view);
         modify = view.findViewById(R.id.edit_event_image_view);
         joiners = view.findViewById(R.id.view_joiners_image_view);
+
+
+        joiners.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new RecyclerViewJoinersFragment(),RecyclerViewJoinersFragment.class.getSimpleName(), R.id.fragment_container_view);
+            }
+        });
 
         modify.setOnClickListener(new View.OnClickListener() {
             @Override

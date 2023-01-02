@@ -1,6 +1,7 @@
 package com.example.ticketeventapp.model.home.recyclerview.viewholder;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,9 @@ public class JoinerViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void setPresenceDrawable(Drawable presence) {
+        if(this.presence == null){
+            Log.e("Bug","Errore null");
+        }
         this.presence.setImageDrawable(presence);
     }
 

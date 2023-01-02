@@ -60,6 +60,7 @@ public class RecyclerViewJoinersFragment extends Fragment {
         ticketListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(TicketListViewModel.class);
         eventListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(EventListViewModel.class);
         joinersRecyclerView = new JoinersRecyclerView(activity);
+        joinersRecyclerView.setRecyclerView();
         joinerItemAdapter = joinersRecyclerView.getJoinerItemAdapter();
         ticketsManager = new TicketsManager();
 
