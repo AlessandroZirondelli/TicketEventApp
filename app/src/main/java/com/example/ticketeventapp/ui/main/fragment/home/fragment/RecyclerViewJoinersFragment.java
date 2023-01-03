@@ -69,6 +69,7 @@ public class RecyclerViewJoinersFragment extends Fragment {
         joinersRecyclerView = new JoinersRecyclerView(activity);
         joinersRecyclerView.setRecyclerView();
         joinerItemAdapter = joinersRecyclerView.getJoinerItemAdapter();
+        joinerItemAdapter.setUsersList(usersViewModelRegLog.getUsersLiveData().getValue());
         ticketsManager = new TicketsManager();
 
 
@@ -113,6 +114,7 @@ public class RecyclerViewJoinersFragment extends Fragment {
         usersViewModelRegLog.getUsersLiveData().observe((LifecycleOwner) activity, new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
+                Log.e("Bug","Setto ora usersList");
                 joinerItemAdapter.setUsersList(users);
             }
         });
@@ -121,9 +123,12 @@ public class RecyclerViewJoinersFragment extends Fragment {
             @Override
             public void onChanged(List<Ticket> ticketList) {
                 Event selectedEvent = eventListViewModel.getSelectedEventItem().getValue();
-                ticketsManager.setTicketList(ticketList);
-                List<Ticket> ticketOfSpecificEvent = ticketsManager.getTicketOfEvent(selectedEvent.getId());
-                joinerItemAdapter.setData(ticketOfSpecificEvent);
+                if(selectedEvent != null){
+                    ticketsManager.setTicketList(ticketList);
+                    List<Ticket> ticketOfSpecificEvent = ticketsManager.getTicketOfEvent(selectedEvent.getId());
+                    Log.e("Bug","Setto ora i dati dell'adapter");
+                    joinerItemAdapter.setData(ticketOfSpecificEvent);
+                }
             }
         });
 

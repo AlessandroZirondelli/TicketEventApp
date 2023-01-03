@@ -69,6 +69,10 @@ public class JoinerItemAdapter extends RecyclerView.Adapter<JoinerViewHolder> im
         String username_joiner = ticket.getUsername(); //this person can be absent of present ath the event. We need to get his full name
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if(this.usersList == null){
+                Log.e("Bug","Errore nulllllllllllllll");
+            }
+            Log.e("Bug","Faccio ora stream su usersList");
             User buyer = this.usersList.stream().filter((user)->user.getUsername().equals(username_joiner)).findAny().get();
             holder.setJoiner_full_name(buyer.getName()+" "+ buyer.getSurname());
         } else {

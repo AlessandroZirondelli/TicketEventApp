@@ -7,17 +7,23 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.mng_users.User;
 import com.example.ticketeventapp.model.utils.AppInfo;
 import com.example.ticketeventapp.ui.main.fragment.home.fragment.HomeFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
+import com.example.ticketeventapp.viewmodel.mng_users.UsersViewModelRegLog;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private AddEventViewModel addEventViewModel;
+    private UsersViewModelRegLog usersViewModelRegLog;
     private AppInfo appInfo;
 
 
@@ -34,7 +40,16 @@ public class MainActivity extends AppCompatActivity {
         }
         appInfo = AppInfo.getInstance();
         addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
+        usersViewModelRegLog = new ViewModelProvider(this).get(UsersViewModelRegLog.class);
         //Log.e("MngEventsActivity","Logged User:"+appInfo.getLoggedUser().getUsername());
+
+
+        usersViewModelRegLog.getUsersLiveData().observe(this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(List<User> users) {
+
+            }
+        });
 
     }
 
