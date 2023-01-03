@@ -169,6 +169,7 @@ public class EnablerDialog {
                         fragmentManager.popBackStack();
                         fragmentManager.popBackStack();
                         eventListViewModel.deleteEvent();
+                        eventListViewModel.deleteAllTicketOfEvent();
 
                     }
                 }).setCancelable(false).create().show();

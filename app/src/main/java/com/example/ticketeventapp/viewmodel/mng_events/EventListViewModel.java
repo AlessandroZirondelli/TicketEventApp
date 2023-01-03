@@ -56,4 +56,8 @@ public class EventListViewModel extends AndroidViewModel {
     public void deleteEvent(){
         this.repository.deleteEvent(this.selectedEventItem.getValue());
     }
+
+    public void deleteAllTicketOfEvent(){
+        this.repository.deleteAllTicketOfEvent(this.selectedEventItem.getValue().getId());
+    }
 }
