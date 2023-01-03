@@ -79,4 +79,23 @@ public class TicketEventAppRepository {
         });
     }
 
+    public void deleteEvent(Event event){
+        TicketEventAppDatabase.executor.execute(new Runnable() {
+
+            @Override
+            public void run() { ticketEventAppDAO.deleteEvent(event);}
+        });
+    }
+
+    public void deleteAllTicketOfEvent(int event_id){
+        TicketEventAppDatabase.executor.execute(new Runnable() {
+
+            @Override
+            public void run() { ticketEventAppDAO.deleteAllTicketOfEvent(event_id);}
+        });
+    }
+
+
+
+
 }
