@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.provider.Settings;
 import android.view.View;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
@@ -16,6 +17,7 @@ import com.example.ticketeventapp.model.utils.AppPreferences;
 import com.example.ticketeventapp.ui.main.activity.MainActivity;
 import com.example.ticketeventapp.ui.reglog.activity.RegLogActivity;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
+import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class EnablerDialog {
@@ -151,6 +153,25 @@ public class EnablerDialog {
         }
 
 
+    }
+
+    public void askToConfirmEventDelete(EventListViewModel eventListViewModel, FragmentManager fragmentManager){
+        new AlertDialog.Builder(activity).setMessage("Do you really want to delete this event and remove all tickets? ")
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                        fragmentManager.popBackStack();
+                        fragmentManager.popBackStack();
+                        eventListViewModel.deleteEvent();
+
+                    }
+                }).setCancelable(false).create().show();
     }
 
 }

@@ -358,6 +358,7 @@ public class ModifyEventFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.e("Delete","CLick on delete event");
+                enablerDialog.askToConfirmEventDelete(eventListViewModel,getFragmentManager());
             }
         });
 
