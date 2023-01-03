@@ -159,6 +159,18 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
         app:layout_constraintTop_toBottomOf="@+id/guideline_bottom_evemt_name" />
 
+    <ImageView
+        android:id="@+id/delete_icon_image_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/delete_event_icon"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_event_icon"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_bottom_all_fields"
+        app:srcCompat="@drawable/delete" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right_event_icon"
         android:layout_width="wrap_content"

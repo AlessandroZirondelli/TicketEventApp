@@ -59,6 +59,8 @@ public class ModifyEventFragment extends Fragment {
     private TextInputEditText event_price;
     private Button button;
 
+    private ImageView event_delete;
+
     private DatePicker datePicker;
     private TimePicker timePicker;
 
@@ -101,6 +103,7 @@ public class ModifyEventFragment extends Fragment {
         event_time = view.findViewById(R.id.event_time_text_input_edit_text);
         event_price = view.findViewById(R.id.event_price_text_input_edit_text);
         button = view.findViewById(R.id.add_event_button);
+        event_delete = view.findViewById(R.id.delete_icon_image_view);
 
         button.setText(R.string.modify_event);
 
@@ -348,6 +351,13 @@ public class ModifyEventFragment extends Fragment {
                         eventListViewModel.clearSelectedItem();
                     }
                 }
+            }
+        });
+
+        event_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("Delete","CLick on delete event");
             }
         });
 

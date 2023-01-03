@@ -163,6 +163,17 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_left_all_fields"
         app:layout_constraintTop_toTopOf="@+id/guideline_bottom_event_price" />
 
+    <ImageView
+        android:id="@+id/delete_icon_image_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/delete_event_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_right_all_fields"
+        app:layout_constraintTop_toTopOf="@+id/guideline_bottom_event_price"
+        app:srcCompat="@drawable/delete" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left_all_fields"
         android:layout_width="wrap_content"

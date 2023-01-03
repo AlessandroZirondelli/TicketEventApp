@@ -56,6 +56,8 @@ public class AddEventFragment extends Fragment {
     private TextInputEditText event_time;
     private TextInputEditText event_price;
     private Button button;
+    private ImageView event_delete;
+
 
     private DatePicker datePicker;
     private TimePicker timePicker;
@@ -95,6 +97,8 @@ public class AddEventFragment extends Fragment {
         event_time = view.findViewById(R.id.event_time_text_input_edit_text);
         event_price = view.findViewById(R.id.event_price_text_input_edit_text);
         button = view.findViewById(R.id.add_event_button);
+        event_delete = view.findViewById(R.id.delete_icon_image_view);
+        event_delete.setVisibility(View.INVISIBLE);
 
         addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
         addEventViewModel.clearData();
