@@ -123,7 +123,7 @@ public class RecyclerViewJoinersFragment extends Fragment {
             @Override
             public void onChanged(List<Ticket> ticketList) {
                 Event selectedEvent = eventListViewModel.getSelectedEventItem().getValue();
-                if(selectedEvent != null){
+                if(selectedEvent != null){ // if it's null, it means that we've just deleted event
                     ticketsManager.setTicketList(ticketList);
                     List<Ticket> ticketOfSpecificEvent = ticketsManager.getTicketOfEvent(selectedEvent.getId());
                     Log.e("Bug","Setto ora i dati dell'adapter");
