@@ -4,8 +4,16 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,6 +23,28 @@ import java.util.Date;
 import java.util.Locale;
 
 public class AddEventManager {
+
+    public static String generateRandomString(){
+        return RandomStringUtils.randomAlphanumeric(255);
+    }
+
+    public static Bitmap generateBitmapQrCode(String str) throws WriterException {
+        QRCodeWriter writer = new QRCodeWriter();
+        BitMatrix bitMatrix = writer.encode(str, BarcodeFormat.QR_CODE, 400, 400);
+        int w = bitMatrix.getWidth();
+        int h = bitMatrix.getHeight();
+        int[] pixels = new int[w * h];
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                pixels[y * w + x] = bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE;
+            }
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        bitmap.setPixels(pixels, 0, w, 0, 0, w, h);
+        return bitmap;
+    }
+
 
     public int areFilledFields(String name, String description, String place, String date, String time, String price){
         if(name.isEmpty()){
