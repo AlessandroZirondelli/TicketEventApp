@@ -22,6 +22,7 @@ import com.example.ticketeventapp.model.home.recyclerview.onitemlistener.OnItemL
 import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_tickets.Ticket;
 import com.example.ticketeventapp.model.mng_tickets.TicketsManager;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
 import com.example.ticketeventapp.ui.main.fragment.mngtickets.TicketResultFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
@@ -37,6 +38,7 @@ public class RecyclerViewTicketsFragment extends Fragment implements OnItemListe
     private ImageView logout;
     private TicketsManager ticketsManager;
     private EventListViewModel eventListViewModel;
+    private EnablerDialog enablerDialog;
 
 
     @Override
@@ -59,6 +61,16 @@ public class RecyclerViewTicketsFragment extends Fragment implements OnItemListe
         ticketsRecyclerView.setRecyclerView(this);
         ticketItemAdapter = ticketsRecyclerView.getEventItemAdapter();
         ticketsManager = new TicketsManager();
+        enablerDialog = new EnablerDialog(getActivity());
+
+        logout = view.findViewById(R.id.logout_image_view);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                enablerDialog.askToLogout();
+            }
+        });
 
         ticketListViewModel.getTicketsLiveData().observe(getActivity(), new Observer<List<Ticket>>() {
             @Override
