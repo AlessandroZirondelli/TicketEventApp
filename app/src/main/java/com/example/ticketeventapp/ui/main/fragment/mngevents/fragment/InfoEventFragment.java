@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +33,9 @@ import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.example.ticketeventapp.viewmodel.mng_tickets.TicketListViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class InfoEventFragment extends Fragment {
 
@@ -119,6 +123,18 @@ public class InfoEventFragment extends Fragment {
         this.event_price.setText(selectedEvent.getPrice());
         this.event_time.setText(selectedEvent.getTime());
         this.event_description.setText(selectedEvent.getDescription());
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            LocalDate today = LocalDate.now();
+            LocalTime time = LocalTime.now();
+
+            LocalDate eventDate = LocalDate.parse(selectedEvent.getDate());
+            LocalTime eventTime = LocalTime.parse(selectedEvent.getTime());
+            if((eventDate.isBefore(today)) || (eventDate.isEqual(today) && (eventTime.isBefore(time)))){
+                button.setEnabled(false);
+            }
+        }
+
 
         String image_uri = selectedEvent.getImageUri();
         if(image_uri.contains("add_photo_alternate")){
