@@ -182,4 +182,11 @@ public class EnablerDialog {
         snackbar.show();
     }
 
+    public void showInfoCantScanTicket(){
+        Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
+                R.string.cant_scan_ticket,
+                Snackbar.ANIMATION_MODE_SLIDE);
+        snackbar.show();
+    }
+
 }

@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.ui.main.fragment.home.fragment.RecyclerViewJoinersFragment;
 import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
 import com.example.ticketeventapp.ui.main.fragment.qr_code_scanner.QrCodeScannerFragment;
@@ -84,14 +85,19 @@ public class ActionSelectFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    LocalDate eventDate = LocalDate.parse(eventListViewModel.getSelectedEventItem().getValue().getDate());
-                    LocalTime eventTime = LocalTime.parse(eventListViewModel.getSelectedEventItem().getValue().getTime());
-                    LocalDate today = LocalDate.now();
-                    LocalTime time = LocalTime.now();
-                    if((eventDate.isAfter(today) || eventDate.isEqual(today)) && (eventTime.isAfter(time))){
-                        Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ModifyEventFragment(),ModifyEventFragment.class.getSimpleName(), R.id.fragment_container_view);
-                    } else {
-                        enablerDialog.showInfoCantModifyEvent();
+                    Event selectedEvent = eventListViewModel.getSelectedEventItem().getValue();
+
+                    if(selectedEvent != null){
+                        LocalDate eventDate = LocalDate.parse(selectedEvent.getDate());
+                        LocalTime eventTime = LocalTime.parse(selectedEvent.getTime());
+                        LocalDate today = LocalDate.now();
+                        LocalTime time = LocalTime.now();
+                        Log.e("Bug","Selected event date"+selectedEvent.getName());
+                        if((eventDate.isAfter(today)) || (eventDate.isEqual(today) && (eventTime.isAfter(time)))){
+                            Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ModifyEventFragment(),ModifyEventFragment.class.getSimpleName(), R.id.fragment_container_view);
+                        } else {
+                            enablerDialog.showInfoCantModifyEvent();
+                        }
                     }
                 }
             }
@@ -99,7 +105,18 @@ public class ActionSelectFragment extends Fragment {
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utilities.replaceFragmentOnContainer((AppCompatActivity) activity, new QrCodeScannerFragment(), QrCodeScannerFragment.class.getSimpleName(), R.id.fragment_container_view);
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    LocalDate eventDate = LocalDate.parse(eventListViewModel.getSelectedEventItem().getValue().getDate());
+                    LocalTime eventTime = LocalTime.parse(eventListViewModel.getSelectedEventItem().getValue().getTime());
+                    LocalDate today = LocalDate.now();
+                    LocalTime time = LocalTime.now();
+                    if((eventDate.isBefore(today) || (eventDate.isEqual(today)) && (eventTime.isBefore(time)))){
+                        Utilities.replaceFragmentOnContainer((AppCompatActivity) activity, new QrCodeScannerFragment(), QrCodeScannerFragment.class.getSimpleName(), R.id.fragment_container_view);
+                    } else {
+                        enablerDialog.showInfoCantScanTicket();
+                    }
+                }
             }
         });
 

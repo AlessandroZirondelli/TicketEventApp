@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -77,8 +78,20 @@ public class ModifyEventFragment extends Fragment {
     private Boolean locationChanged;
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                getFragmentManager().popBackStack();
+                getFragmentManager().popBackStack();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+    }
 
     @Nullable
     @Override
@@ -347,6 +360,7 @@ public class ModifyEventFragment extends Fragment {
                         addEventViewModel.editEvent(event);
                         Log.e("id",""+event.getId());
                         Log.e("AddEventFragment","Inserimento evento effettuato");
+                        getFragmentManager().popBackStack();
                         getFragmentManager().popBackStack();
                         eventListViewModel.clearSelectedItem();
                     }

@@ -73,5 +73,9 @@
     <string name="present_joiners">Presenti</string>
     <string name="absent_joiners">Assenti</string>
 
+    <string name="delete_event_icon">Icona per eliminare evento</string>
+    <string name="cant_modify_event">Evento già iniziato! Non puoi modificare le info evento</string>
+    <string name="cant_scan_ticket">Evento non ancora iniziato ! Scansiona solo quando è iniziato</string>
+
 
 </resources>
