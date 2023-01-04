@@ -68,5 +68,6 @@
     <string name="present_joiners">Present</string>
     <string name="absent_joiners">Absent</string>
     <string name="delete_event_icon">Icon to delete event</string>
+    <string name="cant_modify_event">Event  already started! You can\'t modify event info</string>
 
 </resources>

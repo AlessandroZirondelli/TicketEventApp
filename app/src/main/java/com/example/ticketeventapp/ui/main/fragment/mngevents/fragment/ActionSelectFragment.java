@@ -18,9 +18,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.ui.main.fragment.home.fragment.RecyclerViewJoinersFragment;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
 import com.example.ticketeventapp.ui.main.fragment.qr_code_scanner.QrCodeScannerFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import okhttp3.internal.Util;
 
@@ -31,6 +35,7 @@ public class ActionSelectFragment extends Fragment {
     private ImageView joiners;
     private ImageView modify;
     private EventListViewModel eventListViewModel;
+    private EnablerDialog enablerDialog;
 
     @Nullable
     @Override
@@ -61,6 +66,8 @@ public class ActionSelectFragment extends Fragment {
         view.setBackgroundColor(Color.WHITE); // Add background color because it's transparent
         activity = getActivity();
 
+        enablerDialog = new EnablerDialog(activity);
+
         scan = view.findViewById(R.id.scan_qrcode_image_view);
         modify = view.findViewById(R.id.edit_event_image_view);
         joiners = view.findViewById(R.id.view_joiners_image_view);
@@ -76,7 +83,17 @@ public class ActionSelectFragment extends Fragment {
         modify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ModifyEventFragment(),ModifyEventFragment.class.getSimpleName(), R.id.fragment_container_view);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    LocalDate eventDate = LocalDate.parse(eventListViewModel.getSelectedEventItem().getValue().getDate());
+                    LocalTime eventTime = LocalTime.parse(eventListViewModel.getSelectedEventItem().getValue().getTime());
+                    LocalDate today = LocalDate.now();
+                    LocalTime time = LocalTime.now();
+                    if((eventDate.isAfter(today) || eventDate.isEqual(today)) && (eventTime.isAfter(time))){
+                        Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ModifyEventFragment(),ModifyEventFragment.class.getSimpleName(), R.id.fragment_container_view);
+                    } else {
+                        enablerDialog.showInfoCantModifyEvent();
+                    }
+                }
             }
         });
         scan.setOnClickListener(new View.OnClickListener() {
