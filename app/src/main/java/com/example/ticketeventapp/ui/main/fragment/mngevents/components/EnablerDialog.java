@@ -154,7 +154,7 @@ public class EnablerDialog {
             Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
                     "Event not found",
                     Snackbar.ANIMATION_MODE_SLIDE);
-            snackbar.setBackgroundTint(Color.GREEN);
+            snackbar.setBackgroundTint(Color.RED);
             snackbar.setTextColor(Color.BLACK);
             snackbar.show();
         }

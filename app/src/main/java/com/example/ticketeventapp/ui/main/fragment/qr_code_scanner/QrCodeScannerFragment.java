@@ -197,6 +197,8 @@ public class QrCodeScannerFragment extends Fragment {
                     Event validEvent = addEventManager.isValidCodeEvent(_qrCode);
                     if(validEvent == null) {
                         int resNotFoundEvent = 3;
+                        MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_error);
+                        mediaPlayer.start();
                         enablerDialog.showInfoScannedQrCode(resNotFoundEvent);
                     } else {
                         eventListViewModel.setSelectedEventItem(validEvent);
