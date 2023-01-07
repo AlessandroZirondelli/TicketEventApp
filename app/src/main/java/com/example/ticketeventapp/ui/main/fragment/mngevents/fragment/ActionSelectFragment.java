@@ -112,7 +112,9 @@ public class ActionSelectFragment extends Fragment {
                     LocalDate today = LocalDate.now();
                     LocalTime time = LocalTime.now();
                     if((eventDate.isBefore(today) || (eventDate.isEqual(today)) && (eventTime.isBefore(time)))){
-                        Utilities.replaceFragmentOnContainer((AppCompatActivity) activity, new QrCodeScannerFragment(), QrCodeScannerFragment.class.getSimpleName(), R.id.fragment_container_view);
+                        QrCodeScannerFragment qrCodeScannerFragment = new QrCodeScannerFragment();
+                        qrCodeScannerFragment.setScanTicketMode(true);
+                        Utilities.replaceFragmentOnContainer((AppCompatActivity) activity, qrCodeScannerFragment, QrCodeScannerFragment.class.getSimpleName(), R.id.fragment_container_view);
                     } else {
                         enablerDialog.showInfoCantScanTicket();
                     }

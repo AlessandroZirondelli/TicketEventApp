@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 
 import com.google.zxing.BarcodeFormat;
@@ -20,9 +21,18 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 public class AddEventManager {
+
+    private List<Event> eventList;
+
+
+    public void setEventList(List<Event> eventList){
+        this.eventList = eventList;
+    }
 
     public static String generateRandomString(){
         return RandomStringUtils.randomAlphanumeric(255);
@@ -102,6 +112,13 @@ public class AddEventManager {
 
         return imageURI;
 
+    }
+
+    public Event isValidCodeEvent(String codeToCheck){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Optional<Event> scannedEvent = this.eventList.stream().filter((event)->event.getCode().equals(codeToCheck)).findFirst();
+            return scannedEvent.get();
+        } else {return null;}
     }
 
 }

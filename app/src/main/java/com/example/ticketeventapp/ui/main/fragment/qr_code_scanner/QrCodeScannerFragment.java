@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
@@ -26,12 +27,16 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.model.mng_events.AddEventManager;
+import com.example.ticketeventapp.model.mng_events.Event;
 import com.example.ticketeventapp.model.mng_tickets.Ticket;
 import com.example.ticketeventapp.model.mng_tickets.TicketsManager;
 import com.example.ticketeventapp.model.qr_code_scanner.QRCodeFoundListener;
 import com.example.ticketeventapp.model.qr_code_scanner.QRCodeImageAnalyzer;
 import com.example.ticketeventapp.model.utils.PermissionManager;
 import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.fragment.InfoEventFragment;
+import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.example.ticketeventapp.viewmodel.mng_tickets.TicketListViewModel;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -50,9 +55,12 @@ public class QrCodeScannerFragment extends Fragment {
 
     private PermissionManager permissionManager;
     private TicketsManager ticketsManager;
+    private AddEventManager addEventManager;
     private TicketListViewModel ticketListViewModel;
     private EventListViewModel eventListViewModel;
     private EnablerDialog enablerDialog;
+
+    private Boolean scanTicketMode; //true if ticket scan mode, false if event mode
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,6 +81,7 @@ public class QrCodeScannerFragment extends Fragment {
         ticketListViewModel = new ViewModelProvider(getActivity()).get(TicketListViewModel.class);
         eventListViewModel = new ViewModelProvider(getActivity()).get(EventListViewModel.class);
         ticketsManager = new TicketsManager();
+        addEventManager = new AddEventManager();
         permissionManager = new PermissionManager(activity,this);
         cameraProviderFuture = ProcessCameraProvider.getInstance(activity);
         previewView = activity.findViewById(R.id.activity_main_previewView);
@@ -98,6 +107,13 @@ public class QrCodeScannerFragment extends Fragment {
             @Override
             public void onChanged(List<Ticket> tickets) {
                 ticketsManager.setTicketList(tickets);
+            }
+        });
+
+        eventListViewModel.getEventsLiveData().observe(getActivity(), new Observer<List<Event>>() {
+            @Override
+            public void onChanged(List<Event> eventList) {
+                addEventManager.setEventList(eventList);
             }
         });
 
@@ -156,24 +172,37 @@ public class QrCodeScannerFragment extends Fragment {
 
 
                 //Log.e("QrCode","Selected ticket event id: "+infoTicketViewModel.getSelectedTicket().getValue().getId_event());
-                int res = ticketsManager.isValidTicket(_qrCode, eventListViewModel.getSelectedEventItem().getValue().getId());
-                if(res == 1){
-                    Log.e("QrCode","Ticket valido");
-                    Ticket scannedTicket = ticketsManager.getTicketByCode(_qrCode);
-                    scannedTicket.setIsValidated(true);
-                    ticketListViewModel.updateTicket(scannedTicket);
-                    MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_ok);
-                    mediaPlayer.start();
-                } else if(res == 0){
-                    Log.e("QrCode","Ticket non valido");
-                    MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_error);
-                    mediaPlayer.start();
-                } else if(res == 2){
-                    Log.e("QrCode","Ticket già usatp");
-                    MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_error);
-                    mediaPlayer.start();
+
+                if(scanTicketMode){//scan ticket mode
+                    int res = ticketsManager.isValidTicket(_qrCode, eventListViewModel.getSelectedEventItem().getValue().getId());
+                    if(res == 1){
+                        Log.e("QrCode","Ticket valido");
+                        Ticket scannedTicket = ticketsManager.getTicketByCode(_qrCode);
+                        scannedTicket.setIsValidated(true);
+                        ticketListViewModel.updateTicket(scannedTicket);
+                        MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_ok);
+                        mediaPlayer.start();
+                    } else if(res == 0){
+                        Log.e("QrCode","Ticket non valido");
+                        MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_error);
+                        mediaPlayer.start();
+                    } else if(res == 2){
+                        Log.e("QrCode","Ticket già usatp");
+                        MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_error);
+                        mediaPlayer.start();
+                    }
+                    enablerDialog.showInfoScannedQrCode(res);
+
+                } else { //scan event mode
+                    Event validEvent = addEventManager.isValidCodeEvent(_qrCode);
+                    if(validEvent == null) {
+                        int resNotFoundEvent = 3;
+                        enablerDialog.showInfoScannedQrCode(resNotFoundEvent);
+                    } else {
+                        eventListViewModel.setSelectedEventItem(validEvent);
+                        Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new InfoEventFragment(),InfoEventFragment.class.getSimpleName(), R.id.fragment_container_view);
+                    }
                 }
-                enablerDialog.showInfoScannedQrCode(res);
             }
 
             @Override
@@ -187,5 +216,9 @@ public class QrCodeScannerFragment extends Fragment {
         imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(activity),qrCodeImageAnalyzer );
 
         Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, imageAnalysis, preview);
+    }
+
+    public  void setScanTicketMode(Boolean scanTicketMode){
+        this.scanTicketMode = scanTicketMode;
     }
 }

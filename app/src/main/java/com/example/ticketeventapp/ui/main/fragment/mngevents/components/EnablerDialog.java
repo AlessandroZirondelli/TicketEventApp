@@ -150,6 +150,13 @@ public class EnablerDialog {
             snackbar.setBackgroundTint(Color.GREEN);
             snackbar.setTextColor(Color.BLACK);
             snackbar.show();
+        } else if( res == 3) { //QR code event not found
+            Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
+                    "Event not found",
+                    Snackbar.ANIMATION_MODE_SLIDE);
+            snackbar.setBackgroundTint(Color.GREEN);
+            snackbar.setTextColor(Color.BLACK);
+            snackbar.show();
         }
 
 

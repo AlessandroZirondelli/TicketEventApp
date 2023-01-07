@@ -55,7 +55,9 @@ public class BottomBarEventsUserFragment extends Fragment {
             }
 
             if(item.getItemId() == R.id.scan_bottom_navigation){
-                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,hostFragment,new QrCodeScannerFragment(), QrCodeScannerFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
+                QrCodeScannerFragment qrCodeScannerFragment = new QrCodeScannerFragment();
+                qrCodeScannerFragment.setScanTicketMode(false);
+                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,hostFragment,qrCodeScannerFragment, QrCodeScannerFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
             }
             return true;
         });
