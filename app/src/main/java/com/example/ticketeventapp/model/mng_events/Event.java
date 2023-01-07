@@ -18,6 +18,7 @@ public class Event {
     private String imageUri;
     private String latitude;
     private String longitude;
+    private String code;
 
     public Event( String name, String description, String date, String time, String place, String price, String imageUri, String latitude, String longitude) {
         this.name = name;
@@ -109,5 +110,13 @@ public class Event {
 
     public void setImageUri(String imageUri) {
         this.imageUri = imageUri;
+    }
+
+    public void setCode(String code){
+        this.code = code;
+    }
+
+    public String getCode(){
+        return this.code;
     }
 }

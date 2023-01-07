@@ -356,6 +356,7 @@ public class ModifyEventFragment extends Fragment {
 
                         Event event = new Event(name,description,date,time,place,price, imageUri,latitude,longitude);
                         event.setId(selectedEvent.getId());
+                        event.setCode(selectedEvent.getCode());
                         Log.e("Modify","Modifico evento");
                         addEventViewModel.editEvent(event);
                         Log.e("id",""+event.getId());

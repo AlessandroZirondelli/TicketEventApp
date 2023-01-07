@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.ticketeventapp.R;
+import com.example.ticketeventapp.ui.main.fragment.qr_code_scanner.QrCodeScannerFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -51,6 +52,10 @@ public class BottomBarEventsUserFragment extends Fragment {
 
             if(item.getItemId() == R.id.tickets_bottom_navigation && !item.isChecked()){
                 Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,hostFragment,new RecyclerViewTicketsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
+            }
+
+            if(item.getItemId() == R.id.scan_bottom_navigation){
+                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,hostFragment,new QrCodeScannerFragment(), QrCodeScannerFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
             }
             return true;
         });

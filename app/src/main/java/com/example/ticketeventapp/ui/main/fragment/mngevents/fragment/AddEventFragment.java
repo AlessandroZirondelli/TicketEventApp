@@ -313,6 +313,7 @@ public class AddEventFragment extends Fragment {
 
 
                         Event event = new Event(name,description,date,time,place,price, imageUri,latitude,longitude);
+                        event.setCode(addEventManager.generateRandomString());
                         Log.e("AddEventFragment","value uri evento:"+event.getImageUri());
                         addEventViewModel.addEvent(event);
                         Log.e("AddEventFragment","Inserimento evento effettuato");
