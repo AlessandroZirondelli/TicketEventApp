@@ -200,6 +200,10 @@ public class QrCodeScannerFragment extends Fragment {
                         enablerDialog.showInfoScannedQrCode(resNotFoundEvent);
                     } else {
                         eventListViewModel.setSelectedEventItem(validEvent);
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() { cameraProvider.unbindAll(); }
+                        });
                         Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new InfoEventFragment(),InfoEventFragment.class.getSimpleName(), R.id.fragment_container_view);
                     }
                 }

@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -34,7 +35,11 @@ import com.example.ticketeventapp.ui.main.fragment.mngevents.components.Permissi
 import com.example.ticketeventapp.ui.main.fragment.mngevents.components.DatePicker;
 import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
 import com.example.ticketeventapp.ui.main.fragment.mngevents.components.TimePicker;
+import com.example.ticketeventapp.ui.main.fragment.mngtickets.EventResultFragment;
+import com.example.ticketeventapp.ui.main.fragment.mngtickets.TicketResultFragment;
+import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
+import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 
@@ -72,6 +77,8 @@ public class AddEventFragment extends Fragment {
 
     private Activity activity;
 
+    private EventListViewModel eventListViewModel;
+
 
 
 
@@ -102,6 +109,7 @@ public class AddEventFragment extends Fragment {
 
         addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
         addEventViewModel.clearData();
+        eventListViewModel = new ViewModelProvider(getActivity()).get(EventListViewModel.class);
         addEventManager = new AddEventManager();
 
         datePicker = new DatePicker(getActivity().getSupportFragmentManager(),addEventViewModel,event_date);
@@ -110,7 +118,12 @@ public class AddEventFragment extends Fragment {
         event_date.setFocusable(false);
         event_time.setFocusable(false);
         
+        eventListViewModel.getSelectedEventItem().observe(getActivity(), new Observer<Event>() {
+            @Override
+            public void onChanged(Event event) {
 
+            }
+        });
 
 
 
@@ -317,17 +330,13 @@ public class AddEventFragment extends Fragment {
                         Log.e("AddEventFragment","value uri evento:"+event.getImageUri());
                         addEventViewModel.addEvent(event);
                         Log.e("AddEventFragment","Inserimento evento effettuato");
-                        getFragmentManager().popBackStack();
-
+                        //getFragmentManager().popBackStack(); Da lasciare commentato
+                        eventListViewModel.setSelectedEventItem(event);
+                        Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(),new EventResultFragment(),EventResultFragment.class.getSimpleName(),R.id.fragment_container_view);
                     }
                 }
             }
         });
-
-
-
-
-
     }
 
 
