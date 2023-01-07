@@ -117,7 +117,10 @@ public class AddEventManager {
     public Event isValidCodeEvent(String codeToCheck){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Optional<Event> scannedEvent = this.eventList.stream().filter((event)->event.getCode().equals(codeToCheck)).findFirst();
-            return scannedEvent.get();
+            if(scannedEvent.isPresent()){
+                return scannedEvent.get();
+            }
+            return null;
         } else {return null;}
     }
 
