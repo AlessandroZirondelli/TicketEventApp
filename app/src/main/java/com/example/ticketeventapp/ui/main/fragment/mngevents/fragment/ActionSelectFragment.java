@@ -22,6 +22,7 @@ import com.example.ticketeventapp.ui.main.fragment.home.fragment.RecyclerViewJoi
 import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
 import com.example.ticketeventapp.ui.main.fragment.qr_code_scanner.QrCodeScannerFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
+import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 
 import java.time.LocalDate;
@@ -36,6 +37,7 @@ public class ActionSelectFragment extends Fragment {
     private ImageView joiners;
     private ImageView modify;
     private EventListViewModel eventListViewModel;
+    private AddEventViewModel addEventViewModel;
     private EnablerDialog enablerDialog;
 
     @Nullable
@@ -48,6 +50,7 @@ public class ActionSelectFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         eventListViewModel =  new ViewModelProvider(getActivity()).get(EventListViewModel.class);
+        addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
@@ -86,7 +89,7 @@ public class ActionSelectFragment extends Fragment {
             public void onClick(View view) {
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     Event selectedEvent = eventListViewModel.getSelectedEventItem().getValue();
-
+                    addEventViewModel.clearData();
                     if(selectedEvent != null){
                         LocalDate eventDate = LocalDate.parse(selectedEvent.getDate());
                         LocalTime eventTime = LocalTime.parse(selectedEvent.getTime());

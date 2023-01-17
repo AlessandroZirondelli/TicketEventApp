@@ -121,7 +121,7 @@ public class ModifyEventFragment extends Fragment {
         button.setText(R.string.modify_event);
 
         addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
-        addEventViewModel.clearData();
+        //addEventViewModel.clearData();
 
         addEventManager = new AddEventManager();
 
@@ -134,7 +134,7 @@ public class ModifyEventFragment extends Fragment {
         event_time.setFocusable(false);
 
         Event selectedEvent = eventListViewModel.getSelectedEventItem().getValue();
-        if( selectedEvent !=null){
+        if( selectedEvent !=null && savedInstanceState==null){ //check saveInstanceState because otherwise when I modify date and the rotate screen, new changes are lost. In fact the information of the selected item are loaded.
             event_name.setText(selectedEvent.getName());
             this.event_name.setText(selectedEvent.getName());
             this.event_date.setText(selectedEvent.getDate());
