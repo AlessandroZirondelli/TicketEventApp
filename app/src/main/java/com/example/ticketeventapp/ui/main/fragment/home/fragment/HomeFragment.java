@@ -26,7 +26,6 @@ import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
 public class HomeFragment extends Fragment {
 
     private Activity activity;
-    private BottomBarEventsUserFragment bottomBarEventsUserFragment;
 
 
     @Override
@@ -40,20 +39,14 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
 
-        //if(savedInstanceState == null){
-            Log.e("Bug"," savedInstanceState null in HomeFragment");
-            //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new RecyclerViewEventsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
+        if(savedInstanceState == null){
             Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, new RecyclerViewEventsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
             if(AppInfo.getInstance().getLoggedUser().isUser()){
-                //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new BottomBarEventsUserFragment(),BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
-                this.bottomBarEventsUserFragment = new BottomBarEventsUserFragment();
-                this.bottomBarEventsUserFragment.setHostFragment(this);
-                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, bottomBarEventsUserFragment, BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
+                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, new BottomBarEventsUserFragment(), BottomBarEventsUserFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
             } else {
-                //Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new BottomBarEventsAdminFragment(),BottomBarEventsAdminFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
                 Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) getActivity(),this, new BottomBarEventsAdminFragment(), BottomBarEventsAdminFragment.class.getSimpleName(),R.id.fragment_container_view_bottom_bar);
             }
-        //}
+        }
 
         int orientation = this.getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {

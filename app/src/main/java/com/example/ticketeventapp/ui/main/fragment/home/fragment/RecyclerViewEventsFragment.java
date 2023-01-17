@@ -76,11 +76,8 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
         enablerDialog = new EnablerDialog(activity);
         eventsRecyclerView = new EventsRecyclerView(getActivity());
         eventsRecyclerView.setRecyclerView(this);
-
         eventListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(EventListViewModel.class);
-
         eventItemAdapter = eventsRecyclerView.getEventItemAdapter();
-
 
         if (permissionManager.isPermissionStorageAllowed()){
             Log.e("Permesso","Granted");

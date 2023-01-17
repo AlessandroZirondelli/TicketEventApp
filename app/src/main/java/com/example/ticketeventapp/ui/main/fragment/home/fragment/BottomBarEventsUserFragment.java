@@ -20,12 +20,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class BottomBarEventsUserFragment extends Fragment {
     private Activity activity;
     private BottomNavigationView  bottomNavigationView;
-    private HomeFragment hostFragment;
-
-
-    public void setHostFragment(HomeFragment hostFragment){
-        this.hostFragment = hostFragment;
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,21 +36,22 @@ public class BottomBarEventsUserFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        HomeFragment homeFragment = ((HomeFragment)BottomBarEventsUserFragment.this.getParentFragment());
         activity = getActivity();
         bottomNavigationView = view.findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if(item.getItemId() == R.id.events_bottom_navigation && !item.isChecked()){ // isChecked is to resolve double tap bu. It displayed blank
-                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,hostFragment,new RecyclerViewEventsFragment(), RecyclerViewTicketsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
+                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,homeFragment,new RecyclerViewEventsFragment(), RecyclerViewTicketsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
             }
 
             if(item.getItemId() == R.id.tickets_bottom_navigation && !item.isChecked()){
-                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,hostFragment,new RecyclerViewTicketsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
+                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,homeFragment,new RecyclerViewTicketsFragment(), RecyclerViewEventsFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
             }
 
             if(item.getItemId() == R.id.scan_bottom_navigation){
                 QrCodeScannerFragment qrCodeScannerFragment = new QrCodeScannerFragment();
                 qrCodeScannerFragment.setScanTicketMode(false);
-                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,hostFragment,qrCodeScannerFragment, QrCodeScannerFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
+                Utilities.replaceNestedFragmentOnHomeFragment((AppCompatActivity) activity,homeFragment,qrCodeScannerFragment, QrCodeScannerFragment.class.getSimpleName(),R.id.fragment_container_recycler_view);
             }
             return true;
         });
