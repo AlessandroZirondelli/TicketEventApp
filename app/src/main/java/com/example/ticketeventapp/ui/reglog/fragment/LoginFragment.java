@@ -134,6 +134,8 @@ public class LoginFragment extends Fragment {
         password.setText("");
         username.clearFocus();
         password.clearFocus();
+        disableErrorField(username);
+        disableErrorField(password);
     }
 
     private void enableEmptyFieldError(int field){
