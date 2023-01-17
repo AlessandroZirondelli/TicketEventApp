@@ -30,7 +30,6 @@ public class BottomBarEventsUserFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("Bug","Create BottomBarEventsUserFragment");
     }
 
     @Nullable

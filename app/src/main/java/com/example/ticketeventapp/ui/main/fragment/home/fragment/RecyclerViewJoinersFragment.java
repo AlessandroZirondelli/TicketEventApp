@@ -114,7 +114,6 @@ public class RecyclerViewJoinersFragment extends Fragment {
         usersViewModelRegLog.getUsersLiveData().observe((LifecycleOwner) activity, new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
-                Log.e("Bug","Setto ora usersList");
                 joinerItemAdapter.setUsersList(users);
             }
         });
@@ -126,7 +125,6 @@ public class RecyclerViewJoinersFragment extends Fragment {
                 if(selectedEvent != null){ // if it's null, it means that we've just deleted event
                     ticketsManager.setTicketList(ticketList);
                     List<Ticket> ticketOfSpecificEvent = ticketsManager.getTicketOfEvent(selectedEvent.getId());
-                    Log.e("Bug","Setto ora i dati dell'adapter");
                     joinerItemAdapter.setData(ticketOfSpecificEvent);
                 }
             }

@@ -56,14 +56,12 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.e("Bug","Create RecyclerViewEventsFragment");
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.e("Bug","OnCreateView RecyclerViewEventsFragment");
         return inflater.inflate(R.layout.recycler_view_events_layout, container, false);
     }
 
@@ -71,10 +69,6 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         activity = getActivity();
-        Log.e("Bug","OnViewCreated RecyclerVuewEventFragment");
-        if(activity==null){
-            Log.e("HomeFragment","activity null in recyclervieeweventsfragemnt");
-        }
 
         logout = view.findViewById(R.id.logout_image_view);
         permissionManager = new PermissionManager(activity,this);
@@ -84,7 +78,6 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
         eventsRecyclerView.setRecyclerView(this);
 
         eventListViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(EventListViewModel.class);
-        //eventListViewModel.clearSelectedItem();
 
         eventItemAdapter = eventsRecyclerView.getEventItemAdapter();
 
@@ -102,8 +95,6 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
         eventListViewModel.getEventsLiveData().observe((LifecycleOwner) activity, new Observer<List<Event>>() {
             @Override
             public void onChanged(List<Event> eventList) {
-                Log.e("HomeFragment","Chiamato");
-                //eventItemAdapter.notifyDataSetChanged();
                 eventItemAdapter.setData(eventList);
 
             }
@@ -123,7 +114,6 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
                 //Multiple checks with Near+Current or Near+Future or Near+
                 if(checkedIds.isEmpty()){
-                    Log.e("HomeFragment","Vuotooo");
                     eventItemAdapter.getFilter().filter("all");
                 } else {
                     int countSelectedItems = checkedIds.size();
@@ -152,18 +142,15 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
-                    //Log.e("HomeFragment","Checked");
                     if(chipGroup.getCheckedChipIds().size()==1){
                         eventItemAdapter.getFilter().filter("current");
                     }
                     chipPast.setCheckable(false);
                     chipNext.setCheckable(false);
                 } else{
-                    //Log.e("HomeFragment","Not checked");
                     chipPast.setCheckable(true);
                     chipNext.setCheckable(true);
                     if(chipNear.isChecked()){
-                        //enablerDialog.showInfoAcquisitionPosition();
                         locationGpsAgent.startLocationUpdates();
                     }
                 }
@@ -174,18 +161,15 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
-                    //Log.e("HomeFragment","Checked");
                     if(chipGroup.getCheckedChipIds().size()==1){
                         eventItemAdapter.getFilter().filter("next");
                     }
                     chipPast.setCheckable(false);
                     chipCurrent.setCheckable(false);
                 } else{
-                    //Log.e("HomeFragment","Not checked");
                     chipPast.setCheckable(true);
                     chipCurrent.setCheckable(true);
                     if(chipNear.isChecked()){
-                        //enablerDialog.showInfoAcquisitionPosition();
                         locationGpsAgent.startLocationUpdates();
                     }
                 }
@@ -197,7 +181,6 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
                     if(chipGroup.getCheckedChipIds().size()==1){
-                        Log.e("Filter","Sono l'unico");
                         eventItemAdapter.getFilter().filter("past");
                     }
                     chipNext.setCheckable(false);
@@ -206,7 +189,6 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
                     chipNext.setCheckable(true);
                     chipCurrent.setCheckable(true);
                     if(chipNear.isChecked()){
-                        //enablerDialog.showInfoAcquisitionPosition();
                         locationGpsAgent.startLocationUpdates();
                     }
                 }
@@ -247,26 +229,9 @@ public class RecyclerViewEventsFragment extends Fragment implements OnItemListen
             @Override
             public void onChanged(Location location) {
                 //Continue to filter list
-                Log.e("HomeFragment","Location restituita"+location.toString());
                 eventItemAdapter.getFilter().filter("near");
             }
         });
-
-        /*eventListViewModel.getSelectedEventItem().observe(getActivity(), new Observer<Event>() {
-            @Override
-            public void onChanged(Event event) {
-                 if(event!=null){
-                     if(AppInfo.getInstance().getLoggedUser().isUser()){
-                         Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new InfoEventFragment(),InfoEventFragment.class.getSimpleName(), R.id.fragment_container_view);
-                     } else {
-                         Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ActionSelectFragment(),ActionSelectFragment.class.getSimpleName(), R.id.fragment_container_view);
-                     }
-                 }
-            }
-        });*/
-
-
-
 
         eventItemAdapter.getFilter().filter("all");
     }

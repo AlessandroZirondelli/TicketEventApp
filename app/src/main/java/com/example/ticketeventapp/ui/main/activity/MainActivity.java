@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
         appInfo = AppInfo.getInstance();
         addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
         usersViewModelRegLog = new ViewModelProvider(this).get(UsersViewModelRegLog.class);
-        //Log.e("MngEventsActivity","Logged User:"+appInfo.getLoggedUser().getUsername());
-
 
         usersViewModelRegLog.getUsersLiveData().observe(this, new Observer<List<User>>() {
             @Override
@@ -61,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode == CHOOSE_PICTURE && resultCode==RESULT_OK){
             Uri imageUri = data.getData();
-            Log.e("AddEventFragment",imageUri.toString());
             addEventViewModel.setImageURI(imageUri.toString());
         }
     }
