@@ -108,7 +108,6 @@ public class AddEventFragment extends Fragment {
         event_delete.setVisibility(View.INVISIBLE);
 
         addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
-        addEventViewModel.clearData();
         eventListViewModel = new ViewModelProvider(getActivity()).get(EventListViewModel.class);
         addEventManager = new AddEventManager();
 

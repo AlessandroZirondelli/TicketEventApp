@@ -9,10 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ticketeventapp.R;
 import com.example.ticketeventapp.ui.main.fragment.mngevents.fragment.AddEventFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
+import com.example.ticketeventapp.viewmodel.mng_events.AddEventViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BottomBarEventsAdminFragment extends Fragment {
@@ -33,7 +35,8 @@ public class BottomBarEventsAdminFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Utilities.insertFragment((AppCompatActivity) getActivity(), new AddEventFragment(), AddEventFragment.class.getSimpleName());
+                AddEventViewModel addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
+                addEventViewModel.clearData(); //clear data before open fragment AddEvent
                 Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(), new AddEventFragment(), AddEventFragment.class.getSimpleName(), R.id.fragment_container_view);
             }
         });
