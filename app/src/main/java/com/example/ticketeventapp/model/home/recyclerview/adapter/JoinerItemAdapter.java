@@ -72,7 +72,6 @@ public class JoinerItemAdapter extends RecyclerView.Adapter<JoinerViewHolder> im
             if(this.usersList == null){
                 Log.e("Bug","Errore nulllllllllllllll");
             }
-            Log.e("Bug","Faccio ora stream su usersList");
             User buyer = this.usersList.stream().filter((user)->user.getUsername().equals(username_joiner)).findAny().get();
             holder.setJoiner_full_name(buyer.getName()+" "+ buyer.getSurname());
         } else {
