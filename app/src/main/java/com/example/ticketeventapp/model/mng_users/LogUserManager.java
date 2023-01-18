@@ -84,7 +84,7 @@ public class LogUserManager {
         return appPreferences.canDoAutoLogin();
     }
 
-    
+
     public User getLoggedUser(){
         return appPreferences.getLoggedUser();
     }

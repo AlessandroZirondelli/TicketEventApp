@@ -16,10 +16,8 @@ public class RegUserManager {
 
     public boolean isUsernameAvailable(String username){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Log.e("RegistrationFragment","Sono qui1");
             return !usersList.stream().anyMatch((user)->user.getUsername().equals(username));
         } else {
-            Log.e("RegistrationFragment","Sono qui2");
             for(User user : usersList){
                 if(user.getUsername().equals(username)){
                     return false;
