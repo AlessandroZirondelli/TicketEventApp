@@ -24,7 +24,6 @@ public class AppPreferences {
 
     public void setLoggedUser(User user){
         if(this.getLoggedUser() != null){
-            Log.e("Login","Utente già presente in shared preferences"+ this.getLoggedUser().getUsername());
             this.logoutUser();
         }
             sharedPreferencesEditor.putString("logged_username", user.getUsername());
@@ -39,7 +38,6 @@ public class AppPreferences {
                 LocalDate expirationDate = LocalDate.now().plusDays(21); //yyyy-mm-dd
                 sharedPreferencesEditor.putString("logged_expiration",expirationDate.toString());
                 sharedPreferencesEditor.apply();
-                Log.e("LoginFragment","Expiration date aggiunta");
             } else {
                 //TODO
             }
@@ -71,7 +69,6 @@ public class AppPreferences {
 
         } else{
             //TODO
-            Log.e("LoginFragment","Data reperita nulla");
             return null;
         }
     }
@@ -89,7 +86,6 @@ public class AppPreferences {
                 return true;
             }
             //Expiration date or username/password not saved in shared preferences
-            Log.e("Login","Pulisco sharedPreferences");
             this.logoutUser();
             return false;
         }
