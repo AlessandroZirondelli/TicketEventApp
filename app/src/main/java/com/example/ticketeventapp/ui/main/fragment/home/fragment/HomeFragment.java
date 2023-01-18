@@ -30,7 +30,6 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.e("Bug","Create HomeFragment");
         super.onCreate(savedInstanceState);
     }
 
