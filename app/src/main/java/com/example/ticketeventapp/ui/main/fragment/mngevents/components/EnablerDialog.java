@@ -196,4 +196,11 @@ public class EnablerDialog {
         snackbar.show();
     }
 
+    public void showInfoGoogleMapsNotInstalled(){
+        Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
+                R.string.cant_use_maps_features,
+                Snackbar.ANIMATION_MODE_SLIDE);
+        snackbar.show();
+    }
+
 }

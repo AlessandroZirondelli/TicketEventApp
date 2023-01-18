@@ -73,5 +73,6 @@
     <string name="qr_code_event_title">Qr code event</string>
     <string name="camera_features_disabled">Some Camera features are disabled. You should allow Camera permissions.</string>
     <string name="storage_features_disabled">Some Storage features are disabled. You should allow Storage  permissions.</string>
+    <string name="cant_use_maps_features">Google Maps features missing! You should install Google Maps</string>
 
 </resources>

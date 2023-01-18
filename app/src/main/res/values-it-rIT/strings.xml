@@ -80,6 +80,6 @@
     <string name="qr_code_event_title">Qr code evento</string>
     <string name="camera_features_disabled">Alcune funzionalità della fotocamera sono disattivate. Abilita i permessi della fotocamera.</string>
     <string name="storage_features_disabled">Alcune funzionalità dello storage sono disattivate. Abilita i permessi deldelo storage.</string>
-
+    <string name="cant_use_maps_features">Funzionalità di Google Maps mancanti! Dovresti installare Google Maps per poterle usare</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.example.ticketeventapp.ui.main.fragment.mngevents.fragment;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -27,6 +28,7 @@ import com.example.ticketeventapp.model.mng_tickets.Ticket;
 import com.example.ticketeventapp.model.mng_tickets.TicketsManager;
 import com.example.ticketeventapp.model.mng_users.User;
 import com.example.ticketeventapp.model.utils.AppInfo;
+import com.example.ticketeventapp.ui.main.fragment.mngevents.components.EnablerDialog;
 import com.example.ticketeventapp.ui.main.fragment.mngtickets.TicketResultFragment;
 import com.example.ticketeventapp.ui.utilities.Utilities;
 import com.example.ticketeventapp.viewmodel.mng_events.EventListViewModel;
@@ -92,6 +94,39 @@ public class InfoEventFragment extends Fragment {
         button.setText(R.string.join_event);
         this.disableFocusOnEditText();
         setFields();
+
+
+        event_place.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Event selectedEvent = eventListViewModel.getSelectedEventItem().getValue();
+                String latitude = selectedEvent.getLatitude();
+                String longitude = selectedEvent.getLongitude();
+                String place = selectedEvent.getPlace();
+                String request="";
+                if(!latitude.isEmpty() && !longitude.isEmpty()){
+                     request="geo:"+latitude+","+longitude+"?q="+latitude+","+longitude;
+
+                } else {
+                     request = "google.navigation:q=a+"+Uri.encode(place);
+                }
+                // Create a Uri from an intent string. Use the result to create an Intent.
+                Uri gmmIntentUri = Uri.parse(request);
+                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                // Make the Intent explicit by setting the Google Maps package
+                mapIntent.setPackage("com.google.android.apps.maps");
+                // Attempt to start an activity that can handle the Intent
+                if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                }else {
+                    EnablerDialog enablerDialog = new EnablerDialog(getActivity());
+                    enablerDialog.showInfoGoogleMapsNotInstalled();
+                }
+                return true;
+            }
+        });
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
