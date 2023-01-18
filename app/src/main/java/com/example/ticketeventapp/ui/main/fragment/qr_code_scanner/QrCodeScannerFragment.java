@@ -92,7 +92,6 @@ public class QrCodeScannerFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(activity, qrCode, Toast.LENGTH_SHORT).show();
-                //Log.i(MainActivity.class.getSimpleName(), "QR Code Found: " + qrCode);
             }
         });
 
@@ -176,18 +175,15 @@ public class QrCodeScannerFragment extends Fragment {
                 if(scanTicketMode){//scan ticket mode
                     int res = ticketsManager.isValidTicket(_qrCode, eventListViewModel.getSelectedEventItem().getValue().getId());
                     if(res == 1){
-                        Log.e("QrCode","Ticket valido");
                         Ticket scannedTicket = ticketsManager.getTicketByCode(_qrCode);
                         scannedTicket.setIsValidated(true);
                         ticketListViewModel.updateTicket(scannedTicket);
                         MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_ok);
                         mediaPlayer.start();
                     } else if(res == 0){
-                        Log.e("QrCode","Ticket non valido");
                         MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_error);
                         mediaPlayer.start();
                     } else if(res == 2){
-                        Log.e("QrCode","Ticket già usatp");
                         MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.scanner_error);
                         mediaPlayer.start();
                     }
