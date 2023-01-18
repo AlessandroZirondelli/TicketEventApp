@@ -78,9 +78,11 @@ public class AddEventViewModel extends AndroidViewModel {
 
     public void setIsConnectedToInternet(Boolean isConnectedToInternet){this.isConnectedToInternet.postValue(isConnectedToInternet);}
 
-    public void setPosition_display_name(String display_name){ this.position_display_name.setValue(display_name);}
+    public void setPosition_display_name(String display_name){
+        this.position_display_name.setValue(display_name);}
 
-    public MutableLiveData<String> getPosition_display_name() { return position_display_name; }
+    public MutableLiveData<String> getPosition_display_name() {
+        return position_display_name; }
 
     public MutableLiveData<Boolean> getIsConnectedToInternet(){return this.isConnectedToInternet;}
 
@@ -113,21 +115,23 @@ public class AddEventViewModel extends AndroidViewModel {
 
     }
 
-    public void setData(String imageUri, String selectedDate, String selectedTime, String positionLatitude, String positionLongitude, String position_display_name ){
+    public void setData(String imageUri, String selectedDate, String selectedTime, String positionLatitude, String positionLongitude, String position_display_name){
         this.imageURI.setValue(imageUri);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             this.selectedTime.setValue(LocalTime.parse(selectedTime));
         } else{
             //TODO
         }
+
         this.selectedDate.setValue(selectedDate);
-        if(this.position.getValue()!=null){
+        if(!positionLatitude.isEmpty() && !positionLongitude.isEmpty()){// Check if selected event to modify has position set or not
             Double latitude = Double.parseDouble(positionLatitude);
             Double longitude = Double.parseDouble(positionLongitude);
             this.position.setValue(new Location(""));
             this.position.getValue().setLatitude(latitude);
             this.position.getValue().setLongitude(longitude);
         }
+
         this.position_display_name.setValue(position_display_name);
     }
 

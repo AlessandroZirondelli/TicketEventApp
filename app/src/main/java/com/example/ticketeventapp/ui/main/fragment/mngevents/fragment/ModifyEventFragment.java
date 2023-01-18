@@ -121,7 +121,6 @@ public class ModifyEventFragment extends Fragment {
         button.setText(R.string.modify_event);
 
         addEventViewModel = new ViewModelProvider(getActivity()).get(AddEventViewModel.class);
-        //addEventViewModel.clearData();
 
         addEventManager = new AddEventManager();
 
@@ -156,10 +155,6 @@ public class ModifyEventFragment extends Fragment {
             addEventViewModel.setData(selectedEvent.getImageUri(),selectedEvent.getDate(),selectedEvent.getTime(),selectedEvent.getLatitude(),selectedEvent.getLongitude(),selectedEvent.getPlace());
         }
 
-
-        Log.e("Modify",addEventViewModel.getImageURI().getValue()+"  "+addEventViewModel.getSelectedTime().getValue());
-
-
         permissionManager = new PermissionManager(getActivity(),this);
         permissionDialog = new PermissionDialog(getActivity());
         locationGpsAgent = new LocationGpsAgent(getActivity(),permissionManager);
@@ -193,8 +188,6 @@ public class ModifyEventFragment extends Fragment {
         addEventViewModel.getImageURI().observe(getActivity(), new Observer<String>() {
             @Override
             public void onChanged(String uri) {
-                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-                //Log.e("AddEventFragment","ImageUriChanged:"+uri.getPath());
                 if(uri == null){
                     Drawable drawable = AppCompatResources.getDrawable(activity, activity.getResources().getIdentifier("add_photo_alternate","drawable",activity.getPackageName()));
                 }
@@ -211,7 +204,6 @@ public class ModifyEventFragment extends Fragment {
             @Override
             public void onChanged(Boolean isTurnedOnGPS) {
                 if(!isTurnedOnGPS){
-                    Log.e("AddEventFragment","GPS si è disabilitato");
                     enablerDialog.showInfoTurnedOnGPS();
                 }
             }
@@ -223,7 +215,6 @@ public class ModifyEventFragment extends Fragment {
                 if(location != null){
                     locationChanged = true;
                     event_place.setText(location.getLatitude()+ "  "+location.getLongitude());
-                    Log.e("AddEventFragment",location.getLatitude()+" "+location.getLongitude());
                     networkAgent.createRequestQueue();
                     networkAgent.registerNetworkCallback();
                     networkAgent.sendVolleyRequest(String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()));
@@ -268,19 +259,14 @@ public class ModifyEventFragment extends Fragment {
         event_place.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Log.e("Press","LongPress");
                 if(permissionManager.isPermissionGPSAllowed()){ //GPS permission allowed
                     if(!locationGpsAgent.isTurnedOnGPS()){
-                        Log.e("AddEventFragment","GPS is not active");
                         enablerDialog.askTurnOnGPS();
                     } else {
-                        Log.e("AddEventFragment","GPS is active");
                         if(networkAgent.isConnectedToInternet()){
-                            Log.e("AddEventFragment","Internet connection is active");
                             addEventViewModel.setIsTurnedOnGPS(true);
                             locationGpsAgent.startLocationUpdates();
                         } else {
-                            Log.e("AddEventFragment","Internet connection is not  active");
                             enablerDialog.askToTurnOnInternetConnection();
                         }
                     }
@@ -323,17 +309,13 @@ public class ModifyEventFragment extends Fragment {
                         if(imageUri == null){
                             imageUri = "add_photo_alternate";
                             addEventViewModel.setImageURI("add_photo_alternate");
-                            Log.e("AddEventFragment","Image Uri null");
 
                         } else {
-                            Log.e("AddEventFragment","Image Uri not null");
                             try {
                                 Uri uri = Uri.parse(imageUri);
                                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri );
                                 addEventManager.saveImage(bitmap,getActivity());
-                                Log.e("AddEventFragment","Immagine salvata");
                             } catch (IOException e) {
-                                Log.e("AddEventFragment","Errore salvataggio foto");
                                 e.printStackTrace();
                             }
 
@@ -341,26 +323,40 @@ public class ModifyEventFragment extends Fragment {
                         String latitude = "";
                         String longitude = "";
 
-                        if(!locationChanged && !event_place.getText().equals(selectedEvent.getPlace()) ){
+                        String new_place_string =  event_place.getText().toString();
+                        String old_place_string = selectedEvent.getPlace();
+
+                        //check if previous position is set or not
+                        if(!selectedEvent.getLatitude().isEmpty() && !selectedEvent.getLongitude().isEmpty()){
+                            Location oldPosition = new Location("");
+                            oldPosition.setLatitude(Double.parseDouble(selectedEvent.getLatitude()));
+                            oldPosition.setLongitude(Double.parseDouble(selectedEvent.getLongitude()));
+                            Location newPosition = addEventViewModel.getPosition().getValue();
+                            //if new position is equal to previous position it means that position is not changed.
+                            //This chec is necessary because when I do the first set od AddEventViewModel with data of selected event
+                            //This set is considered as changes, even it's not a change, so locationChanged is set. We need to set false this variable.
+                            if(oldPosition.getLatitude() == newPosition.getLatitude() && oldPosition.getLongitude() == newPosition.getLongitude()){
+                                locationChanged= false;
+                                addEventViewModel.setPosition_display_name(event_place.getText().toString());
+                            }
+                        }
+
+                        if(!locationChanged && !new_place_string.equals(old_place_string)){ // se la location non è cambiata ma modifica il testo
                             addEventViewModel.setPosition(null);
+
                         }
 
-                        Location position = addEventViewModel.getPosition().getValue();
 
-                        if(position != null){
-                            Log.e("AddEventFragment","Trovate coordinate");
-                            latitude = String.valueOf(position.getLatitude());
-                            longitude = String.valueOf(position.getLongitude());
+                        Location finalPosition = addEventViewModel.getPosition().getValue();
+                        if(finalPosition != null){
+                            latitude = String.valueOf(finalPosition.getLatitude());
+                            longitude = String.valueOf(finalPosition.getLongitude());
                         }
-
 
                         Event event = new Event(name,description,date,time,place,price, imageUri,latitude,longitude);
                         event.setId(selectedEvent.getId());
                         event.setCode(selectedEvent.getCode());
-                        Log.e("Modify","Modifico evento");
                         addEventViewModel.editEvent(event);
-                        Log.e("id",""+event.getId());
-                        Log.e("AddEventFragment","Inserimento evento effettuato");
                         getFragmentManager().popBackStack();
                         getFragmentManager().popBackStack();
                         eventListViewModel.clearSelectedItem();
@@ -372,7 +368,6 @@ public class ModifyEventFragment extends Fragment {
         event_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("Delete","CLick on delete event");
                 enablerDialog.askToConfirmEventDelete(eventListViewModel,getFragmentManager());
             }
         });
