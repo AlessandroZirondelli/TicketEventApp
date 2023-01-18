@@ -244,19 +244,14 @@ public class AddEventFragment extends Fragment {
         event_place.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Log.e("Press","LongPress");
                 if(permissionManager.isPermissionGPSAllowed()){ //GPS permission allowed
                     if(!locationGpsAgent.isTurnedOnGPS()){
-                        Log.e("AddEventFragment","GPS is not active");
                         enablerDialog.askTurnOnGPS();
                     } else {
-                        Log.e("AddEventFragment","GPS is active");
                         if(networkAgent.isConnectedToInternet()){
-                            Log.e("AddEventFragment","Internet connection is active");
                             addEventViewModel.setIsTurnedOnGPS(true);
                             locationGpsAgent.startLocationUpdates();
                         } else {
-                            Log.e("AddEventFragment","Internet connection is not  active");
                             enablerDialog.askToTurnOnInternetConnection();
                         }
                     }
@@ -299,17 +294,13 @@ public class AddEventFragment extends Fragment {
                         if(imageUri == null){
                             imageUri = "add_photo_alternate";
                             addEventViewModel.setImageURI("add_photo_alternate");
-                            Log.e("AddEventFragment","Image Uri null");
 
                         } else {
-                            Log.e("AddEventFragment","Image Uri not null");
                             try {
                                 Uri uri = Uri.parse(imageUri);
                                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri );
                                 addEventManager.saveImage(bitmap,getActivity());
-                                Log.e("AddEventFragment","Immagine salvata");
                             } catch (IOException e) {
-                                Log.e("AddEventFragment","Errore salvataggio foto");
                                 e.printStackTrace();
                             }
 
@@ -318,7 +309,6 @@ public class AddEventFragment extends Fragment {
                         String longitude = "";
                         Location position = addEventViewModel.getPosition().getValue();
                         if(position != null){
-                            Log.e("AddEventFragment","Trovate coordinate");
                             latitude = String.valueOf(position.getLatitude());
                             longitude = String.valueOf(position.getLongitude());
                         }
@@ -326,9 +316,7 @@ public class AddEventFragment extends Fragment {
 
                         Event event = new Event(name,description,date,time,place,price, imageUri,latitude,longitude);
                         event.setCode(addEventManager.generateRandomString());
-                        Log.e("AddEventFragment","value uri evento:"+event.getImageUri());
                         addEventViewModel.addEvent(event);
-                        Log.e("AddEventFragment","Inserimento evento effettuato");
                         //getFragmentManager().popBackStack(); Da lasciare commentato
                         eventListViewModel.setSelectedEventItem(event);
                         Utilities.replaceFragmentOnContainer((AppCompatActivity) getActivity(),new EventResultFragment(),EventResultFragment.class.getSimpleName(),R.id.fragment_container_view);
@@ -350,13 +338,10 @@ public class AddEventFragment extends Fragment {
         super.onResume();
         if(locationGpsAgent.isTurnedOnGPS()){
             addEventViewModel.setIsTurnedOnGPS(true);
-            Log.e("AddEventFragment","GPS Riattivato");
         }
         if(networkAgent.isConnectedToInternet()){
             addEventViewModel.setIsConnectedToInternet(true);
-            Log.e("AddEventFragment","Connessione Internet riattivata");
         }
-        Log.e("AddEventFragment","OnResume");
     }
 
     @Override
@@ -372,8 +357,6 @@ public class AddEventFragment extends Fragment {
 
         if (choosePicture.resolveActivity(getActivity().getPackageManager()) != null) {
             getActivity().startActivityForResult(choosePicture, CHOOSE_PICTURE);
-        } else {
-            Log.e("AddEventFragment","No resolver of specific choose picture intent");
         }
 
     }
@@ -406,7 +389,6 @@ public class AddEventFragment extends Fragment {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if(!hasFocus){
-                    Log.e("RegistrationFragment","Perdo focus");
                     disableErrorField(viewT);
                 }
             }
