@@ -1,15 +1,10 @@
 package com.example.ticketeventapp.ui.utilities;
 
 
-import android.content.Intent;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
-import com.example.ticketeventapp.R;
-import com.example.ticketeventapp.ui.main.activity.MainActivity;
 import com.example.ticketeventapp.ui.main.fragment.home.fragment.BottomBarEventsAdminFragment;
 import com.example.ticketeventapp.ui.main.fragment.home.fragment.BottomBarEventsUserFragment;
 import com.example.ticketeventapp.ui.main.fragment.home.fragment.HomeFragment;
@@ -27,10 +22,7 @@ public class Utilities {
                 && !(fragment instanceof BottomBarEventsAdminFragment)
                 && !(fragment instanceof BottomBarEventsUserFragment)
                 && !(fragment instanceof RecyclerViewEventsFragment)) {
-            Log.e("BackStack","Aggiungo nel back stack:"+fragment.getClass().getSimpleName());
             transaction.addToBackStack(tag);
-        }else {
-            Log.e("BackStack","Faccio solo replace con: "+fragment.getClass().getSimpleName());
         }
         transaction.commit();
     }
@@ -40,7 +32,6 @@ public class Utilities {
         transaction.replace(fragmentContainerId,childFragment, tag);
         transaction.addToBackStack(tag);
         transaction.commit();
-        Log.e("BackStack","Aggiungo nested fragment nel back stack:"+childFragment.getClass().getSimpleName());
     }
 
 }
