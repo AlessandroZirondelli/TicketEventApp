@@ -71,25 +71,7 @@ public class TicketItemAdapter extends RecyclerView.Adapter<TicketViewHolder>{
 
         Drawable drawable = AppCompatResources.getDrawable(activity, activity.getResources().getIdentifier("@drawable/qr_code_2","drawable",activity.getPackageName()));
         holder.set_event_photo_drawable(drawable);
-
-        /*if(holder.qrcode!=null){
-            Log.e("Bug","Holder qrcode NOT null");
-        }
-
-
-        Picasso.get().load(R.drawable.calendar_month).placeholder(R.drawable.qr_code_2).into(holder.qrcode, new Callback() {
-            @Override
-            public void onSuccess() {
-                Log.e("Bug","Loaded image ok");
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-                Log.e("Bug",e.toString());
-            }
-        });
-        Drawable drawable;*/
+        
 
     }
 
