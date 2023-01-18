@@ -84,14 +84,10 @@ public class LogUserManager {
         return appPreferences.canDoAutoLogin();
     }
 
-
-
+    
     public User getLoggedUser(){
         return appPreferences.getLoggedUser();
     }
-/*
-    public LocalDate getExpirationDateLogin(){
-        return appPreferences.getExpirationDate();
-    }*/
+
 
 }
