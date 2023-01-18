@@ -56,7 +56,6 @@ public class ActionSelectFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-                Log.e("HomeFrament","Turn indrì action select");
                 eventListViewModel.setSelectedEventItem(null);
                 getFragmentManager().popBackStack();
             }
@@ -95,7 +94,6 @@ public class ActionSelectFragment extends Fragment {
                         LocalTime eventTime = LocalTime.parse(selectedEvent.getTime());
                         LocalDate today = LocalDate.now();
                         LocalTime time = LocalTime.now();
-                        Log.e("Bug","Selected event date"+selectedEvent.getName());
                         if((eventDate.isAfter(today)) || (eventDate.isEqual(today) && (eventTime.isAfter(time)))){
                             Utilities.replaceFragmentOnContainer((AppCompatActivity) activity,new ModifyEventFragment(),ModifyEventFragment.class.getSimpleName(), R.id.fragment_container_view);
                         } else {
