@@ -62,10 +62,6 @@ public class LoginFragment extends Fragment {
         registerIcon = view.findViewById(R.id.add_account_icon_image_view);
         loginIcon = view.findViewById(R.id.login_icon_image_view);
 
-        //username.setFocusable(false); Serve per  rendere il textinpt non focusable e quindi non modificabile
-
-        //usersViewModelRegLog = new ViewModelProvider(getActivity()).get(UsersViewModelRegLog.class);
-
 
         usersViewModelRegLog = new ViewModelProvider(getActivity()).get(UsersViewModelRegLog.class);
         logUserManager = new LogUserManager(usersViewModelRegLog.getUsersLiveData().getValue(),getActivity());
@@ -74,10 +70,11 @@ public class LoginFragment extends Fragment {
             @Override
             public void onChanged(List<User> users) {
                 logUserManager.setUsersList(users);
+                if(users.isEmpty()){//Add Admin user if list is empty
+                    usersViewModelRegLog.addUser(new User("Admin","Admin","Admin","Pass",false));
+                }
             }
         });
-
-
 
         registerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,14 +84,11 @@ public class LoginFragment extends Fragment {
         });
 
         if(logUserManager.canDoAutoLogin()){
-            Log.e("LoginFragment","Auto login possibile");
             AppInfo appInfo = AppInfo.getInstance();
             appInfo.setLoggedUser(logUserManager.appPreferences.getLoggedUser());
             Intent intent = new Intent(getActivity(), MainActivity.class); //esplicitiamo la classe che andiamo a richiamare
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             this.startActivity(intent);
-        }else{
-            Log.e("LoginFragment","Auto login NON possibile");
         }
 
         loginIcon.setOnClickListener(new View.OnClickListener() {
@@ -113,9 +107,7 @@ public class LoginFragment extends Fragment {
                         enableCredentialsError(resCredentials);
                     } else{ //correct credentials
                         //redirect to activity with home
-
                         logUserManager.startLoginSession(username_string,password_string);
-                        Log.e("Login","Utente che si stya loggamdo: "+logUserManager.getLoggedUser().getUsername());
                         Intent intent = new Intent(getActivity(), MainActivity.class); //esplicitiamo la classe che andiamo a richiamare
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         getActivity().startActivity(intent);
@@ -169,7 +161,6 @@ public class LoginFragment extends Fragment {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if(!hasFocus){
-                    Log.e("RegistrationFragment","Perdo focus");
                     disableErrorField(viewT);
                 }
             }
