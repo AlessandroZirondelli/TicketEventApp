@@ -21,4 +21,17 @@ public class PermissionDialog {
     }
 
 
+    public void showInfoDeniedPermissionCamera() {
+        Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
+                R.string.camera_features_disabled,
+                Snackbar.ANIMATION_MODE_SLIDE);
+        snackbar.show();
+    }
+
+    public void showInfoDeniedPermissionStorage() {
+        Snackbar snackbar  =  Snackbar.make(activity.findViewById(R.id.fragment_container_view),
+                R.string.storage_features_disabled,
+                Snackbar.ANIMATION_MODE_SLIDE);
+        snackbar.show();
+    }
 }

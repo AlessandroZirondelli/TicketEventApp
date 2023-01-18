@@ -71,5 +71,7 @@
     <string name="cant_modify_event">Event  already started! You can\'t modify event info</string>
     <string name="cant_scan_ticket">Event not started yet! You can scan ticket only when event already started</string>
     <string name="qr_code_event_title">Qr code event</string>
+    <string name="camera_features_disabled">Some Camera features are disabled. You should allow Camera permissions.</string>
+    <string name="storage_features_disabled">Some Storage features are disabled. You should allow Storage  permissions.</string>
 
 </resources>

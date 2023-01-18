@@ -3,7 +3,6 @@ package com.example.ticketeventapp.model.utils;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.util.Log;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -28,11 +27,16 @@ public class PermissionManager {
     private String PERMISSION_STORAGE_REQUESTED = Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
     private Boolean alreadyAskedPermissionGPS;
+    private Boolean alreadyAskedPermissionStorage;
+
+    private PermissionDialog permissionDialog;
 
     public PermissionManager(Activity activity, Fragment fragment){
         this.activity = activity;
         this.fragment = fragment;
         this.alreadyAskedPermissionGPS = false;
+        this.alreadyAskedPermissionStorage = false;
+        this.permissionDialog = new PermissionDialog(activity);
 
         this.requestGpsPermissionLauncher = fragment.registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
             @Override
@@ -43,7 +47,6 @@ public class PermissionManager {
                 }
                 else{ //permission denied
                      alreadyAskedPermissionGPS = true;
-                     PermissionDialog permissionDialog = new PermissionDialog(activity);
                      permissionDialog.showInfoDeniedPermissionGPS();
                 }
                 AddEventViewModel addEventViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(AddEventViewModel.class);
@@ -58,9 +61,7 @@ public class PermissionManager {
                     // Update boolean variable in ViewModel
                 }
                 else{ //permission denied
-                    /*PermissionDialog permissionDialog = new PermissionDialog(activity);
-                    permissionDialog.showInfoDeniedPermissionGPS();*/
-                    Log.e("Camera","Accesso alla camera negato");
+                    permissionDialog.showInfoDeniedPermissionCamera();
                 }
 
             }
@@ -72,7 +73,8 @@ public class PermissionManager {
                 if(result){
 
                 } else {
-                    Log.e("Storage","Accesso allo storage negato");
+                    alreadyAskedPermissionStorage = true;
+                    permissionDialog.showInfoDeniedPermissionStorage();
                 }
             }
         });
@@ -93,6 +95,8 @@ public class PermissionManager {
     public void launchPermissionRequestGPS(){
         if(!this.alreadyAskedPermissionGPS){ //Ask only if the user has not deny yet
             requestGpsPermissionLauncher.launch(PERMISSION_GPS_REQUESTED);
+        } else {
+            permissionDialog.showInfoDeniedPermissionGPS();
         }
     }
 
@@ -101,7 +105,11 @@ public class PermissionManager {
     }
 
     public void launchPermissionRequestStorage(){
-        requestCameraPermissionLauncher.launch(PERMISSION_STORAGE_REQUESTED);
+        if(!this.alreadyAskedPermissionStorage){
+            requestStoragePermissionLauncher.launch(PERMISSION_STORAGE_REQUESTED);
+        } else {
+            permissionDialog.showInfoDeniedPermissionStorage();
+        }
     }
 
 

@@ -77,5 +77,9 @@
     <string name="cant_modify_event">Evento già iniziato! Non puoi modificare le info evento</string>
     <string name="cant_scan_ticket">Evento non ancora iniziato ! Scansiona solo quando è iniziato</string>
 
+    <string name="qr_code_event_title">Qr code evento</string>
+    <string name="camera_features_disabled">Alcune funzionalità della fotocamera sono disattivate. Abilita i permessi della fotocamera.</string>
+    <string name="storage_features_disabled">Alcune funzionalità dello storage sono disattivate. Abilita i permessi deldelo storage.</string>
+
 
 </resources>
