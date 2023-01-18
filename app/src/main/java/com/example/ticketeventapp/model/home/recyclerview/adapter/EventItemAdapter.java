@@ -70,17 +70,6 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
             Drawable drawable = AppCompatResources.getDrawable(activity, activity.getResources().getIdentifier(image_uri,"drawable",activity.getPackageName()));
             holder.set_event_photo_drawable(drawable);
         } else { //User loaded a photo
-            /*Bitmap bitmap = Utilities.getImageBitmap(activity, Uri.parse(image));
-            holder.placeImageView.setImageBitmap(bitmap);*/
-
-            //My solution below
-            /*try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), Uri.parse(image_uri)); //
-                holder.set_event_photo_bitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
-
             Picasso.get().load(Uri.parse(image_uri)).fit().centerCrop()
                     .placeholder(R.drawable.add_photo_alternate)
                     .into(holder.event_photo);
@@ -174,9 +163,6 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
                                 filteredList.add(event);
                             }
                         }
-                        else{
-                            Log.e("HomeFragment","Salto evento");
-                        }
                     }
                 }
                 else if(filterType.equals("next-near")){ //near 30 km
@@ -196,9 +182,6 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
                                     filteredList.add(event);
                                 }
                             }
-                        }
-                        else{
-                            Log.e("HomeFragment","Salto evento");
                         }
                     }
                 }
@@ -220,9 +203,6 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
                                 }
                             }
                         }
-                        else{
-                            Log.e("HomeFragment","Salto evento");
-                        }
                     }
                 }
                 else if(filterType.equals("current-near")){ //near 30 km
@@ -242,9 +222,6 @@ public class EventItemAdapter extends RecyclerView.Adapter<EventViewHolder> impl
                                     filteredList.add(event);
                                 }
                             }
-                        }
-                        else{
-                            Log.e("HomeFragment","Salto evento");
                         }
                     }
                 }
