@@ -158,7 +158,6 @@ public class RegistrationFragment extends Fragment {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if(!hasFocus){
-                    Log.e("RegistrationFragment","Perdo focus");
                     disableErrorField(viewT);
                 }
             }
