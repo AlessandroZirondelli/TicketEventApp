@@ -74,8 +74,6 @@ public class EventResultFragment extends Fragment {
             if(selectedEvent != null){
                 generatedQrCode = AddEventManager.generateBitmapQrCode(selectedEvent.getCode());
                 qrcode.setImageBitmap(generatedQrCode);
-            } else {
-                Log.e("Bug","selectedEvent is null");
             }
         } catch (WriterException e) {
             e.printStackTrace();
