@@ -83,7 +83,6 @@ public class NetworkAgent {
     public void registerNetworkCallback(){
         if(connectivityManager != null){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Log.e("AddEventFragment","Register callback");
                 connectivityManager.registerDefaultNetworkCallback(networkCallback);
              }
         }else { //No connection
@@ -94,7 +93,6 @@ public class NetworkAgent {
     public void unregisterNetworkCallback(){
         if(connectivityManager != null){
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                    Log.e("AddEventFragment","Unregister callback");
                     connectivityManager.unregisterNetworkCallback(networkCallback);
                 }
         }
@@ -114,8 +112,6 @@ public class NetworkAgent {
                         Log.e("AddEventFragment","Campo presente");
                         road = road+" "+address.get("house_number");
                     } //check if fields exists
-                    //String house_number = address.get("house_number").toString();
-                    //addEventViewModel.setPosition_display_name(road+" "+house_number);
 
                     addEventViewModel.setPosition_display_name(road);
 
