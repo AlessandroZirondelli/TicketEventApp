@@ -11,9 +11,14 @@
         android:layout_height="wrap_content"
         android:text="John Doe"
         android:textSize="36sp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:layout_marginLeft="15dp"
         />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/presence_image_view"
@@ -21,6 +26,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/logout_icon"
         app:srcCompat="@drawable/absent_joiner"
-        android:layout_weight="1"/>
+        android:layout_gravity="right"
+        />
 
 </LinearLayout>
