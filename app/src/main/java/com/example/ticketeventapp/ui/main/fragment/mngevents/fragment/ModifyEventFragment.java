@@ -390,13 +390,10 @@ public class ModifyEventFragment extends Fragment {
         super.onResume();
         if(locationGpsAgent.isTurnedOnGPS()){
             addEventViewModel.setIsTurnedOnGPS(true);
-            Log.e("AddEventFragment","GPS Riattivato");
         }
         if(networkAgent.isConnectedToInternet()){
             addEventViewModel.setIsConnectedToInternet(true);
-            Log.e("AddEventFragment","Connessione Internet riattivata");
         }
-        Log.e("AddEventFragment","OnResume");
     }
 
     @Override
@@ -412,8 +409,6 @@ public class ModifyEventFragment extends Fragment {
 
         if (choosePicture.resolveActivity(getActivity().getPackageManager()) != null) {
             getActivity().startActivityForResult(choosePicture, CHOOSE_PICTURE);
-        } else {
-            Log.e("AddEventFragment","No resolver of specific choose picture intent");
         }
 
     }
@@ -446,7 +441,6 @@ public class ModifyEventFragment extends Fragment {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if(!hasFocus){
-                    Log.e("RegistrationFragment","Perdo focus");
                     disableErrorField(viewT);
                 }
             }
