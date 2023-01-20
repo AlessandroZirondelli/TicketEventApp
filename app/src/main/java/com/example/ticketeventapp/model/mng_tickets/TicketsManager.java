@@ -127,7 +127,7 @@ public class TicketsManager {
 
             //Filter tickets of users
             List<Ticket> personalTicket = ticketList.stream()
-                                        .filter((ticket)->ticket.getUsername().equals(AppInfo.getInstance().getLoggedUser().getUsername()))
+                                        .filter((ticket)->ticket.getUsername().equals(AppInfo.getInstance().getLoggedUser().getUsername()) && !ticket.isValidated())
                                         .collect(Collectors.toList());
 
 
